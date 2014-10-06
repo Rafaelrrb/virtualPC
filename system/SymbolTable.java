@@ -30,4 +30,8 @@ public class SymbolTable {
         }
         return instance;
     }
+    
+    public LinkedList getReferencesSymbol(Symbol symbol){
+        return null;
+    }
 }
