@@ -9,5 +9,15 @@ package system;
  * @author glaucomunsberg
  */
 public class Assembler {
+    public void start(){
     
+    }
+    
+    public void nextStep(){
+    
+    }
+    
+    public void setOperatingMode(String mode){
+    
+    }
 }

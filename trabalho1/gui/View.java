@@ -1,9 +1,11 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose Tools | Templatesasasa
  * and open the template in the editor.
  */
 package gui;
+
+import system.Assembler;
 
 /**
  *
@@ -11,11 +13,13 @@ package gui;
  */
 public class View extends javax.swing.JDialog {
 
+    Assembler assembler;
     /**
      * Creates new form Tela
      */
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        assembler = new Assembler();
         initComponents();
     }
 
@@ -28,21 +32,188 @@ public class View extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPanel1 = new javax.swing.JPanel();
+        jLabelName = new javax.swing.JLabel();
+        jLabelVersion = new javax.swing.JLabel();
+        jComboMode = new javax.swing.JComboBox();
+        jLabelOperatingMode = new javax.swing.JLabel();
+        jButtonNextStep = new javax.swing.JButton();
+        jButtonStart = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabelCommands = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaOutPut = new javax.swing.JTextArea();
+        jLabelIn = new javax.swing.JLabel();
+        jLabelOut = new javax.swing.JLabel();
+        jTextFieldInput = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabelName.setFont(new java.awt.Font("DIN Light", 0, 48)); // NOI18N
+        jLabelName.setText("VirtualPC");
+
+        jLabelVersion.setFont(new java.awt.Font("DIN Light", 0, 12)); // NOI18N
+        jLabelVersion.setText("Version Calingaert");
+
+        jComboMode.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
+        jComboMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Modo Contínuo (Sem Interação)", "Modo Contínuo (Com Interação)", "Modo de Depuração" }));
+        jComboMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboModeActionPerformed(evt);
+            }
+        });
+
+        jLabelOperatingMode.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelOperatingMode.setText("Modo de Operação");
+
+        jButtonNextStep.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
+        jButtonNextStep.setText("Next Step");
+        jButtonNextStep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextStepActionPerformed(evt);
+            }
+        });
+
+        jButtonStart.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
+        jButtonStart.setText("Start");
+        jButtonStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStartActionPerformed(evt);
+            }
+        });
+
+        jLabelCommands.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelCommands.setText("Comandos");
+
+        jTextAreaOutPut.setColumns(20);
+        jTextAreaOutPut.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaOutPut.setRows(5);
+        jTextAreaOutPut.setEnabled(false);
+        jScrollPane2.setViewportView(jTextAreaOutPut);
+
+        jLabelIn.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelIn.setText("In");
+
+        jLabelOut.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelOut.setText("Out");
+
+        jTextFieldInput.setFont(new java.awt.Font("DIN Light", 0, 12)); // NOI18N
+        jTextFieldInput.setText("Choose...");
+        jTextFieldInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldInputActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelName)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelOperatingMode)
+                                .addGap(209, 209, 209)
+                                .addComponent(jLabelIn))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jComboMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabelCommands)
+                                        .addGap(206, 206, 206))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButtonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonNextStep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jLabelOut))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(72, 72, 72)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 9, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addComponent(jLabelVersion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelOperatingMode)
+                    .addComponent(jLabelIn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelCommands)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonStart)
+                            .addComponent(jButtonNextStep)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboModeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboModeActionPerformed
+
+    private void jButtonNextStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextStepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNextStepActionPerformed
+
+    private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonStartActionPerformed
+
+    private void jTextFieldInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,5 +261,20 @@ public class View extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonNextStep;
+    private javax.swing.JButton jButtonStart;
+    private javax.swing.JComboBox jComboMode;
+    private javax.swing.JLabel jLabelCommands;
+    private javax.swing.JLabel jLabelIn;
+    private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelOperatingMode;
+    private javax.swing.JLabel jLabelOut;
+    private javax.swing.JLabel jLabelVersion;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea jTextAreaOutPut;
+    private javax.swing.JTextField jTextFieldInput;
     // End of variables declaration//GEN-END:variables
 }
