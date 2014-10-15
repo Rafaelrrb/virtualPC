@@ -5,8 +5,12 @@
         <group>
             <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/GuiView.java</file>
             <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/system/Assembler.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/services/Line.java</file>
             <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/gui/View.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/system/Memory.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/services/Symbol.java</file>
             <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/Principal.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/system/SymbolTable.java</file>
         </group>
     </open-files>
 </project-private>

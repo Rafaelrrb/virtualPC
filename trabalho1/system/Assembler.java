@@ -45,12 +45,7 @@ public class Assembler {
      * Método para resetar todos os valores
      */
     public void reset(){
-        config.recordACC.setText("0");
-        config.recordMOP.setText("0");
-        config.recordPC.setText("0");
-        config.recordRE.setText("0");
-        config.recordRI.setText("0");
-        config.recordSP.setText("0");
+        config.resetSystem();
     }
     
     public void nextStep(){
