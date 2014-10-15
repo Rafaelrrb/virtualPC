@@ -8,9 +8,9 @@ package services;
  * @author glaucomunsberg
  */
 public class Symbol {
-    private String name;
-    private int anddress;
-    
+    public String name;
+    public int anddress;
+    short value;
     public Symbol(String name, int andress){
     
     }

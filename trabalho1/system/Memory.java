@@ -5,16 +5,20 @@
  */
 package system;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author glaucomunsberg
  */
 public class Memory {
     private static volatile Memory instance = null;
+    private short position;
+    private short symbols[];
     
     private Memory() {
-        
-        //symbols.add(new Symbol(0,0));
+        position = 0;
+        symbols = new short[64];
     }
     
     public static Memory getInstance() {
@@ -26,5 +30,10 @@ public class Memory {
             }
         }
         return instance;
+    }
+    
+    public void setOnMemory(Short value){
+        symbols[position]=value;
+        position++;
     }
 }

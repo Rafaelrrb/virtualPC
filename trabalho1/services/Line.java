@@ -4,17 +4,33 @@
  */
 package services;
 
+import system.Memory;
+
 /**
  *
  * @author glaucomunsberg
  */
 public class Line {
-    private String label;
-    private Operation Operator;
-    private Symbol simbol1;
-    private Symbol simbol2;
+    private String line;
+
     
-    public Line(String label,Operation operator, Symbol simbol1, Symbol simbol2){
-    
+    public Line(String line){
+        this.line = line;
+        String splitedLine[] = this.line.split("\\s+");
+        Config.getInstance().setLog("num op: "+splitedLine.length);
+        int operation = -1;
+        try{
+            Config.getInstance().setLog("Operation: "+splitedLine[0]);
+            
+            for(String splitedLine1 : splitedLine) {
+                Memory.getInstance().setOnMemory(Short.parseShort(splitedLine1));
+            }
+            
+        }catch(Exception e){
+        
+            Config.getInstance().setLog("Ooops! Error");
+            e.printStackTrace();
+        }
+        
     }
 }
