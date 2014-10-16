@@ -95,19 +95,19 @@ public class Calingaert {
             
             case 0:
                 //BR
-                pc = memory.getOnMemory((short)(pc+1));
+                pc = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
                 break;
             case 1:
                 //BRPOS
                 if(accumulator > 0){
-                    pc = memory.getOnMemory((short)(pc+1));
+                    pc = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
                 }else{
                     pc = (short) (pc+2);
                 }
                 break;
             case 2:
                 //ADD
-                accumulator =(short) (accumulator + memory.getOnMemory((short)(pc+1)));
+                accumulator =(short) (accumulator + memory.getOnMemory(memory.getOnMemory((short)(pc+1))));
                 pc = (short) (pc+2);
                 break;
             case 3:
@@ -118,7 +118,7 @@ public class Calingaert {
             case 4:
                 //BRZERO
                 if(accumulator == 0){
-                    pc = memory.getOnMemory((short)(pc+1));
+                    pc = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
                 }else{
                     pc = (short) (pc+2);
                 }
@@ -126,14 +126,14 @@ public class Calingaert {
             case 5:
                 //BRNEG
                 if(accumulator < 0){
-                    pc = memory.getOnMemory((short)(pc+1));
+                    pc = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
                 }else{
                     pc = (short) (pc+2);
                 }
                 break;
             case 6:
                 //SUB
-                accumulator =(short) (accumulator - memory.getOnMemory((short)(pc+1)));
+                accumulator =(short) (accumulator - memory.getOnMemory(memory.getOnMemory((short)(pc+1))));
                 pc = (short) (pc+2);
                 break;
             case 7:
@@ -150,7 +150,8 @@ public class Calingaert {
                 break;
             case 10:
                 //DIVISOR
-                short valueDivisor = memory.getOnMemory((short)(pc+1));
+                short valueDivisor = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
+                config.setLog("Div:"+accumulator+"/"+memory.getOnMemory(memory.getOnMemory((short)(pc+1))));
                 accumulator = (short)(accumulator /valueDivisor);
                 pc = (short) (pc+2);
                 break;
@@ -175,7 +176,7 @@ public class Calingaert {
             case 14:
                 //MULT
                 short valueMult = memory.getOnMemory((short)(pc+1));
-                accumulator = (short)(accumulator /valueMult);
+                accumulator = (short)(accumulator * valueMult);
                 pc = (short) (pc+2);
                 break;
             case 15:
