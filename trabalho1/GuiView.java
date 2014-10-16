@@ -4,7 +4,7 @@
  */
 
 import services.Config;
-import system.Assembler;
+import system.Calingaert;
 import system.Memory;
 
 /**
@@ -13,7 +13,7 @@ import system.Memory;
  */
 public class GuiView extends javax.swing.JDialog {
 
-    Assembler assembler;
+    Calingaert assembler;
     /**
      * Creates new form Tela
      * @param parent
@@ -28,10 +28,11 @@ public class GuiView extends javax.swing.JDialog {
         config.setLog("Iniciado!");
         config.setOutPut(this.jTextAreaOutPut);
         config.setInPut(jTextFieldInput);
+        config.setComboBoxMode(jComboMode);
         Memory.getInstance().setTableMemory(jTable1);
         config.setDisplayLabels(jLabelDisplayPC, jLabelDisplayMOP,jLabelDisplayRE, jLabelDisplayRI, jLabelDisplaySP, jLabelDisplayACC, jLabelDisplayAddress);
         
-        assembler = new Assembler();
+        assembler = new Calingaert();
         
     }
 

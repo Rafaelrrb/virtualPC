@@ -21,7 +21,6 @@ public class Recorders {
     
     private Recorders() {
         
-        //symbols.add(new Symbol(0,0));
     }
 
     public static Recorders getInstance() {

@@ -5,7 +5,7 @@
  */
 package gui;
 
-import system.Assembler;
+import system.Calingaert;
 
 /**
  *
@@ -13,13 +13,13 @@ import system.Assembler;
  */
 public class View extends javax.swing.JDialog {
 
-    Assembler assembler;
+    Calingaert assembler;
     /**
      * Creates new form Tela
      */
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        assembler = new Assembler();
+        assembler = new Calingaert();
         initComponents();
     }
 

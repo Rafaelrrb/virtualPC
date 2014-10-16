@@ -3,6 +3,7 @@
  */
 package services;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -20,6 +21,7 @@ public class Config {
     private JTextArea log;
     private JTextArea out;
     public JTextField in;
+    private JComboBox comboBoxMode;
     private JLabel recordPC;
     private JLabel recordMOP;
     private JLabel recordRE;
@@ -27,6 +29,7 @@ public class Config {
     private JLabel recordSP;
     private JLabel recordACC;
     private JLabel recordAddress;
+   
     
     /**
      * Construtor privado da classe
@@ -161,7 +164,27 @@ public class Config {
      * @param line 
      */
     public void setOutPut(String line){
+        
         this.out.setText(this.out.getText()+line+"\n");
+    }
     
+    /**
+     * Método que retorna qual dos modos de operação
+     *  foi seleciado pelo operador.
+     * @return short 
+     */
+    public short getComboBoxModeSelected(){
+        
+        return (short) this.comboBoxMode.getSelectedIndex();
+    }
+    
+    
+    /**
+     * Método que insere a referência da combo
+     *  no display o sistema
+     * @param box 
+     */
+    public void setComboBoxMode(JComboBox box){
+        this.comboBoxMode = box;
     }
 }

@@ -11,7 +11,7 @@ import services.Config;
  *
  * @author glaucomunsberg
  */
-public class Assembler {
+public class Calingaert {
     
     private final Config config;
     private final Memory memory;
@@ -23,7 +23,7 @@ public class Assembler {
     private short ri;
     private short re;
     
-    public Assembler(){
+    public Calingaert(){
         config      = Config.getInstance();
         memory      = Memory.getInstance();
         commands    = Catalog.getInstance();
@@ -32,6 +32,7 @@ public class Assembler {
         ri          = 0;
         re          = 0;
         pc          = 0;
+        isStoped    = false;
     }
     
     /**
@@ -40,7 +41,28 @@ public class Assembler {
      *  e executa de acordo com o modo de execução
      */
     public void start(){
-    
+        config.setLog(String.format("Mode selected: %d", config.getComboBoxModeSelected()));
+        if(memory.getPosition() == 0){
+            config.setLog("Ooops! Memory Empty");
+            return;
+        }
+        switch(config.getComboBoxModeSelected()){
+            case 0:
+                while(!this.isStoped){
+
+                    this.nextStep();
+                
+                }
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                this.nextStep();
+                break;
+        
+        }
+        
     }
     
     /**
@@ -117,10 +139,13 @@ public class Assembler {
                 break;
             case 10:
                 //DIVISOR
+                short valueDivisor = memory.getOnMemory((short)(pc+1));
+                accumulator = (short)(accumulator /valueDivisor);
+                pc = (short) (pc+2);
                 break;
             case 11:
                 //STOP
-                
+                this.isStoped = true;
                 break;
             case 12:
                 //STREAM
@@ -141,6 +166,9 @@ public class Assembler {
                 break;
             case 14:
                 //MULT
+                short valueMult = memory.getOnMemory((short)(pc+1));
+                accumulator = (short)(accumulator /valueMult);
+                pc = (short) (pc+2);
                 break;
             case 15:
                 //CALL
