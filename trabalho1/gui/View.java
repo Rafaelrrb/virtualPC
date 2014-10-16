@@ -38,8 +38,6 @@ public class View extends javax.swing.JDialog {
         jLabelVersion = new javax.swing.JLabel();
         jButtonNextStep = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaOutPut = new javax.swing.JTextArea();
         jLabelIn = new javax.swing.JLabel();
         jLabelOut = new javax.swing.JLabel();
         jTextFieldInput = new javax.swing.JTextField();
@@ -67,8 +65,13 @@ public class View extends javax.swing.JDialog {
         jPanelMemory = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelLog = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextAreaLog = new javax.swing.JTextArea();
         jButtonReset = new javax.swing.JButton();
         jButtonStart1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaOutPut = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,12 +90,6 @@ public class View extends javax.swing.JDialog {
                 jButtonNextStepActionPerformed(evt);
             }
         });
-
-        jTextAreaOutPut.setColumns(20);
-        jTextAreaOutPut.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
-        jTextAreaOutPut.setRows(5);
-        jTextAreaOutPut.setEnabled(false);
-        jScrollPane2.setViewportView(jTextAreaOutPut);
 
         jLabelIn.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
         jLabelIn.setText("In");
@@ -398,6 +395,31 @@ public class View extends javax.swing.JDialog {
 
         jTabbedPane.addTab("Memory", jPanelMemory);
 
+        jTextAreaLog.setColumns(20);
+        jTextAreaLog.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaLog.setRows(5);
+        jTextAreaLog.setEnabled(false);
+        jScrollPane3.setViewportView(jTextAreaLog);
+
+        javax.swing.GroupLayout jPanelLogLayout = new javax.swing.GroupLayout(jPanelLog);
+        jPanelLog.setLayout(jPanelLogLayout);
+        jPanelLogLayout.setHorizontalGroup(
+            jPanelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLogLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelLogLayout.setVerticalGroup(
+            jPanelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLogLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane.addTab("Logs", jPanelLog);
+
         jButtonReset.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jButtonReset.setText("Reset");
         jButtonReset.addActionListener(new java.awt.event.ActionListener() {
@@ -414,43 +436,50 @@ public class View extends javax.swing.JDialog {
             }
         });
 
+        jTextAreaOutPut.setEditable(false);
+        jTextAreaOutPut.setColumns(20);
+        jTextAreaOutPut.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaOutPut.setRows(5);
+        jTextAreaOutPut.setEnabled(false);
+        jScrollPane2.setViewportView(jTextAreaOutPut);
+
         javax.swing.GroupLayout jPanelDisplayRELayout = new javax.swing.GroupLayout(jPanelDisplayRE);
         jPanelDisplayRE.setLayout(jPanelDisplayRELayout);
         jPanelDisplayRELayout.setHorizontalGroup(
             jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonStart1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonNextStep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelIn)
+                    .addComponent(jLabelOut)
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jButtonStart1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)
-                                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonNextStep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDisplayRELayout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelIn)
-                                        .addComponent(jLabelOut)
-                                        .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabelName))
                             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                                 .addGap(163, 163, 163)
                                 .addComponent(jLabelVersion)))
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanelDisplayRELayout.setVerticalGroup(
@@ -470,7 +499,8 @@ public class View extends javax.swing.JDialog {
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonReset)
                             .addComponent(jButtonStart1)
-                            .addComponent(jButtonNextStep)))
+                            .addComponent(jButtonNextStep))
+                        .addGap(65, 65, 65))
                     .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                         .addGap(0, 46, Short.MAX_VALUE)
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,9 +510,9 @@ public class View extends javax.swing.JDialog {
                             .addComponent(jLabelIn))
                         .addGap(18, 18, 18)
                         .addComponent(jLabelOut)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                        .addGap(45, 45, 45))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -492,7 +522,7 @@ public class View extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelDisplayRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,13 +628,16 @@ public class View extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelConfiguration;
     private javax.swing.JPanel jPanelDisplayRE;
     private javax.swing.JPanel jPanelGeneral;
+    private javax.swing.JPanel jPanelLog;
     private javax.swing.JPanel jPanelMemory;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextAreaLog;
     private javax.swing.JTextArea jTextAreaOutPut;
     private javax.swing.JTextField jTextFieldInput;
     // End of variables declaration//GEN-END:variables

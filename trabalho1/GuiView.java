@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templatesasasa
- * and open the template in the editor.
+ * Esta é a classe responsável pela interface gráfica manipulada
+ *  pela classe Assembler no package System
  */
 
 import services.Config;
-import services.Line;
 import system.Assembler;
+import system.Memory;
 
 /**
  *
@@ -17,13 +16,19 @@ public class GuiView extends javax.swing.JDialog {
     Assembler assembler;
     /**
      * Creates new form Tela
+     * @param parent
+     * @param modal
      */
     public GuiView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
         Config config = Config.getInstance();
-        config.setLog(this.jTextAreaOutPut);
-        config.setLog("Iniciando...");
+        config.setLog(this.jTextAreaLog);
+        config.setLog("Iniciado!");
+        config.setOutPut(this.jTextAreaOutPut);
+        config.setInPut(jTextFieldInput);
+        Memory.getInstance().setTableMemory(jTable1);
         config.setDisplayLabels(jLabelDisplayPC, jLabelDisplayMOP,jLabelDisplayRE, jLabelDisplayRI, jLabelDisplaySP, jLabelDisplayACC, jLabelDisplayAddress);
         
         assembler = new Assembler();
@@ -39,14 +44,11 @@ public class GuiView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanelDisplayRE = new javax.swing.JPanel();
         jLabelName = new javax.swing.JLabel();
         jLabelVersion = new javax.swing.JLabel();
         jButtonNextStep = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaOutPut = new javax.swing.JTextArea();
         jLabelIn = new javax.swing.JLabel();
         jLabelOut = new javax.swing.JLabel();
         jTextFieldInput = new javax.swing.JTextField();
@@ -74,8 +76,13 @@ public class GuiView extends javax.swing.JDialog {
         jPanelMemory = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelLog = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextAreaLog = new javax.swing.JTextArea();
         jButtonReset = new javax.swing.JButton();
         jButtonStart1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaOutPut = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,12 +102,6 @@ public class GuiView extends javax.swing.JDialog {
             }
         });
 
-        jTextAreaOutPut.setColumns(20);
-        jTextAreaOutPut.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
-        jTextAreaOutPut.setRows(5);
-        jTextAreaOutPut.setEnabled(false);
-        jScrollPane2.setViewportView(jTextAreaOutPut);
-
         jLabelIn.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
         jLabelIn.setText("In");
 
@@ -111,8 +112,7 @@ public class GuiView extends javax.swing.JDialog {
         jTextFieldInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldInputActionPerformed(evt);
-                //Config.getInstance().setLog(jTextFieldInput.getText());
-                Line line = new Line(jTextFieldInput.getText());
+                assembler.setNewLine(jTextFieldInput.getText());
                 jTextFieldInput.setText("");
             }
         });
@@ -122,32 +122,32 @@ public class GuiView extends javax.swing.JDialog {
 
         jLabelDisplayPC.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayPC.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayPC.setText("--");
+        jLabelDisplayPC.setText("0");
 
         jLabelSP.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jLabelSP.setText("SP");
 
         jLabelDisplaySP.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplaySP.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplaySP.setText("--");
+        jLabelDisplaySP.setText("0");
 
         jLabelACC.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jLabelACC.setText("ACC");
 
         jLabelDisplayACC.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayACC.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayACC.setText("--");
+        jLabelDisplayACC.setText("0");
 
         jLabelMOP.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jLabelMOP.setText("MOP");
 
         jLabelDisplayMOP.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayMOP.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayMOP.setText("--");
+        jLabelDisplayMOP.setText("0");
 
         jLabelDisplayRI.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayRI.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayRI.setText("--");
+        jLabelDisplayRI.setText("0");
 
         jLabelRI.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jLabelRI.setText("RI");
@@ -157,14 +157,14 @@ public class GuiView extends javax.swing.JDialog {
 
         jLabelDisplayRE.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayRE.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayRE.setText("--");
+        jLabelDisplayRE.setText("0");
 
         jLabelddresss.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jLabelddresss.setText("Address");
 
         jLabelDisplayAddress.setBackground(new java.awt.Color(0, 0, 0));
         jLabelDisplayAddress.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDisplayAddress.setText("--");
+        jLabelDisplayAddress.setText("0");
 
         jLabelCommands1.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
         jLabelCommands1.setText("Engine");
@@ -264,7 +264,7 @@ public class GuiView extends javax.swing.JDialog {
         jTabbedPane.addTab("General", jPanelGeneral);
 
         jComboMode.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
-        jComboMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Modo Contínuo (Sem Interação)", "Modo Contínuo (Com Interação)", "Modo de Depuração" }));
+        jComboMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "[0] Modo Contínuo (Sem Interação)", "[1] Modo Contínuo (Com Interação)", "[2] Modo de Depuração" }));
         jComboMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboModeActionPerformed(evt);
@@ -297,73 +297,74 @@ public class GuiView extends javax.swing.JDialog {
                 .addContainerGap(98, Short.MAX_VALUE))
         );
 
+        
         jTabbedPane.addTab("Configuration", jPanelConfiguration);
-        Object[][] objectOnModel = new Object [][] {
-                {0, null},
-                {1, null},
-                {2, null},
-                {3, null},
-                {5, null},
-                {4, null},
-                {6, null},
-                {7, null},
-                {8, null},
-                {9, null},
-                {10, null},
-                {11, null},
-                {12, null},
-                {13, null},
-                {14, null},
-                {15, null},
-                {16, null},
-                {17, null},
-                {18, null},
-                {19, null},
-                {20, null},
-                {21, null},
-                {22, null},
-                {23, null},
-                {24, null},
-                {25, null},
-                {26, null},
-                {27, null},
-                {28, null},
-                {29, null},
-                {30, null},
-                {31, null},
-                {32, null},
-                {33, null},
-                {34, null},
-                {35, null},
-                {36, null},
-                {37, null},
-                {38, null},
-                {39, null},
-                {40, null},
-                {41, null},
-                {42, null},
-                {43, null},
-                {44, null},
-                {45, null},
-                {46, null},
-                {47, null},
-                {48, null},
-                {49, null},
-                {50, null},
-                {51, null},
-                {52, null},
-                {53, null},
-                {54, null},
-                {55, null},
-                {56, null},
-                {57, null},
-                {58, null},
-                {59, null},
-                {60, null},
-                {61, null},
-                {62, null},
-                {63, null}
-            }; 
+        Object[][] objectOnModel = new Object[][]{
+            {0, null},
+            {1, null},
+            {2, null},
+            {3, null},
+            {5, null},
+            {4, null},
+            {6, null},
+            {7, null},
+            {8, null},
+            {9, null},
+            {10, null},
+            {11, null},
+            {12, null},
+            {13, null},
+            {14, null},
+            {15, null},
+            {16, null},
+            {17, null},
+            {18, null},
+            {19, null},
+            {20, null},
+            {21, null},
+            {22, null},
+            {23, null},
+            {24, null},
+            {25, null},
+            {26, null},
+            {27, null},
+            {28, null},
+            {29, null},
+            {30, null},
+            {31, null},
+            {32, null},
+            {33, null},
+            {34, null},
+            {35, null},
+            {36, null},
+            {37, null},
+            {38, null},
+            {39, null},
+            {40, null},
+            {41, null},
+            {42, null},
+            {43, null},
+            {44, null},
+            {45, null},
+            {46, null},
+            {47, null},
+            {48, null},
+            {49, null},
+            {50, null},
+            {51, null},
+            {52, null},
+            {53, null},
+            {54, null},
+            {55, null},
+            {56, null},
+            {57, null},
+            {58, null},
+            {59, null},
+            {60, null},
+            {61, null},
+            {62, null},
+            {63, null}
+        };
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             objectOnModel,
             new String [] {
@@ -408,6 +409,31 @@ public class GuiView extends javax.swing.JDialog {
 
         jTabbedPane.addTab("Memory", jPanelMemory);
 
+        jTextAreaLog.setColumns(20);
+        jTextAreaLog.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaLog.setRows(5);
+        jTextAreaLog.setEnabled(false);
+        jScrollPane3.setViewportView(jTextAreaLog);
+
+        javax.swing.GroupLayout jPanelLogLayout = new javax.swing.GroupLayout(jPanelLog);
+        jPanelLog.setLayout(jPanelLogLayout);
+        jPanelLogLayout.setHorizontalGroup(
+            jPanelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLogLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelLogLayout.setVerticalGroup(
+            jPanelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLogLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane.addTab("Logs", jPanelLog);
+
         jButtonReset.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
         jButtonReset.setText("Reset");
         jButtonReset.addActionListener(new java.awt.event.ActionListener() {
@@ -424,43 +450,50 @@ public class GuiView extends javax.swing.JDialog {
             }
         });
 
+        jTextAreaOutPut.setEditable(false);
+        jTextAreaOutPut.setColumns(20);
+        jTextAreaOutPut.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaOutPut.setRows(5);
+        jTextAreaOutPut.setEnabled(false);
+        jScrollPane2.setViewportView(jTextAreaOutPut);
+
         javax.swing.GroupLayout jPanelDisplayRELayout = new javax.swing.GroupLayout(jPanelDisplayRE);
         jPanelDisplayRE.setLayout(jPanelDisplayRELayout);
         jPanelDisplayRELayout.setHorizontalGroup(
             jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonStart1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonNextStep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelIn)
+                    .addComponent(jLabelOut)
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(jPanelDisplayRELayout.createSequentialGroup()
+                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jButtonStart1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)
-                                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonNextStep, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDisplayRELayout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelIn)
-                                        .addComponent(jLabelOut)
-                                        .addGroup(jPanelDisplayRELayout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabelName))
                             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                                 .addGap(163, 163, 163)
                                 .addComponent(jLabelVersion)))
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanelDisplayRELayout.setVerticalGroup(
@@ -480,7 +513,8 @@ public class GuiView extends javax.swing.JDialog {
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonReset)
                             .addComponent(jButtonStart1)
-                            .addComponent(jButtonNextStep)))
+                            .addComponent(jButtonNextStep))
+                        .addGap(65, 65, 65))
                     .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                         .addGap(0, 46, Short.MAX_VALUE)
                         .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,9 +524,9 @@ public class GuiView extends javax.swing.JDialog {
                             .addComponent(jLabelIn))
                         .addGap(18, 18, 18)
                         .addComponent(jLabelOut)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                        .addGap(45, 45, 45))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -502,7 +536,7 @@ public class GuiView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelDisplayRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,51 +568,6 @@ public class GuiView extends javax.swing.JDialog {
         assembler.start();
     }                                             
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                GuiView dialog = new GuiView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonNextStep;
     private javax.swing.JButton jButtonReset;
@@ -608,13 +597,15 @@ public class GuiView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelConfiguration;
     private javax.swing.JPanel jPanelDisplayRE;
     private javax.swing.JPanel jPanelGeneral;
+    private javax.swing.JPanel jPanelLog;
     private javax.swing.JPanel jPanelMemory;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextAreaLog;
     private javax.swing.JTextArea jTextAreaOutPut;
     private javax.swing.JTextField jTextFieldInput;
     // End of variables declaration                   

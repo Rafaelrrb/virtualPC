@@ -4,7 +4,9 @@
  */
 package system;
 
-import java.util.LinkedList;
+import javax.swing.JTable;
+
+
 
 /**
  *
@@ -12,21 +14,26 @@ import java.util.LinkedList;
  */
 public class Memory {
     private static volatile Memory instance = null;
+    private JTable jtableMemory;
     private short position;
     private short memoryRange[];
     
+    /**
+     * Construtor privado que seta como
+     *  0 a posição inicial e memória do tamanho de 1K
+     */
     private Memory() {
         position = 0;
         memoryRange = new short[64];
     }
     
     /**
-     * Retorna a instância única desta classe
+     * Retorna a única instância desta classe
      * @return 
      */
     public static Memory getInstance() {
         if (instance == null) {
-            synchronized (SymbolTable.class) {
+            synchronized (Memory.class) {
                 if (instance == null) {
                     instance = new Memory();
                 }
@@ -35,12 +42,24 @@ public class Memory {
         return instance;
     }
     
+    public void setTableMemory(JTable table){
+        this.jtableMemory = table;
+    }
+    
+    public void setValueOnTableMemory(short position,short value){    
+        this.jtableMemory.setValueAt(value, position, 1);
+    }
+    
+    
     /**
      * Método que reseta a memória e todos os seus valores
      */
     public void resetMemory(){
     
         memoryRange = new short[64];
+        for(int a=0; a < 64; a++){
+            this.jtableMemory.setValueAt(null, a, 1);
+        }
         position    = 0;
     }
     
@@ -49,6 +68,7 @@ public class Memory {
      * @param value 
      */
     public void setOnMemory(Short value){
+        jtableMemory.setValueAt(value, position, 1);
         memoryRange[position]=value;
         position++;
     }
@@ -66,7 +86,7 @@ public class Memory {
      * @param position
      * @return 
      */
-    public short getOnMemory(Short position){
+    public short getOnMemory(short position){
         return memoryRange[position];
     }
     
@@ -76,6 +96,8 @@ public class Memory {
      * @param value 
      */
     public void setOnMemory(Short memoryPosition, Short value){
+        jtableMemory.setValueAt(value, memoryPosition, 1);
         memoryRange[memoryPosition] = value;
+        
     }
 }

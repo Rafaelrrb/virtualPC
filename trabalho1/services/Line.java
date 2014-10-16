@@ -12,10 +12,10 @@ import system.Memory;
  */
 public class Line {
     public String  line;
-    public short   line1;
-    public short   line2;
-    public short   line3;
-    public short   numOfLines;
+    private short   column1;
+    private short   column2;
+    private short   column3;
+    private short   numOfColumn;
     private static final Config config = Config.getInstance();
     private static final Memory memory = Memory.getInstance();
     
@@ -32,28 +32,31 @@ public class Line {
         try{
             switch(splitedLine.length){
                 case 1:
-                    line1 = Short.parseShort(splitedLine[0]);
-                    memory.setOnMemory(line1);
-                    numOfLines = 1;
+                    column1 = Short.parseShort(splitedLine[0]);
+                    memory.setOnMemory(column1);
+                    numOfColumn = 1;
+                    config.setOutPut(line);
                     break;
                 case 2:
-                    line1 = Short.parseShort(splitedLine[0]);
-                    line2 = Short.parseShort(splitedLine[1]);
-                    memory.setOnMemory(line1);
-                    memory.setOnMemory(line2);
-                    numOfLines = 2;
+                    column1 = Short.parseShort(splitedLine[0]);
+                    column2 = Short.parseShort(splitedLine[1]);
+                    memory.setOnMemory(column1);
+                    memory.setOnMemory(column2);
+                    numOfColumn = 2;
+                    config.setOutPut(line);
                     break;
                 case 3:
-                    line1 = Short.parseShort(splitedLine[0]);
-                    line2 = Short.parseShort(splitedLine[1]);
-                    line3 = Short.parseShort(splitedLine[2]);
-                    memory.setOnMemory(line1);
-                    memory.setOnMemory(line2);
-                    memory.setOnMemory(line3);
-                    numOfLines = 2;
+                    column1 = Short.parseShort(splitedLine[0]);
+                    column2 = Short.parseShort(splitedLine[1]);
+                    column3 = Short.parseShort(splitedLine[2]);
+                    memory.setOnMemory(column1);
+                    memory.setOnMemory(column2);
+                    memory.setOnMemory(column3);
+                    numOfColumn = 2;
+                    config.setOutPut(line);
                     break;
                 default:
-                    config.setLog("Oops! Line: Num of artgments are wrong "+splitedLine.length);
+                    config.setLog("Oops! Line: Num of arguments are wrong "+splitedLine.length);
             }
             config.reloadDisplayRecordAddress();
             
