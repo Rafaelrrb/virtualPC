@@ -89,9 +89,10 @@ public class Config {
     public void reloadDisplayLabels(short pc, short sp, short acc, short mop, short re, short ri){
         this.recordPC.setText(String.format("%d", pc));
         this.recordSP.setText(String.format("%d", sp));
-        this.recordACC.setText(String.format("%d", mop));
+        this.recordACC.setText(String.format("%d", acc));
         this.recordRE.setText(String.format("%d", re));
         this.recordRI.setText(String.format("%d", ri));
+        this.recordMOP.setText(String.format("%d", mop));
     }
     
     /**
@@ -186,5 +187,6 @@ public class Config {
      */
     public void setComboBoxMode(JComboBox box){
         this.comboBoxMode = box;
+        this.comboBoxMode.setSelectedIndex(2);
     }
 }

@@ -112,7 +112,7 @@ public class Calingaert {
                 break;
             case 3:
                 //LOAD
-                accumulator = memory.getOnMemory((short)(pc+1));
+                accumulator = memory.getOnMemory(memory.getOnMemory((short)(pc+1)));
                 pc = (short)(pc+2) ;
                 break;
             case 4:
@@ -144,8 +144,8 @@ public class Calingaert {
                 re = (short) (pc+1);
                 break;
             case 8:
-                //OUT PUT
-                config.setOutPut(String.format("%d", memory.getOnMemory((short)(pc+1))));
+                //OUTPUT
+                config.setOutPut(String.format("%d", memory.getOnMemory(memory.getOnMemory((short)(pc+1)))));
                 pc = (short) (pc+2);
                 break;
             case 10:
@@ -168,8 +168,8 @@ public class Calingaert {
             case 13:
                 //COPY
                 short positionTo = memory.getOnMemory((short)(pc+2));
-                re =(short)  (pc+1);
-                memory.setOnMemory(positionTo, memory.getOnMemory((short)(pc+1)));
+                memory.setOnMemory(memory.getOnMemory((short)(pc+1)), memory.getOnMemory(positionTo));
+                config.setLog("Position:"+memory.getOnMemory((short)(pc+1))+"value:"+memory.getOnMemory(positionTo));
                 pc = (short) (pc+3);
                 break;
             case 14:

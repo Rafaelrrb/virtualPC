@@ -28,6 +28,9 @@ public class Memory {
     private Memory() {
         position = 0;
         memoryRange = new short[64];
+        for(int a=0; a < 64; a++){
+            memoryRange[a]= 0;
+        }
     }
     
     /**
@@ -62,6 +65,7 @@ public class Memory {
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.LEFT);
         jtableMemory.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+        jtableMemory.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
         tcm.getColumn(1).setPreferredWidth(200);
         
     }
@@ -72,8 +76,10 @@ public class Memory {
      * @param position
      * @param value 
      */
-    public void setValueOnTableMemory(short position,short value){    
-        this.jtableMemory.setValueAt(value, position, 1);
+    public void setValueOnTableMemory(){    
+        for(int a = 0; a < memoryRange.length;a++){
+            jtableMemory.setValueAt(memoryRange[a], a, 1);
+        }
     }
     
     
@@ -81,12 +87,12 @@ public class Memory {
      * Método que reseta a memória e todos os seus valores
      */
     public void resetMemory(){
-    
+        position = 0;
         memoryRange = new short[64];
         for(int a=0; a < 64; a++){
+            memoryRange[a]= 0;
             this.jtableMemory.setValueAt(null, a, 1);
         }
-        position    = 0;
     }
     
     /**
@@ -94,9 +100,10 @@ public class Memory {
      * @param value 
      */
     public void setOnMemory(Short value){
-        jtableMemory.setValueAt(value, position, 1);
+        
         memoryRange[position]=value;
         position++;
+        setValueOnTableMemory();
     }
     
     /**
@@ -123,8 +130,10 @@ public class Memory {
      * @param value 
      */
     public void setOnMemory(Short memoryPosition, Short value){
-        jtableMemory.setValueAt(value, memoryPosition, 1);
+        
+        //jtableMemory.setValueAt(value, memoryPosition, 1);
         memoryRange[memoryPosition] = value;
+        setValueOnTableMemory();
         
     }
 }
