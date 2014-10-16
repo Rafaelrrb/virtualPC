@@ -56,7 +56,10 @@ public class Line {
                     config.setOutPut(line);
                     break;
                 default:
-                    config.setLog("Oops! Line: Num of arguments are wrong "+splitedLine.length);
+                    for (String splitedLine1 : splitedLine) {
+                        short column = Short.parseShort(splitedLine1);
+                        memory.setOnMemory(column);
+                    }
             }
             config.reloadDisplayRecordAddress();
             

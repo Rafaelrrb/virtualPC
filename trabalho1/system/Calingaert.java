@@ -18,10 +18,14 @@ public class Calingaert {
     private Catalog commands;
     private short accumulator;
     private boolean isStoped;
+    private boolean isStaredComputed;
+    private boolean isStreamMemoryWanted;
     private short pc;
     private short sp;
     private short ri;
     private short re;
+    private short streamMemoryPositionWanted;
+    
     
     public Calingaert(){
         config      = Config.getInstance();
@@ -33,6 +37,8 @@ public class Calingaert {
         re          = 0;
         pc          = 0;
         isStoped    = false;
+        isStaredComputed    = false;
+        isStreamMemoryWanted = true;
     }
     
     /**
@@ -41,9 +47,10 @@ public class Calingaert {
      *  e executa de acordo com o modo de execução
      */
     public void start(){
+        this.isStaredComputed=true;
         config.setLog(String.format("Mode selected: %d", config.getComboBoxModeSelected()));
         if(memory.getPosition() == 0){
-            config.setLog("Ooops! Memory Empty");
+            config.setLog("Ooops! Calingaert: Memory Empty");
             return;
         }
         switch(config.getComboBoxModeSelected()){
@@ -79,6 +86,10 @@ public class Calingaert {
      *  posição
      */
     public void nextStep(){
+        if(config.getComboBoxModeSelected() == 0){
+            return;
+        }
+        this.isStaredComputed=true;
         ri = memory.getOnMemory(pc);
         switch(memory.getOnMemory(pc)){
             
@@ -150,18 +161,15 @@ public class Calingaert {
             case 12:
                 //STREAM
                 config.setOutPut("Digite o valor");
-                config.in.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        short positon = memory.getOnMemory((short)(pc+1));
-                        memory.setOnMemory(positon, Short.parseShort(config.in.getText()));
-                        pc = (short) (pc+2);
-                    }
-                });
+                isStreamMemoryWanted = true;
+                this.streamMemoryPositionWanted = memory.getOnMemory((short)(pc+1));
+                
+                break;
             case 13:
                 //COPY
-                short value = memory.getOnMemory((short)(pc+2));
+                short positionTo = memory.getOnMemory((short)(pc+2));
                 re =(short)  (pc+1);
-                memory.setOnMemory((short)(pc+1), value);
+                memory.setOnMemory(positionTo, memory.getOnMemory((short)(pc+1)));
                 pc = (short) (pc+3);
                 break;
             case 14:
@@ -179,7 +187,7 @@ public class Calingaert {
                 pc = sp;
                 break;
             default:
-                config.setLog("Ooops! Assembler: Command not defined!");
+                config.setLog("Ooops! Calingaert: Command "+ri+" not defined!");
                 
         }
         config.reloadDisplayLabels(pc, sp, accumulator, sp, re, ri);
@@ -191,7 +199,21 @@ public class Calingaert {
      * @param line 
      */
     public void setNewLine(String line){
-       commands.insertLine(line);
+       if(this.isStaredComputed){
+           if(this.isStreamMemoryWanted){
+           
+               try{
+                   memory.setOnMemory(streamMemoryPositionWanted, Short.parseShort(line));
+                   isStreamMemoryWanted = false;
+                   pc = (short) (pc+2);
+               }catch(Exception e){
+                   e.printStackTrace();
+               }
+           }
+       }else{
+           commands.insertLine(line);
+       }
+       
     }
     
     /**
@@ -206,5 +228,8 @@ public class Calingaert {
         re = 0;
         pc = 0;
         config.reloadDisplayLabels(pc, sp, accumulator, sp, re, ri);
+        this.isStaredComputed=false;
+        this.isStoped   =false;
+        this.streamMemoryPositionWanted = 0;
     }
 }

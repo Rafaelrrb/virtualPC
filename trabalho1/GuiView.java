@@ -554,7 +554,7 @@ public class GuiView extends javax.swing.JDialog {
     }                                          
 
     private void jButtonNextStepActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+        assembler.nextStep();
     }                                               
 
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {                                             

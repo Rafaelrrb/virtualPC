@@ -106,8 +106,8 @@ public class Config {
         this.recordSP.setText("0");
         this.recordACC.setText("0");
         this.recordAddress.setText("0");
-        this.out.setText("");
-        this.in.setText("");
+        this.out.setText(" ");
+        this.in.setText(" ");
         memory.resetMemory();
         command.resetCommand();
     }

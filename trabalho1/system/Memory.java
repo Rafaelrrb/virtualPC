@@ -5,6 +5,9 @@
 package system;
 
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 
 
@@ -42,10 +45,33 @@ public class Memory {
         return instance;
     }
     
+    /**
+     * Método pelo qual se insere a referência
+     *  para a tabela de memória da interface  
+     *  bem como se organiza o layout dela
+     * @param table 
+     */
     public void setTableMemory(JTable table){
         this.jtableMemory = table;
+        
+        /**
+         * Organizando o layout
+         */
+        TableColumnModel tcm = jtableMemory.getColumnModel();
+        tcm.getColumn(0).setMaxWidth(55);
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        jtableMemory.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+        tcm.getColumn(1).setPreferredWidth(200);
+        
     }
     
+    /**
+     * Método que insere modifica o valor exibido na tabela
+     *  da interface
+     * @param position
+     * @param value 
+     */
     public void setValueOnTableMemory(short position,short value){    
         this.jtableMemory.setValueAt(value, position, 1);
     }
@@ -83,11 +109,12 @@ public class Memory {
     
     /**
      * Retorna o conteúdo da memória naquela posição
-     * @param position
+     * @param posit
      * @return 
      */
-    public short getOnMemory(short position){
-        return memoryRange[position];
+    public short getOnMemory(short posit){
+        
+        return memoryRange[posit];
     }
     
     /**

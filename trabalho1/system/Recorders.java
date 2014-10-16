@@ -25,7 +25,7 @@ public class Recorders {
 
     public static Recorders getInstance() {
         if (instance == null) {
-            synchronized (SymbolTable.class) {
+            synchronized (Recorders.class) {
                 if (instance == null) {
                     instance = new Recorders();
                 }
