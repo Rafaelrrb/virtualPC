@@ -86,13 +86,13 @@ public class Config {
      * @param re
      * @param ri 
      */
-    public void reloadDisplayLabels(short pc, short sp, short acc, short mop, short re, short ri){
+    public void reloadDisplayLabels(short pc, short sp, short acc, short re, short ri){
         this.recordPC.setText(String.format("%d", pc));
         this.recordSP.setText(String.format("%d", sp));
         this.recordACC.setText(String.format("%d", acc));
         this.recordRE.setText(String.format("%d", re));
         this.recordRI.setText(String.format("%d", ri));
-        this.recordMOP.setText(String.format("%d", mop));
+        this.recordMOP.setText(String.format("%d", this.comboBoxMode.getSelectedIndex()));
     }
     
     /**

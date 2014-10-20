@@ -4,6 +4,7 @@
  */
 package system;
 
+import java.util.LinkedList;
 import services.Catalog;
 import services.Config;
 
@@ -21,7 +22,7 @@ public class Calingaert {
     private boolean isStaredComputed;
     private boolean isStreamMemoryWanted;
     private short pc;
-    private short sp;
+    private LinkedList<Short> sp;
     private short ri;
     private short re;
     private short streamMemoryPositionWanted;
@@ -32,10 +33,11 @@ public class Calingaert {
         memory      = Memory.getInstance();
         commands    = Catalog.getInstance();
         accumulator = 0;
-        sp          = 0;
+        sp          = new LinkedList<Short>();
         ri          = 0;
         re          = 0;
         pc          = 0;
+        
         isStoped    = false;
         isStaredComputed    = false;
         isStreamMemoryWanted = true;
@@ -181,17 +183,22 @@ public class Calingaert {
                 break;
             case 15:
                 //CALL
-                sp = pc;
+                sp.push(pc);
                 pc = memory.getOnMemory((short)(pc+1));
                 break;
             case 16:
-                pc = sp;
+                pc = sp.pop();
                 break;
             default:
                 config.setLog("Ooops! Calingaert: Command "+ri+" not defined!");
                 
         }
-        config.reloadDisplayLabels(pc, sp, accumulator, sp, re, ri);
+        if(sp.size() == 0){
+            config.reloadDisplayLabels(pc, (short)0, accumulator, re, ri);
+        }else{
+            config.reloadDisplayLabels(pc, sp.get(0), accumulator, re, ri);
+        }
+        
     }
     
     /**
@@ -224,11 +231,17 @@ public class Calingaert {
      */
     public void resetAssembler(){
         accumulator = 0;
-        sp = 0;
+        sp.clear();
         ri = 0;
         re = 0;
         pc = 0;
-        config.reloadDisplayLabels(pc, sp, accumulator, sp, re, ri);
+        
+        if(sp.get(0) == null){
+            config.reloadDisplayLabels(pc, (short)0, accumulator, re, ri);
+        }else{
+            config.reloadDisplayLabels(pc, sp.get(0), accumulator, re, ri);
+        }
+        
         this.isStaredComputed=false;
         this.isStoped   =false;
         this.streamMemoryPositionWanted = 0;
