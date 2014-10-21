@@ -23,6 +23,10 @@ public class Recorders {
         
     }
 
+    /**
+     *  Retorna a única instância dos registradores
+     * @return
+     */
     public static Recorders getInstance() {
         if (instance == null) {
             synchronized (Recorders.class) {

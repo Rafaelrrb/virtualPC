@@ -9,5 +9,8 @@
                 <root id="test.virtualpc.dir"/>
             </test-roots>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>registradores</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

@@ -27,7 +27,9 @@ public class Calingaert {
     private short re;
     private short streamMemoryPositionWanted;
     
-    
+    /**
+     * Construtor default do Calingaert
+     */
     public Calingaert(){
         config      = Config.getInstance();
         memory      = Memory.getInstance();
@@ -40,7 +42,7 @@ public class Calingaert {
         
         isStoped    = false;
         isStaredComputed    = false;
-        isStreamMemoryWanted = true;
+        isStreamMemoryWanted = false;
     }
     
     /**
@@ -64,11 +66,12 @@ public class Calingaert {
                 }
                 break;
             case 1:
-                
+                this.nextStep();
                 break;
             case 2:
                 this.nextStep();
                 break;
+            
         
         }
         
@@ -88,7 +91,8 @@ public class Calingaert {
      *  posição
      */
     public void nextStep(){
-        if(config.getComboBoxModeSelected() == 0){
+        if(this.isStaredComputed == true && this.isStreamMemoryWanted == true){
+            config.setLog("NextStep aborted");
             return;
         }
         this.isStaredComputed=true;
@@ -159,6 +163,9 @@ public class Calingaert {
                 break;
             case 11:
                 //STOP
+                if(!this.isStoped){
+                   config.setOutPut("Ended");
+                }
                 this.isStoped = true;
                 break;
             case 12:
@@ -212,8 +219,9 @@ public class Calingaert {
            
                try{
                    memory.setOnMemory(streamMemoryPositionWanted, Short.parseShort(line));
-                   isStreamMemoryWanted = false;
                    pc = (short) (pc+2);
+                   isStreamMemoryWanted = false;
+                   
                }catch(Exception e){
                    e.printStackTrace();
                }
@@ -236,7 +244,7 @@ public class Calingaert {
         re = 0;
         pc = 0;
         
-        if(sp.get(0) == null){
+        if(sp.size() == 0){
             config.reloadDisplayLabels(pc, (short)0, accumulator, re, ri);
         }else{
             config.reloadDisplayLabels(pc, sp.get(0), accumulator, re, ri);

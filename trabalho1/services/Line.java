@@ -11,6 +11,10 @@ import system.Memory;
  * @author glaucomunsberg
  */
 public class Line {
+
+    /**
+     * Linha contendo a string de acesso
+     */
     public String  line;
     private short   column1;
     private short   column2;

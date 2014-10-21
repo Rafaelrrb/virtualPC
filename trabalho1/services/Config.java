@@ -15,11 +15,15 @@ import system.Memory;
  */
 public class Config {
     private static volatile Config instance = null;
-    private static Memory memory = Memory.getInstance();
-    private static Catalog command = Catalog.getInstance();
+    private static final Memory memory = Memory.getInstance();
+    private static final Catalog command = Catalog.getInstance();
     private int startLocation;
     private JTextArea log;
     private JTextArea out;
+
+    /**
+     *
+     */
     public JTextField in;
     private JComboBox comboBoxMode;
     private JLabel recordPC;
@@ -82,7 +86,6 @@ public class Config {
      * @param pc
      * @param sp
      * @param acc
-     * @param mop
      * @param re
      * @param ri 
      */

@@ -72,9 +72,7 @@ public class Memory {
     
     /**
      * Método que insere modifica o valor exibido na tabela
-     *  da interface
-     * @param position
-     * @param value 
+     *  da interface 
      */
     public void setValueOnTableMemory(){    
         for(int a = 0; a < memoryRange.length;a++){

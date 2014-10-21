@@ -11,6 +11,9 @@ public class Principal {
     
     private static GuiView app;
     
+    /**
+     * Esta é a Classe Principal do Sistema e instancia a interface o Calingaert
+     */
     public Principal(){
         
         app = new GuiView(new javax.swing.JFrame(), true);
@@ -23,6 +26,10 @@ public class Principal {
         app.setVisible(true);
     }
     
+    /**
+     * Método main e não precisa de parâmetros
+     * @param args
+     */
     public static void main(String [] args)
     {
           Principal programa = new Principal();

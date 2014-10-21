@@ -16,6 +16,8 @@ public class View extends javax.swing.JDialog {
     Calingaert assembler;
     /**
      * Creates new form Tela
+     * @param parent
+     * @param modal
      */
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
