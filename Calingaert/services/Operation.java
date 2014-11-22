@@ -2,7 +2,7 @@
  * Esta é uma ENUM conténdo os operadores suportado
  *      pelo montador
  */
-package services;
+package Calingaert.services;
 
 /**
  *

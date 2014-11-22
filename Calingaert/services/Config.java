@@ -1,13 +1,13 @@
 /*
  * Config é a classe base de configuração para o sistema
  */
-package services;
+package Calingaert.services;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import system.Memory;
+import Calingaert.system.Memory;
 
 /**
  *

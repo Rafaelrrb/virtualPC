@@ -2,9 +2,9 @@
  * Esta classe representa cada um das linhas
  *  digitadas no console pelo usuário
  */
-package services;
+package Calingaert.services;
 
-import system.Memory;
+import Calingaert.system.Memory;
 
 /**
  *

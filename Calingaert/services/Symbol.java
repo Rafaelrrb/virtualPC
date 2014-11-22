@@ -1,7 +1,7 @@
 /*
  * Esta classe contém as um simbolo e seu endereço
  */
-package services;
+package Calingaert.services;
 
 /**
  *

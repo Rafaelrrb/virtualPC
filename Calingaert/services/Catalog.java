@@ -2,7 +2,7 @@
  * Esta classe é o catalogo de todos os comandos inseridos
  *  através do input do sistema
  */
-package services;
+package Calingaert.services;
 
 import java.util.LinkedList;
 

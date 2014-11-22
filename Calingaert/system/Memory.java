@@ -2,7 +2,7 @@
  * Esta classe representa a memória de 1K e está estruturada
  * através de uma lista
  */
-package system;
+package Calingaert.system;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;

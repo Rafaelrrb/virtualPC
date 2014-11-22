@@ -2,11 +2,11 @@
  * Assembler é a classe que executará de fato
  *      o simulador
  */
-package system;
+package Calingaert.system;
 
 import java.util.LinkedList;
-import services.Catalog;
-import services.Config;
+import Calingaert.services.Catalog;
+import Calingaert.services.Config;
 
 /**
  *
