@@ -12,7 +12,17 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/trabalho1/M68000/Principal.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/macro/Macro.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/services/TabletUsage.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/services/Memory.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/assistance/Usage.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/linker/Linker.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/loader/Loader.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/Calingaert/services/Symbol.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/Principal.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/assistance/Symbol.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/services/TabletSymbol.java</file>
+            <file>file:/Users/glaucomunsberg/Projetos/virtualPC/M68000/machine/VirtualMachine.java</file>
         </group>
     </open-files>
 </project-private>

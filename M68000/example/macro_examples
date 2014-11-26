@@ -1,0 +1,12 @@
+...
+SAV2    MACRO
+        MOVE.L    \1,SAVET       SAVE 1ST ARGUMENT
+        MOVE.L    \2,SAVET+4     SAVE 2ND ARGUMENT
+        IFEQ      '\3',''        IS THERE A 3RD ARGUMENT?
+        FAIL      1000           DID ASSEMBLER GO THRU HERE?
+        MEXIT                    NO, EXIT FROM MACRO
+        ENDC
+        MOVE.L    \3,SAVET+8     SAVE 3RD ARGUMENT
+        ENDM
+...
+        SAV2.L         7,3,GT   CALLING
