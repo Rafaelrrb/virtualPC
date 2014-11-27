@@ -139,6 +139,14 @@ public class Memory {
         }
     }
     
+    public void resetMemory(){
+    
+    
+    }
+    
+    public int getPosition(){
+        return 0;
+    }
     /**
      *  Printa toda a memória até o contador em um arquivo passado
      * @param file
