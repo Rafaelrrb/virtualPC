@@ -10,8 +10,10 @@ import java.util.logging.Logger;
 public class Registers {
     private static Logger logger;
     
-    private char[][] registers;
+    private char[][] registersData;
+    private char[][] registersAnddress;
     private char[] CCR;
+    public int pc;
     private static volatile Registers instance = null;
     
     private Registers() {
@@ -34,15 +36,18 @@ public class Registers {
          * 
          */
         CCR = new char[5]; // All positions of CCR [0]X [1]N [2]Z [3]V [4]C
-        registers = new char[8][16];
+        registersAnddress = new char[8][16];
+        registersData = new char[8][16];
         
         logger = Logger.getLogger(Registers.class.getName());
+        pc = 0;
         logger.info("Registers Loaded");
         
     }
     
     /**
-     * Retorna a única instância desta classe
+     * Retorna a unica instancia desta classe
+     * 
      * @return 
      */
     public static Registers getInstance() {
@@ -58,11 +63,36 @@ public class Registers {
     
     public char[] getRegisterD(int position){
         if(position <= 8 || position >= 0){
-            return registers[position];
+            return registersData[position];
         }else{
             logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
             return null;
         }
         
     }
+    
+    public char[] getRegisterA(int position){
+        if(position <= 6 || position >= 0){
+            return registersData[position];
+        }else{
+            logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
+            return null;
+        }
+        
+    }
+    
+    /**
+     * Stack Pointer (user)
+     */
+    public char[] getRegisterAUSP(){
+        return registersData[7];
+    }
+    
+    /**
+     * Stack Pointer (supervisor)
+     */
+    public char[] getRegisterSSP(){
+        return registersData[8];
+    }
+    
 }

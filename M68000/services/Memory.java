@@ -18,7 +18,6 @@ public class Memory {
     private static volatile Memory instance = null;
     private static Logger logger;
     private char[][] memory;
-    private int pc;
     private Registers registers;
     
     /**
@@ -26,8 +25,8 @@ public class Memory {
      *  0 a posição inicial e memória do tamanho de 1K
      */
     private Memory() {
+        registers = Registers.getInstance();
         memory = new char[1024][16];
-        pc = 0;
         registers = Registers.getInstance();
         logger = Logger.getLogger(Memory.class.getName()); 
         logger.info("Memory Loaded");
@@ -57,10 +56,6 @@ public class Memory {
         
         return resposta;
     }
-
-    public int getPc() {
-        return pc;
-    }
  
     /**
      * Cada byte inserido na memória, o program counter é incrementado
@@ -68,8 +63,8 @@ public class Memory {
      * @param valor 
      */
     public void insereByteMemoria(char[] valor){
-        System.arraycopy(valor, 0, memory[pc], 0, 8);
-        pc++;
+        System.arraycopy(valor, 0, memory[registers.pc], 0, 8);
+        registers.pc++;
     }
     
     /**
@@ -89,9 +84,9 @@ public class Memory {
      */
     public void insertWordMemory(char[][] valor){
         for(int i = 0; i < 2 ; i++){
-            System.arraycopy(valor[i], 0, memory[pc + i], 0, 8);
+            System.arraycopy(valor[i], 0, memory[registers.pc + i], 0, 8);
         }
-        pc = pc + 4;
+        registers.pc = registers.pc + 4;
     }
     
     /**
@@ -102,11 +97,11 @@ public class Memory {
     public void insertWordMemory(char[] valor){
         for(int i = 0; i < 2; i++){
             for(int j = 0;j < 4; j ++){
-                memory[pc + i][j] = valor[8*i + j]; 
+                memory[registers.pc + i][j] = valor[8*i + j]; 
             }
         }
         
-        pc = pc + 4;
+        registers.pc = registers.pc + 4;
     }
     
     public void insertWordMemory(char[] valor, int local){
@@ -130,7 +125,7 @@ public class Memory {
     public void printMemory(){
         int i;
         
-        for(i = 0; i < pc; i++){
+        for(i = 0; i < registers.pc; i++){
             System.out.print(i+": ");
             for(int j = 0; j < 16; j++){
                 System.out.print(memory[i][j]);
@@ -145,8 +140,9 @@ public class Memory {
     }
     
     public int getPosition(){
-        return 0;
+        return registers.pc;
     }
+    
     /**
      *  Printa toda a memória até o contador em um arquivo passado
      * @param file
@@ -156,7 +152,7 @@ public class Memory {
         int i;
         boolean par = false;
         
-        for(i = 0; i < pc; i++){
+        for(i = 0; i < registers.pc; i++){
             
             for(int j = 0; j < 8; j++){
                 file.write(memory[i][j]);

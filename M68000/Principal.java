@@ -1,5 +1,7 @@
 package M68000;
 
+import M68000.assistance.FileMananger;
+
 /*
  * Classe que executa o sistema
  */
@@ -18,15 +20,8 @@ public class Principal {
      */
     public Principal(){
         
-        //app = new GuiView(new javax.swing.JFrame(), true);
-        /**app.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-        app.setVisible(true);
-        */
+        FileMananger file = FileMananger.getInstance();
+        file.openFile("/Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_1");
     }
     
     /**

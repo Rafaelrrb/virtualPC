@@ -15,14 +15,8 @@ import javax.swing.JTextField;
  */
 public class Configuration {
     private static volatile Configuration instance = null;
-    private static final Memory memory = Memory.getInstance();
-    private int startLocation;
     private JTextArea log;
     private JTextArea out;
-
-    /**
-     *
-     */
     public JTextField in;
     private JComboBox comboBoxMode;
     private JLabel recordPC;
@@ -32,8 +26,8 @@ public class Configuration {
     private JLabel recordSP;
     private JLabel recordACC;
     private JLabel recordAddress;
-   
     
+
     /**
      * Construtor privado da classe
      */
@@ -111,7 +105,6 @@ public class Configuration {
         this.recordAddress.setText("0");
         this.out.setText(" ");
         this.in.setText(" ");
-        memory.resetMemory();
     }
     
     /**
@@ -119,7 +112,7 @@ public class Configuration {
      * segundo o uso de memória até então
      */
     public void reloadDisplayRecordAddress(){
-        this.recordAddress.setText(String.format("%d", memory.getPosition()));
+        //this.recordAddress.setText(String.format("%d", memory.getPosition()));
     }
     
     /**
@@ -139,7 +132,6 @@ public class Configuration {
         if(this.log != null)
             this.log.setText(this.log.getText()+line+"\n");
     }
-    
     
     /**
      * Método que insere a referência do
@@ -179,7 +171,6 @@ public class Configuration {
         
         return (short) this.comboBoxMode.getSelectedIndex();
     }
-    
     
     /**
      * Método que insere a referência da combo
