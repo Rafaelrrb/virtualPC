@@ -1,5 +1,6 @@
 package M68000;
 
+import M68000.assembler.Assembler;
 import M68000.assistance.FileMananger;
 
 /*
@@ -14,14 +15,15 @@ import M68000.assistance.FileMananger;
 public class Principal {
     
     //private static GuiView app;
+    private Assembler assembler;
     
     /**
      * Esta é a Classe Principal do Sistema e instancia a interface o Calingaert
      */
     public Principal(){
-        
-        FileMananger file = FileMananger.getInstance();
-        file.openFile("/Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_1");
+       
+      assembler = new Assembler();
+      assembler.execute("/Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2");
     }
     
     /**

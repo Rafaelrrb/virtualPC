@@ -31,13 +31,13 @@ public class Macro {
     }
     
     
-    public String processText(String texto){
+    public String[] processText(String[] texto){
         logger.info("Macro Processor start process the string...");
         // 1. Acha as macros e armazenas elas em 
         // 2. quando acha uma referência a elas então substitui
         // 3. salva o texto final em outro arquivo que deve ser chamado "out_macro" por exemplo
         // 3. retorna a string que foi salva como out_macro
-        return "";
+        return new String[0];
     }
    
 }

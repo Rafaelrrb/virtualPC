@@ -12,13 +12,30 @@ import java.util.logging.Logger;
  *
  * @author Ruhan
  */
-public class TabletSymbol {
-    private final static Logger logger = Logger.getLogger(TabletSymbol.class.getName());
+public class TableSymbol {
+    private final static Logger logger = Logger.getLogger(TableSymbol.class.getName());
+    private static volatile TableSymbol instance = null;
     private ArrayList<Symbol> tabela;
-    private TabletUsage usos;
+    private TableUsage tableUsage;
 
-    public TabletSymbol() {
+    private TableSymbol() {
         this.tabela = new ArrayList();
+        logger.info("Table Symbol Loaded");
+    }
+    
+    /**
+     * Retorna a única instância desta classe
+     * @return 
+     */
+    public static TableSymbol getInstance() {
+        if (instance == null) {
+            synchronized (Memory.class) {
+                if (instance == null) {
+                    instance = new TableSymbol();
+                }
+            }
+        }
+        return instance;
     }
     
     public void defineEndereco(String identificador, int endereco){
@@ -31,8 +48,8 @@ public class TabletSymbol {
         this.adicionaSimbolo(identificador, endereco);
     }
     
-    public void conectaTabelas (TabletUsage usos){
-        this.usos = usos;
+    public void conectaTabelas (TableUsage tableUsage){
+        this.tableUsage = tableUsage;
     }
     
     public void setaGlobal(String identificador){
@@ -178,7 +195,7 @@ public class TabletSymbol {
             //printa = "";
             if(!s.isDefinido()){
                 printa = "\n" + s.getSimbolo();
-                end = usos.returnaUsos(s.getSimbolo());
+                end = tableUsage.returnaUsos(s.getSimbolo());
                 for(Anddress u : end){
                     printa = printa + " " + u.toString();
                     //System.out.println("UUIIIA!");

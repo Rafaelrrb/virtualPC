@@ -56,48 +56,55 @@ public class FileMananger {
     
     public boolean openFile(String url){
         
-        logger.info("Starting open file");
-        path = url;
-        
-        try {
-            
-            file = new FileReader(path);
-            bufferedFile = new BufferedReader(file);
-            String temporary;
-            numberOfLine = 0;
-            while ((temporary = bufferedFile.readLine()) != null) {
-                numberOfLine++;
-            }
-            
-            String[] lines = new String[numberOfLine];
-            file = new FileReader(path);
-            bufferedFile = new BufferedReader(file);
-            numberOfLine=0;
-            temporary = " ";
-            
-            while ( temporary != null) {
-                
-                temporary = bufferedFile.readLine();
-                if(temporary != null){
-                    lines[numberOfLine] = temporary;
+        if(!isOpen){
+            logger.info("Starting open file");
+            path = url;
+
+            try {
+
+                file = new FileReader(path);
+                bufferedFile = new BufferedReader(file);
+                String temporary;
+                numberOfLine = 0;
+                while ((temporary = bufferedFile.readLine()) != null) {
                     numberOfLine++;
-                } 
+                }
+
+                String[] lines = new String[numberOfLine];
+                file = new FileReader(path);
+                bufferedFile = new BufferedReader(file);
+                numberOfLine = 0;
+                temporary = " ";
+
+                while (temporary != null) {
+
+                    temporary = bufferedFile.readLine();
+                    if (temporary != null) {
+                        lines[numberOfLine] = temporary;
+                        numberOfLine++;
+                    }
+                }
+                this.lines = lines;
+
+            } catch (FileNotFoundException ex) {
+
+                logger.severe("Can't open the file");
+                return false;
+
+            } catch (IOException ex) {
+
+                logger.severe("Can't open the file (IOException)");
+                return false;
+
             }
-            this.lines = lines;
+            logger.log(Level.INFO, "Success when opening the file with {0} lines", numberOfLine);
             
-        } catch (FileNotFoundException ex) {
-            
-            logger.severe("Can't open the file");
-            return false;
-            
-        } catch (IOException ex) {
-            
-            logger.severe("Can't open the file (IOException)");
-            return false;
-            
+        
+            return isOpen = true;   
+        }else{
+            logger.info("One file was open after");
+            return true;
         }
-        logger.log(Level.INFO, "Success when opening the file with {0} lines", numberOfLine);
-        return isOpen = true;   
     }
     
     public String[] getLines(){

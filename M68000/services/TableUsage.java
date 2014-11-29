@@ -14,12 +14,30 @@ import java.util.logging.Logger;
  *
  * @author Ruhan
  */
-public class TabletUsage {
-    private final static Logger logger = Logger.getLogger(TabletUsage.class.getName());
+public class TableUsage {
+    private final static Logger logger = Logger.getLogger(TableUsage.class.getName());
     private final ArrayList<Usage> lista;
-        
-    public TabletUsage() {
+    private static volatile TableUsage instance = null;
+    
+    
+    private TableUsage() {
         lista = new ArrayList();
+        logger.info("Table Usage Loaded");
+    }
+    
+    /**
+     * Retorna a única instância desta classe
+     * @return 
+     */
+    public static TableUsage getInstance() {
+        if (instance == null) {
+            synchronized (TableUsage.class) {
+                if (instance == null) {
+                    instance = new TableUsage();
+                }
+            }
+        }
+        return instance;
     }
     
     public void insereUso(Usage uso){
