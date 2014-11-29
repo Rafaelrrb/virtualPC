@@ -63,8 +63,8 @@ public class Memory {
      * @param valor 
      */
     public void insereByteMemoria(char[] valor){
-        System.arraycopy(valor, 0, memory[registers.pc], 0, 8);
-        registers.pc++;
+        System.arraycopy(valor, 0, memory[registers.getPC()], 0, 8);
+        registers.addToPC(1);
     }
     
     /**
@@ -84,9 +84,9 @@ public class Memory {
      */
     public void insertWordMemory(char[][] valor){
         for(int i = 0; i < 2 ; i++){
-            System.arraycopy(valor[i], 0, memory[registers.pc + i], 0, 8);
+            System.arraycopy(valor[i], 0, memory[registers.getPC() + i], 0, 8);
         }
-        registers.pc = registers.pc + 4;
+        registers.addToPC(4);
     }
     
     /**
@@ -97,11 +97,11 @@ public class Memory {
     public void insertWordMemory(char[] valor){
         for(int i = 0; i < 2; i++){
             for(int j = 0;j < 4; j ++){
-                memory[registers.pc + i][j] = valor[8*i + j]; 
+                memory[registers.getPC() + i][j] = valor[8*i + j]; 
             }
         }
         
-        registers.pc = registers.pc + 4;
+        registers.addToPC(4);
     }
     
     public void insertWordMemory(char[] valor, int local){
@@ -125,7 +125,7 @@ public class Memory {
     public void printMemory(){
         int i;
         
-        for(i = 0; i < registers.pc; i++){
+        for(i = 0; i < registers.getPC(); i++){
             System.out.print(i+": ");
             for(int j = 0; j < 16; j++){
                 System.out.print(memory[i][j]);
@@ -138,11 +138,7 @@ public class Memory {
     
     
     }
-    
-    public int getPosition(){
-        return registers.pc;
-    }
-    
+   
     /**
      *  Printa toda a memória até o contador em um arquivo passado
      * @param file
@@ -152,7 +148,7 @@ public class Memory {
         int i;
         boolean par = false;
         
-        for(i = 0; i < registers.pc; i++){
+        for(i = 0; i < registers.getPC(); i++){
             
             for(int j = 0; j < 8; j++){
                 file.write(memory[i][j]);

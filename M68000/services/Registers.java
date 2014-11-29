@@ -13,7 +13,7 @@ public class Registers {
     private char[][] registersData;
     private char[][] registersAnddress;
     private char[] CCR;
-    public int pc;
+    private int pc;
     private static volatile Registers instance = null;
     
     private Registers() {
@@ -93,6 +93,14 @@ public class Registers {
      */
     public char[] getRegisterSSP(){
         return registersData[8];
+    }
+    
+    public int getPC(){
+        return pc;
+    }
+    
+    public void addToPC(int plus){
+        pc += plus;
     }
     
 }
