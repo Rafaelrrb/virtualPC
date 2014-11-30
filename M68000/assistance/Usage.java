@@ -4,8 +4,6 @@
  */
 package M68000.assistance;
 
-import M68000.services.Anddress;
-
 /**
  *
  * @author Ruhan

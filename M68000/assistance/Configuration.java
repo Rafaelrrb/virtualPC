@@ -22,16 +22,16 @@ public class Configuration {
     public JCheckBox comboLink;
     public JCheckBox comboLoader;
     public JCheckBox comboAssembler;
-    private JLabel recordPC;
-    private JLabel recordACC;
-    private JLabel recordAddress;
-    private JLabel recordN;
-    private JLabel recordZ;
-    private JLabel recordV;
-    private JLabel recordC;
-    private JLabel recordX;
-    private JLabel[] recordD;
-    private JLabel[] recordA;
+    public JLabel recordPC;
+    public JLabel recordACC;
+    public JLabel recordAddress;
+    public JLabel recordN;
+    public JLabel recordZ;
+    public JLabel recordV;
+    public JLabel recordC;
+    public JLabel recordX;
+    public JLabel[] registerD;
+    public JLabel[] registerA;
     
     /**
      * Construtor privado da classe
@@ -79,12 +79,12 @@ public class Configuration {
     }
     
     public void setRegisterData(JLabel[] registersD){
-        this.recordD =  registersD;
+        this.registerD =  registersD;
     
     }
     
     public void setRegisterAnddress(JLabel[] registersA){
-        this.recordA =  registersA;
+        this.registerA =  registersA;
     
     }
     

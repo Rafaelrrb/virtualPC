@@ -3,11 +3,14 @@
  * and open the template in the editor.
  */
 package M68000.services;
+import M68000.assistance.Anddress;
 import M68000.assistance.Symbol;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Ruhan
@@ -18,6 +21,7 @@ public class TableSymbol {
     private ArrayList<Symbol> tabela;
     private TableUsage tableUsage;
     private Registers registers;
+    private JTable jTableSymbol;
 
     private TableSymbol() {
         this.tabela = new ArrayList();
@@ -48,6 +52,7 @@ public class TableSymbol {
             }
         }
         this.adicionaSimbolo(identificador, endereco);
+        printTableSymbol();
     }
     
     public void setaGlobal(String identificador){
@@ -63,6 +68,7 @@ public class TableSymbol {
         Symbol simbolo;
         simbolo = new Symbol(identificador);
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void adicionaSimbolo(String identificador, int endereco){
@@ -70,6 +76,7 @@ public class TableSymbol {
         simbolo = new Symbol(identificador);
         simbolo.setEndereco(endereco);
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void adicionaEquivalencia(String identificador, int endereco){
@@ -77,18 +84,21 @@ public class TableSymbol {
         simbolo = new Symbol(identificador,1);
         simbolo.setEndereco(endereco);
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void adicionaConstante(String identificador, int valor){
         Symbol simbolo;
         simbolo = new Symbol(identificador,2,Integer.toString(valor));
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void adicionaSpace(String identificador){
         Symbol simbolo;
         simbolo = new Symbol(identificador,3);
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void adicionaSpace(String identificador, int endereco){
@@ -96,6 +106,7 @@ public class TableSymbol {
         simbolo = new Symbol(identificador,3);
         simbolo.setEndereco(endereco);
         tabela.add(simbolo);
+        printTableSymbol();
     }
     
     public void printaTudo(){
@@ -183,6 +194,20 @@ public class TableSymbol {
 
                 fos.write(printa.getBytes());
             }
+        }
+    }
+    
+    public void setTableSymbol(JTable table){
+        this.jTableSymbol = table;
+    }
+    
+    public void printTableSymbol(){
+        DefaultTableModel model = (DefaultTableModel) jTableSymbol.getModel();
+        for(int a=0; a < model.getRowCount(); a++){
+            model.removeRow(a);
+        }
+        for(Symbol i:tabela){
+            model.addRow(new Object[]{i.getSimbolo()});
         }
     }
     

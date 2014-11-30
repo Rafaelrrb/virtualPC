@@ -1,5 +1,6 @@
 package M68000.services;
 
+import M68000.assistance.Configuration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 public class Registers {
     private static Logger logger;
     
+    private Configuration configuration;
     private char[][] registersData;
     private char[][] registersAnddress;
     private char[] CCR;
@@ -38,7 +40,7 @@ public class Registers {
         CCR = new char[5]; // All positions of CCR [0]X [1]N [2]Z [3]V [4]C
         registersAnddress = new char[8][16];
         registersData = new char[8][16];
-        
+        configuration = Configuration.getInstance();
         logger = Logger.getLogger(Registers.class.getName());
         pc = 0;
         logger.info("Registers Loaded");
@@ -61,46 +63,131 @@ public class Registers {
         return instance;
     }
     
+    /**
+     * insere o registrador de endereço D[position]
+     * @param position
+     * @param value 
+     */
+    public void setRegisterD(int position, char[] value){
+        if(position <= 7 || position >= 0){
+            registersData[position] = value;
+            String string = "";
+            for(char i :value){
+                string +=value;
+            }
+            configuration.registerD[position].setText(string);
+        }else{
+            logger.log(Level.SEVERE, "Ooops! Registrador D{0} não existe", position);
+        }
+    }
+    
+    /**
+     * Retornar o registrador de dado D[position]
+     * @param position
+     * @return 
+     */
     public char[] getRegisterD(int position){
-        if(position <= 8 || position >= 0){
+        if(position <= 7 || position >= 0){
             return registersData[position];
         }else{
-            logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
+            logger.log(Level.SEVERE, "Ooops! Registrador D{0} não existe", position);
             return null;
         }
         
     }
     
+   /**
+    * Retorna o registrador de endereço A[position]
+    * @param position
+    * @return 
+    */
     public char[] getRegisterA(int position){
         if(position <= 6 || position >= 0){
             return registersData[position];
         }else{
-            logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
+            logger.log(Level.SEVERE, "Ooops! Registrador A{0} não existe", position);
             return null;
         }
         
     }
     
     /**
-     * Stack Pointer (user)
+     *  Insere o novo valor ao registrador de endereço A[position]
+     * @param position
+     * @param value 
      */
-    public char[] getRegisterAUSP(){
+    public void setRegisterA(int position, char[] value){
+        if(position <= 6 || position >= 0){
+            registersData[position] = value;
+            String string = "";
+            for(char i :value){
+                string +=value;
+            }
+            configuration.registerA[position].setText(string);
+        }else{
+            logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
+        }
+    }
+    
+    /**
+     * Insere no registrador especial USP
+     * @param value 
+     */
+    public void setRegistradorUSP(char[] value){
+        registersData[7] = value;
+        String string = "";
+        for(char i :value){
+            string +=value;
+        }
+        configuration.registerA[7].setText(string);
+    }
+    
+    /**
+     * Insere no registrador especial SSP
+     * @param value 
+     */
+    public void setRegistradorSSP(char[] value){
+        registersData[8] = value;
+        String string = "";
+        for(char i :value){
+            string +=value;
+        }
+        configuration.registerA[8].setText(string);
+    }
+    
+    /**
+     * Retorna o Stack Pointer (user)
+     * @return 
+     */
+    public char[] getRegisterUSP(){
         return registersData[7];
     }
     
     /**
      * Stack Pointer (supervisor)
+     * @return 
      */
     public char[] getRegisterSSP(){
         return registersData[8];
     }
     
+    /**
+     * Retorna o PC do sistema
+     * @return int
+     */
     public int getPC(){
         return pc;
     }
     
+    /**
+     * Adiciona o valor plus ao contador atual
+     *  pc + plus
+     * @param plus 
+     */
     public void addToPC(int plus){
         pc += plus;
+        configuration.recordPC.setText(String.format("%d", pc));
+        
     }
     
 }

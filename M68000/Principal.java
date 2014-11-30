@@ -1,10 +1,6 @@
 package M68000;
-
-import M68000.assembler.Assembler;
-import M68000.assistance.FileMananger;
-import M68000.Interface;
 /*
- * Classe que executa o sistema
+ * Classe que executa o sistema Moto 68k
  */
 
 /**
@@ -14,9 +10,7 @@ import M68000.Interface;
 
 public class Principal {
     
-    //private static GuiView app;
-    private Assembler assembler;
-    private M68000.Interface interfaca;
+    private final Interface interfaca;
     
     /**
      * Esta é a Classe Principal do Sistema e instancia a interface o Calingaert
@@ -31,7 +25,7 @@ public class Principal {
         });
       interfaca.setVisible(true);
     }
-    ///Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2
+    //  /Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2
     /**
      * Método main e não precisa de parâmetros
      * @param args

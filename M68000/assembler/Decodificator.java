@@ -46,6 +46,8 @@ public class Decodificator {
         if(instruction.hasLabel()){
             symbols.defineAnddress(instruction.getLabel(), registers.getPC());
         }
+        DecodificatedInstruction instruc = new DecodificatedInstruction(instruction);
+        
     }
     
     public void processInstructionGlobal(String line){

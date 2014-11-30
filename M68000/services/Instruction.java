@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Instruction é a classe pelo qual se manipula cada 
+ *  instrução inserida no sistema e possibilitando 
+ *  retornar cada um de seus atributos (operando 1 e 2, label...)
  */
 package M68000.services;
 
@@ -15,8 +15,10 @@ public class Instruction {
     private String operator1;
     private String operator2;
 
-    /*
-     * Construtor
+    /**
+     * O construtor precisa de uma string com o comando completo
+     *  como por exemplo "ADD $1000, A1"
+     * @param str 
      */
     public Instruction(String str) {
         int caracterCounter;
@@ -50,6 +52,11 @@ public class Instruction {
         
     }
     
+    /**
+     * Retorna a Label do comando se ele tiver
+     * @param str
+     * @return 
+     */
     private int getLabel(String str){
         int i;
         char c;
@@ -73,6 +80,12 @@ public class Instruction {
         
     }
     
+    /**
+     * Retorna a operação que é realizada pelo comando
+     * @param str
+     * @param i
+     * @return 
+     */
     private int getOperation(String str, int i){
         char c;
         //resposta = "";
@@ -98,6 +111,11 @@ public class Instruction {
         return i;
     }
     
+    /**
+     * Retorna o número de operadores que há no comando
+     * @param str
+     * @return 
+     */
     private int numberOfOperators(String str){
         if(str.contains(",")){
             return 2;
@@ -111,6 +129,12 @@ public class Instruction {
                
     }
     
+    /**
+     * constroi o primeiro operador e diz onde começa o segundo
+     * @param str
+     * @param i
+     * @return 
+     */
     private int getOperator1(String str, int i){
         char c;
 
@@ -135,6 +159,11 @@ public class Instruction {
         return i;
     }
     
+    /**
+     * Constroi o segundo operadno
+     * @param str
+     * @param i 
+     */
     private void getOperator2(String str, int i){
         char c;
         this.operator2 = "";
@@ -158,7 +187,11 @@ public class Instruction {
         //return;
     }
     
-    
+    /**
+     * Esse comando sobrescreve o 
+     *  comando toString para tornar o comando visível e intelegivel 
+     * @return 
+     */
     @Override
     public String toString(){
         String resposta;
@@ -178,26 +211,50 @@ public class Instruction {
         return resposta;
     }
 
+    /**
+     * Retorna booleano se esse tem label
+     * @return 
+     */
     public boolean hasLabel() {
         return hasLabel;
     }
 
+    /**
+     * Retorna a label do commando
+     * @return 
+     */
     public String getLabel() {
         return label;
     }
 
+    /**
+     * Retorna o número de operandos que há no comando
+     * @return 
+     */
     public int getNumberOfOperators() {
         return numberOfOperators;
     }
 
+    /**
+     * Retorna a operação do sistema
+     * @return 
+     */
     public String getOperation() {
         return operation;
     }
 
+    /**
+     * Retorna o primeiro operador
+     * @return 
+     */
     public String getOperator1() {
         return operator1;
     }
 
+    /**
+     * retorna o segundo operador
+     * @return 
+     */
     public String getOperator2() {
         return operator2;
     }

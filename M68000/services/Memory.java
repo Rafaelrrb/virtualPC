@@ -70,6 +70,7 @@ public class Memory {
     public void insereByteMemoria(char[] valor){
         System.arraycopy(valor, 0, memory[registers.getPC()], 0, 8);
         registers.addToPC(1);
+        this.setValueOnTableMemory();
     }
     
     /**
@@ -140,8 +141,8 @@ public class Memory {
     }
     
     public void resetMemory(){
-    
-    
+        memory = new char[1024][16];
+        registers.addToPC(-registers.getPC());
     }
    
     /**
@@ -189,13 +190,21 @@ public class Memory {
         
     }
     
+    public String memoryToString(int position){
+        String value = "";
+        for(int a=0; a < 16; a++){
+            value+=memory[position][a];
+        }
+        return  value;
+    }
+    
     /**
      * Método que insere modifica o valor exibido na tabela
      *  da interface 
      */
     public void setValueOnTableMemory(){    
-        for(int a = 0; a < memory.length;a++){
-            jtableMemory.setValueAt(memory[a], a, 1);
+        for(int a = 0; a < 128;a++){
+            jtableMemory.setValueAt(memoryToString(a), a, 1);
         }
     }
 }

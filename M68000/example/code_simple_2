@@ -1,9 +1,6 @@
-aushuahsiuhau
-aushauihsuauhis
 BEGIN
         ORG $1000
 LOOP    ADD D0,(A4)
         BEQ LOOP
-        MOVE #ADE12,$4000
+        MOVE #12,$4000
 END
-aaaa

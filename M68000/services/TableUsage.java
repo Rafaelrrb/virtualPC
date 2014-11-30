@@ -4,11 +4,14 @@
  */
 package M68000.services;
 
+import M68000.assistance.Anddress;
 import M68000.assistance.Usage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +21,7 @@ public class TableUsage {
     private final static Logger logger = Logger.getLogger(TableUsage.class.getName());
     private final ArrayList<Usage> lista;
     private static volatile TableUsage instance = null;
+    private JTable jTableUsage;
     
     
     private TableUsage() {
@@ -42,14 +46,17 @@ public class TableUsage {
     
     public void insereUso(Usage uso){
         lista.add(uso);
+        printTableUSage();
     }
     
     public void insereUso(String simbolo, Anddress end){
         lista.add(new Usage(simbolo,end));
+        printTableUSage();
     }
     
     public void insereUso(String simbolo, int endereco){
         lista.add(new Usage(simbolo,new Anddress(endereco)));
+        printTableUSage();
     }
     
     public ArrayList<Anddress> returnaUsos(String simbolo){
@@ -69,6 +76,19 @@ public class TableUsage {
         return lista;
     }
     
+    public void setTableUsage(JTable table){
+        this.jTableUsage = table;
+    }
+    
+    public void printTableUSage(){
+        DefaultTableModel model = (DefaultTableModel) jTableUsage.getModel();
+        for(int a=0; a < model.getRowCount(); a++){
+            model.removeRow(a);
+        }
+        for(Usage i:lista){
+            model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress())});
+        }
+    }
    
     public void printaUsos(FileOutputStream fos) throws IOException{
         String printa = "";

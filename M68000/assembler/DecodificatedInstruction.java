@@ -109,7 +109,7 @@ public class DecodificatedInstruction {
             R(inst);
             return;
         }
-        if(inst.getOperation().contains("OR")){
+        if(inst.getOperation().contains("OR") && !inst.getOperation().contains("ORG")){
             R(inst);
             return;
         }
@@ -147,6 +147,11 @@ public class DecodificatedInstruction {
         if(inst.getOperation().contains("BRA") || inst.getOperation().contains("BEQ") || inst.getOperation().contains("BSR") || inst.getOperation().contains("BNE")){
             branch(inst);
             return;
+        }
+        
+        if(inst.getOperation().contains("ORG")){
+            
+        
         }
     }
     
