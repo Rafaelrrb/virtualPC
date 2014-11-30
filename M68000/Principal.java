@@ -30,10 +30,8 @@ public class Principal {
             }
         });
       interfaca.setVisible(true);
-      assembler = new Assembler();
-      assembler.execute("/Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2");
     }
-    
+    ///Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2
     /**
      * Método main e não precisa de parâmetros
      * @param args

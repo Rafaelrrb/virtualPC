@@ -65,6 +65,8 @@ public class Interface extends javax.swing.JDialog {
         jCheckBoxAssembler = new javax.swing.JCheckBox();
         jCheckBoxLoader = new javax.swing.JCheckBox();
         jCheckBoxVirtualMachine = new javax.swing.JCheckBox();
+        jLabelX = new javax.swing.JLabel();
+        jLabelDisplayX = new javax.swing.JLabel();
         jPanelConfiguration = new javax.swing.JPanel();
         jLabelOperatingMode = new javax.swing.JLabel();
         jLabelOperatingMode1 = new javax.swing.JLabel();
@@ -215,6 +217,13 @@ public class Interface extends javax.swing.JDialog {
             }
         });
 
+        jLabelX.setFont(new java.awt.Font("DIN Light", 0, 14)); // NOI18N
+        jLabelX.setText("X");
+
+        jLabelDisplayX.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelDisplayX.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jLabelDisplayX.setText("-");
+
         javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
         jPanelGeneral.setLayout(jPanelGeneralLayout);
         jPanelGeneralLayout.setHorizontalGroup(
@@ -228,47 +237,42 @@ public class Interface extends javax.swing.JDialog {
                         .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelDisplayAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelDisplayACC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelDisplayPC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addComponent(jLabelRE1)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabelDisplayC, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addComponent(jLabelRE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabelDisplayV, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addComponent(jLabelRI)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabelDisplayZ, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addComponent(jLabelMOP)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabelDisplayN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelDisplayPC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabelCommands1))
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabelPC))
-                            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabelSP)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(jPanelGeneralLayout.createSequentialGroup()
-                .addContainerGap()
+                            .addComponent(jLabelCommands2)
+                            .addComponent(jCheckBoxAssembler)
+                            .addComponent(jCheckBoxLinker)
+                            .addComponent(jCheckBoxLoader)
+                            .addComponent(jCheckBoxVirtualMachine))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelRE)
+                    .addComponent(jLabelX)
+                    .addComponent(jLabelRE1)
+                    .addComponent(jLabelRI)
+                    .addComponent(jLabelMOP))
+                .addGap(41, 41, 41)
                 .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCommands2)
-                    .addComponent(jCheckBoxAssembler)
-                    .addComponent(jCheckBoxLinker)
-                    .addComponent(jCheckBoxLoader)
-                    .addComponent(jCheckBoxVirtualMachine))
+                    .addComponent(jLabelDisplayZ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelDisplayV, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDisplayC, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDisplayX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDisplayN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelCommands1))
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelPC))
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelSP)))
+                .addGap(418, 418, 418))
         );
         jPanelGeneralLayout.setVerticalGroup(
             jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,15 +310,21 @@ public class Interface extends javax.swing.JDialog {
                     .addComponent(jLabelRE1)
                     .addComponent(jLabelDisplayC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelCommands2)
-                .addGap(12, 12, 12)
-                .addComponent(jCheckBoxAssembler)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxLinker)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxLoader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxVirtualMachine)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelX)
+                    .addComponent(jLabelDisplayX))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelGeneralLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jCheckBoxAssembler)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxLinker)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxLoader)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxVirtualMachine))
+                    .addComponent(jLabelCommands2))
                 .addContainerGap())
         );
 
@@ -669,7 +679,7 @@ public class Interface extends javax.swing.JDialog {
             jPanelMemoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMemoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -694,7 +704,7 @@ public class Interface extends javax.swing.JDialog {
             jPanelLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLogLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -778,7 +788,7 @@ public class Interface extends javax.swing.JDialog {
                 .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -786,7 +796,7 @@ public class Interface extends javax.swing.JDialog {
                 .addComponent(jLabelOut)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jLabelOut1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -794,7 +804,7 @@ public class Interface extends javax.swing.JDialog {
                 .addGroup(jPanelDisplayRELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonReset)
                     .addComponent(jButtonStart1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
             .addGroup(jPanelDisplayRELayout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -816,7 +826,7 @@ public class Interface extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelDisplayRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         pack();
@@ -928,6 +938,7 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDisplaySSP;
     private javax.swing.JLabel jLabelDisplayUSP;
     private javax.swing.JLabel jLabelDisplayV;
+    private javax.swing.JLabel jLabelDisplayX;
     private javax.swing.JLabel jLabelDisplayZ;
     private javax.swing.JLabel jLabelIn;
     private javax.swing.JLabel jLabelMOP;
@@ -959,6 +970,7 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelRI;
     private javax.swing.JLabel jLabelSP;
     private javax.swing.JLabel jLabelVersion;
+    private javax.swing.JLabel jLabelX;
     private javax.swing.JLabel jLabelddresss;
     private javax.swing.JPanel jPanelConfiguration;
     private javax.swing.JPanel jPanelDisplayRE;

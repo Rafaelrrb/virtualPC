@@ -8,6 +8,10 @@ package M68000.services;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 
 /**
@@ -19,6 +23,7 @@ public class Memory {
     private static Logger logger;
     private char[][] memory;
     private Registers registers;
+    private JTable jtableMemory;
     
     /**
      * Construtor privado que seta como
@@ -162,4 +167,35 @@ public class Memory {
         }
     }
     
+    /**
+     * Método pelo qual se insere a referência
+     *  para a tabela de memória da interface  
+     *  bem como se organiza o layout dela
+     * @param table 
+     */
+    public void setTableMemory(JTable table){
+        this.jtableMemory = table;
+        
+        /**
+         * Organizando o layout
+         */
+        TableColumnModel tcm = jtableMemory.getColumnModel();
+        tcm.getColumn(0).setMaxWidth(55);
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        jtableMemory.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+        jtableMemory.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+        tcm.getColumn(1).setPreferredWidth(200);
+        
+    }
+    
+    /**
+     * Método que insere modifica o valor exibido na tabela
+     *  da interface 
+     */
+    public void setValueOnTableMemory(){    
+        for(int a = 0; a < memory.length;a++){
+            jtableMemory.setValueAt(memory[a], a, 1);
+        }
+    }
 }

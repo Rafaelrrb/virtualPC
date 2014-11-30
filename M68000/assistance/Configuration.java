@@ -3,7 +3,7 @@
  */
 package M68000.assistance;
 
-import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -15,13 +15,13 @@ import javax.swing.JTextField;
 public class Configuration {
     private static volatile Configuration instance = null;
     private JTextArea log;
-    private JTextArea out;
+    public JTextField out;
     private JTextArea linkerListFile;
-    private JTextField in;
-    private JComboBox comboMachine;
-    private JComboBox comboLink;
-    private JComboBox comboLoader;
-    private JComboBox comboAssembler;
+    public JTextField in;
+    public JCheckBox comboMachine;
+    public JCheckBox comboLink;
+    public JCheckBox comboLoader;
+    public JCheckBox comboAssembler;
     private JLabel recordPC;
     private JLabel recordACC;
     private JLabel recordAddress;
@@ -129,7 +129,7 @@ public class Configuration {
      *  display out da interface
      * @param out 
      */
-    public void setOutPut(JTextArea out){
+    public void setOutPut(JTextField out){
         this.out = out;
     }
     
@@ -160,7 +160,7 @@ public class Configuration {
      * @param loader
      * @param virtualMachine
      */
-    public void setGeralComboBox(JComboBox assembler,JComboBox linker, JComboBox loader, JComboBox virtualMachine){
+    public void setGeralComboBox(JCheckBox assembler,JCheckBox linker, JCheckBox loader, JCheckBox virtualMachine){
         this.comboAssembler = assembler;
         this.comboLink      = linker;
         this.comboLoader    = loader;
