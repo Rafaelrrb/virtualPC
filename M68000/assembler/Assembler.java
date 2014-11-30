@@ -60,7 +60,7 @@ public class Assembler {
                         status = status.END;
                         break;
                     }
-                    decodificator.processInstructionBegin(line);
+                    decodificator.processInstruction(line);
                     break;
                 case END:
                     logger.info("Not command");

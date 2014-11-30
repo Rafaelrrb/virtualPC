@@ -5,6 +5,9 @@
  */
 package M68000.assembler;
 
+import M68000.services.Instruction;
+import M68000.services.Registers;
+import M68000.services.TableSymbol;
 import java.util.logging.Logger;
 
 /**
@@ -14,9 +17,13 @@ import java.util.logging.Logger;
 public class Decodificator {
     private static volatile Decodificator instance = null;
     private final static Logger logger = Logger.getLogger(Decodificator.class.getName());
+    private TableSymbol symbols;
+    private Registers registers;
     
     private Decodificator(){
         logger.info("Decodificator Loaded");
+        symbols = TableSymbol.getInstance();
+        registers = Registers.getInstance();
     }
     
     public static Decodificator getInstance() {
@@ -31,8 +38,14 @@ public class Decodificator {
     }
     
     
-    public void processInstructionBegin(String line){
-    
+    public void processInstruction(String line){
+        Instruction instruction = new Instruction(line);
+        
+        System.out.println(instruction);
+        
+        if(instruction.hasLabel()){
+            symbols.defineAnddress(instruction.getLabel(), registers.getPC());
+        }
     }
     
     public void processInstructionGlobal(String line){

@@ -3,7 +3,6 @@
  */
 package M68000.assistance;
 
-import M68000.services.Memory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -17,17 +16,23 @@ public class Configuration {
     private static volatile Configuration instance = null;
     private JTextArea log;
     private JTextArea out;
-    public JTextField in;
-    private JComboBox comboBoxMode;
+    private JTextArea linkerListFile;
+    private JTextField in;
+    private JComboBox comboMachine;
+    private JComboBox comboLink;
+    private JComboBox comboLoader;
+    private JComboBox comboAssembler;
     private JLabel recordPC;
-    private JLabel recordMOP;
-    private JLabel recordRE;
-    private JLabel recordRI;
-    private JLabel recordSP;
     private JLabel recordACC;
     private JLabel recordAddress;
+    private JLabel recordN;
+    private JLabel recordZ;
+    private JLabel recordV;
+    private JLabel recordC;
+    private JLabel recordX;
+    private JLabel[] recordD;
+    private JLabel[] recordA;
     
-
     /**
      * Construtor privado da classe
      */
@@ -55,65 +60,51 @@ public class Configuration {
      *  permite que seja manipulados os displays de registradores
      *  pela classe Config
      * @param recordPC
-     * @param recordMOP
-     * @param recordRE
-     * @param recordRI
-     * @param recordSP
+     * @param recordN
      * @param recordACC
      * @param recordAnddress 
+     * @param recordZ 
+     * @param recordV 
+     * @param recordC 
      */
-    public void setDisplayLabels(JLabel recordPC, JLabel recordMOP, JLabel recordRE, JLabel recordRI, JLabel recordSP, JLabel recordACC, JLabel recordAnddress){
+    public void setGeneralLabels(JLabel recordPC, JLabel recordACC, JLabel recordAnddress, JLabel recordN, JLabel recordZ, JLabel recordV, JLabel recordC, JLabel recordX){
         this.recordPC       = recordPC;
-        this.recordMOP      = recordMOP;
-        this.recordRE       = recordRE;
-        this.recordRI       = recordRI;
-        this.recordSP       = recordSP;
         this.recordACC      = recordACC;
         this.recordAddress  = recordAnddress;
+        this.recordN        = recordN;
+        this.recordZ        = recordZ;
+        this.recordV        = recordV;
+        this.recordC        = recordC;
+        this.recordX        = recordX;
+    }
+    
+    public void setRegisterData(JLabel[] registersD){
+        this.recordD =  registersD;
+    
+    }
+    
+    public void setRegisterAnddress(JLabel[] registersA){
+        this.recordA =  registersA;
     
     }
     
     /**
-     * Método que atualiza os valores da tab "General" 
+     *  Método que atualiza os valores da tab "General" 
      *  na interface
-     * @param pc
-     * @param sp
-     * @param acc
-     * @param re
-     * @param ri 
+     * @param X
+     * @param N
+     * @param V
+     * @param C
+     * @param Z 
      */
-    public void reloadDisplayLabels(short pc, short sp, short acc, short re, short ri){
-        this.recordPC.setText(String.format("%d", pc));
-        this.recordSP.setText(String.format("%d", sp));
-        this.recordACC.setText(String.format("%d", acc));
-        this.recordRE.setText(String.format("%d", re));
-        this.recordRI.setText(String.format("%d", ri));
-        this.recordMOP.setText(String.format("%d", this.comboBoxMode.getSelectedIndex()));
+    public void reloadCCR(short X, short N, short V, short C, short Z){
+        this.recordX.setText(String.format("%d", X));
+        this.recordN.setText(String.format("%d", N));
+        this.recordV.setText(String.format("%d", V));
+        this.recordC.setText(String.format("%d", C));
+        this.recordZ.setText(String.format("%d", Z));
     }
-    
-    /**
-     * Método responsável por resetar o sistema inteiro
-     *  para que se possa reentrar com um novo programa
-     */
-    public void resetSystem(){
-        this.recordPC.setText("0");
-        this.recordMOP.setText("0");
-        this.recordRE.setText("0");
-        this.recordRI.setText("0");
-        this.recordSP.setText("0");
-        this.recordACC.setText("0");
-        this.recordAddress.setText("0");
-        this.out.setText(" ");
-        this.in.setText(" ");
-    }
-    
-    /**
-     * Atualiza o Display do Andrress
-     * segundo o uso de memória até então
-     */
-    public void reloadDisplayRecordAddress(){
-        //this.recordAddress.setText(String.format("%d", memory.getPosition()));
-    }
+ 
     
     /**
      * Insere no sistema a referência do
@@ -144,6 +135,15 @@ public class Configuration {
     
     /**
      * Método que insere a referência do
+     *  display out da interface 
+     * @param linker
+     */
+    public void setLinkerListFile(JTextArea linker){
+        this.linkerListFile = linker;
+    }
+    
+    /**
+     * Método que insere a referência do
      *  display in da interface para ser
      *  manipulado
      * @param text 
@@ -153,32 +153,36 @@ public class Configuration {
     }
     
     /**
-     * Método que insere uma nova linha
-     *  no output do sistema
-     * @param line 
-     */
-    public void setOutPut(String line){
-        
-        this.out.setText(this.out.getText()+line+"\n");
-    }
-    
-    /**
-     * Método que retorna qual dos modos de operação
-     *  foi seleciado pelo operador.
-     * @return short 
-     */
-    public short getComboBoxModeSelected(){
-        
-        return (short) this.comboBoxMode.getSelectedIndex();
-    }
-    
-    /**
      * Método que insere a referência da combo
-     *  no display o sistema
-     * @param box 
+     *  no display o sistema 
+     * @param assembler
+     * @param linker
+     * @param loader
+     * @param virtualMachine
      */
-    public void setComboBoxMode(JComboBox box){
-        this.comboBoxMode = box;
-        this.comboBoxMode.setSelectedIndex(2);
+    public void setGeralComboBox(JComboBox assembler,JComboBox linker, JComboBox loader, JComboBox virtualMachine){
+        this.comboAssembler = assembler;
+        this.comboLink      = linker;
+        this.comboLoader    = loader;
+        this.comboMachine   = virtualMachine;
+    }
+   
+    /**
+     * Método responsável por resetar o sistema inteiro
+     *  para que se possa reentrar com um novo programa
+     */
+    public void resetSystem(){
+        
+        this.recordX.setText("-");
+        this.recordN.setText("-");
+        this.recordV.setText("-");
+        this.recordC.setText("-");
+        this.recordZ.setText("-");
+        this.recordPC.setText("-");
+        this.recordACC.setText("-");
+        this.recordAddress.setText("-----------------");
+        this.out.setText("");
+        this.in.setText("");
     }
 }
+

@@ -41,9 +41,9 @@ public class Instruction {
         this.numberOfOperators = numberOfOperators(str);
         
         if(this.numberOfOperators != 0){
-            caracterCounter = getOperator1(str,caracterCounter);
+            caracterCounter = Instruction.this.getOperator1(str,caracterCounter);
             if(this.numberOfOperators == 2){
-                getOperator2(str,caracterCounter);
+                Instruction.this.getOperator2(str,caracterCounter);
             }
         }
         
@@ -194,11 +194,11 @@ public class Instruction {
         return operation;
     }
 
-    public String getOperation1() {
+    public String getOperator1() {
         return operator1;
     }
 
-    public String getOperation2() {
+    public String getOperator2() {
         return operator2;
     }
   

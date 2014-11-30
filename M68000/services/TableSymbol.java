@@ -17,10 +17,12 @@ public class TableSymbol {
     private static volatile TableSymbol instance = null;
     private ArrayList<Symbol> tabela;
     private TableUsage tableUsage;
+    private Registers registers;
 
     private TableSymbol() {
         this.tabela = new ArrayList();
         logger.info("Table Symbol Loaded");
+        registers = Registers.getInstance();
     }
     
     /**
@@ -38,7 +40,7 @@ public class TableSymbol {
         return instance;
     }
     
-    public void defineEndereco(String identificador, int endereco){
+    public void defineAnddress(String identificador, int endereco){
         for(Symbol i : tabela){
             if(identificador.equals(i.getSimbolo())){
                 i.setEndereco(endereco);
@@ -46,10 +48,6 @@ public class TableSymbol {
             }
         }
         this.adicionaSimbolo(identificador, endereco);
-    }
-    
-    public void conectaTabelas (TableUsage tableUsage){
-        this.tableUsage = tableUsage;
     }
     
     public void setaGlobal(String identificador){
@@ -130,7 +128,7 @@ public class TableSymbol {
         return false;
     }
     
-    public Anddress getEndereco(String identificador){
+    public Anddress getAndress(String identificador){
         for (Symbol s : tabela){
             if(s.getSimbolo().equals(identificador)){
                 return s.getEndereco();
