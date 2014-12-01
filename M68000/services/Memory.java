@@ -106,7 +106,6 @@ public class Memory {
                 memory[registers.getPC() + i][j] = valor[8*i + j]; 
             }
         }
-        
         registers.addToPC(4);
     }
         

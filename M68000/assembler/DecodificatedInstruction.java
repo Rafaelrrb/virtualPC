@@ -24,9 +24,10 @@ public class DecodificatedInstruction {
     private static Registers  registers     = Registers.getInstance();
     private static final Logger logger = Logger.getLogger(DecodificatedInstruction.class.getName());
     
+
     private int bits;
-    String byte_1;
-    String byte_2;
+    String byteLow;
+    String byteHigh;
     //teste
     String wordImediato;
     
@@ -168,17 +169,17 @@ public class DecodificatedInstruction {
      */ 
     
     private void ASR_Dx_Dy (Instruction inst){
-        this.byte_1 = "11100000";
-        this.byte_2 = "00";
+        this.byteLow = "11100000";
+        this.byteHigh = "00";
         
-        this.byte_2 = this.byte_2 + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
     }
    
     private void ASR_Dy (Instruction inst){
-        this.byte_1 = "11100000";
-        this.byte_2 = "10";
+        this.byteLow = "11100000";
+        this.byteHigh = "10";
         
-        this.byte_2 = this.byte_2 + "000" +intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + "000" +intToBin(inst.getOperator2().charAt(1));
         
         this.wordImediato = imediatoToString(inst.getOperator1());
     }
@@ -186,42 +187,41 @@ public class DecodificatedInstruction {
     private void ASR_ea (Instruction inst){
         int tipo;
         
-        this.byte_1 = "11100000";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        this.byte_2 = "01";
+        this.byteLow = "11100000";
+        this.byteHigh = "01";
         
         tipo = tipoOperando(inst.getOperator1());
         
         if(tipo == 0){ //DN
-            this.byte_2 = this.byte_2 + "000" + intToBin(inst.getOperator1().charAt(1));
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "000" + intToBin(inst.getOperator1().charAt(1));
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             return;
         }
         if (tipo == 2){ //(AN)
-          this.byte_2 = this.byte_2 + "010" + intToBin(inst.getOperator1().charAt(2));
-          memoria.insereByteMemoria(this.byte_2.toCharArray());
+          this.byteHigh = this.byteHigh + "010" + intToBin(inst.getOperator1().charAt(2));
+          memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
           return;
         }
         if (tipo == 4){ //(END)
-            this.byte_2 = this.byte_2 + "010" + "100";
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "010" + "100";
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             resolveSimbolo(inst.getOperator1());
 
         }
     }
     
     private void ASL_Dx_Dy (Instruction inst){
-        this.byte_1 = "11100001";
-        this.byte_2 = "00";
+        this.byteLow = "11100001";
+        this.byteHigh = "00";
         
-        this.byte_2 = this.byte_2 + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
     }
     
     private void ASL_Dy (Instruction inst){
-        this.byte_1 = "11100001";
-        this.byte_2 = "10";
+        this.byteLow = "11100001";
+        this.byteHigh = "10";
         
-        this.byte_2 = this.byte_2 + "000" +intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + "000" +intToBin(inst.getOperator2().charAt(1));
         
         this.wordImediato = imediatoToString(inst.getOperator1());
     }
@@ -229,43 +229,43 @@ public class DecodificatedInstruction {
     private void ASL_ea (Instruction inst){
         int tipo;
         
-        this.byte_1 = "11100001";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        this.byte_2 = "01";
+        this.byteLow = "11100001";
+        
+        this.byteHigh = "01";
         
         tipo = tipoOperando(inst.getOperator1());
         
         if(tipo == 0){ //DN
-            this.byte_2 = this.byte_2 + "000" + intToBin(inst.getOperator1().charAt(1));
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "000" + intToBin(inst.getOperator1().charAt(1));
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             return;
         }
         if (tipo == 2){ //(AN)
-          this.byte_2 = this.byte_2 + "010" + intToBin(inst.getOperator1().charAt(2));
-          memoria.insereByteMemoria(this.byte_2.toCharArray());
+          this.byteHigh = this.byteHigh + "010" + intToBin(inst.getOperator1().charAt(2));
+          memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
           return;
         }
         if (tipo == 4){ //(END)
             
-            this.byte_2 = this.byte_2 + "010" + "100";
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "010" + "100";
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             resolveSimbolo(inst.getOperator1());
 
         }
     }
     
     private void LSR_Dx_Dy (Instruction inst){
-        this.byte_1 = "11100010";
-        this.byte_2 = "00";
+        this.byteLow = "11100010";
+        this.byteHigh = "00";
         
-        this.byte_2 = this.byte_2 + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
     }
     
     private void LSR_Dy (Instruction inst){
-        this.byte_1 = "11100010";
-        this.byte_2 = "10";
+        this.byteLow = "11100010";
+        this.byteHigh = "10";
         
-        this.byte_2 = this.byte_2 + "000" +intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + "000" +intToBin(inst.getOperator2().charAt(1));
         
         this.wordImediato = imediatoToString(inst.getOperator1());
     }
@@ -273,43 +273,42 @@ public class DecodificatedInstruction {
     private void LSR_ea (Instruction inst){
         int tipo;
         
-        this.byte_1 = "11100010";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        this.byte_2 = "01";
+        this.byteLow = "11100010";
+        this.byteHigh = "01";
         
         tipo = tipoOperando(inst.getOperator1());
         
         if(tipo == 0){ //DN
-            this.byte_2 = this.byte_2 + "000" + intToBin(inst.getOperator1().charAt(1));
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "000" + intToBin(inst.getOperator1().charAt(1));
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             return;
         }
         if (tipo == 2){ //(AN)
-          this.byte_2 = this.byte_2 + "010" + intToBin(inst.getOperator1().charAt(2));
-          memoria.insereByteMemoria(this.byte_2.toCharArray());
+          this.byteHigh = this.byteHigh + "010" + intToBin(inst.getOperator1().charAt(2));
+          memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
           return;
         }
         if (tipo == 4){ //(END)
             
-            this.byte_2 = this.byte_2 + "010" + "100";
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "010" + "100";
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             resolveSimbolo(inst.getOperator1());
  
         }
     }    
     
    private void LSL_Dx_Dy (Instruction inst){
-        this.byte_1 = "11100011";
-        this.byte_2 = "00";
+        this.byteLow = "11100011";
+        this.byteHigh = "00";
         
-        this.byte_2 = this.byte_2 + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + intToBin(inst.getOperator1().charAt(1)) + intToBin(inst.getOperator2().charAt(1));
     }
    
    private void LSL_Dy (Instruction inst){
-        this.byte_1 = "11100011";
-        this.byte_2 = "10";
+        this.byteLow = "11100011";
+        this.byteHigh = "10";
         
-        this.byte_2 = this.byte_2 + "000" +intToBin(inst.getOperator2().charAt(1));
+        this.byteHigh = this.byteHigh + "000" +intToBin(inst.getOperator2().charAt(1));
         
         this.wordImediato = imediatoToString(inst.getOperator1());
     }
@@ -317,36 +316,35 @@ public class DecodificatedInstruction {
    private void LSL_ea (Instruction inst){
         int tipo;
         
-        this.byte_1 = "11100011";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        this.byte_2 = "01";
+        this.byteLow = "11100011";
+        //memoria.insereByteMemoria(this.byte_1.toCharArray());
+        this.byteHigh = "01";
         
         tipo = tipoOperando(inst.getOperator1());
         
         if(tipo == 0){ //DN
-            this.byte_2 = this.byte_2 + "000" + intToBin(inst.getOperator1().charAt(1));
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "000" + intToBin(inst.getOperator1().charAt(1));
+            memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
             return;
         }
         if (tipo == 2){ //(AN)
-          this.byte_2 = this.byte_2 + "010" + intToBin(inst.getOperator1().charAt(2));
-          memoria.insereByteMemoria(this.byte_2.toCharArray());
+          this.byteHigh = this.byteHigh + "010" + intToBin(inst.getOperator1().charAt(2));
+          memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
           return;
         }
         if (tipo == 4){ //(END)
             
-            this.byte_2 = this.byte_2 + "010" + "100";
-            memoria.insereByteMemoria(this.byte_2.toCharArray());
+            this.byteHigh = this.byteHigh + "010" + "100";
+            memoria.insereByteMemoria(this.byteHigh.toCharArray());
             resolveSimbolo(inst.getOperator1());
         }
     }
     
    
-   /*
-    * CONJUNTO DE INSTRUÇÕES TRIVIAIS
-    *   RTS, STOP
+   /**
+    * Conjunto de instruções basicas
+    * @param inst 
     */
-   
    private void R (Instruction inst){
        char D0;
        int operando;
@@ -356,11 +354,11 @@ public class DecodificatedInstruction {
        boolean equ = false;
        String M = "";
        String Xn = "";       
-       this.byte_1 = tipo_R(inst.getOperation());
+       this.byteLow = tipo_R(inst.getOperation());
        
        if(tipoOperando(inst.getOperator2()) == 0){ // R x,D (D armazena)
            D0 = '0';
-           this.byte_1 = this.byte_1 + intToBin(inst.getOperator2().charAt(1)) + D0;
+           this.byteLow = this.byteLow + intToBin(inst.getOperator2().charAt(1)) + D0;
            //memoria.insereByteMemoria(this.byte_1.toCharArray());
                       
            operando = tipoOperando(inst.getOperator1());
@@ -410,8 +408,8 @@ public class DecodificatedInstruction {
                }
            }
            
-           this.byte_2 = "01" + M + Xn;
-           memoria.insereByteMemoria((this.byte_1+this.byte_2).toCharArray());
+           this.byteHigh = "01" + M + Xn;
+           memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
            
            /*
             * Aqui se tem que adicionar mais porcaria na memória
@@ -438,8 +436,7 @@ public class DecodificatedInstruction {
                     logger.severe("CMP mal formatado!");
                 }
                 
-                this.byte_1 = this.byte_1 + intToBin(inst.getOperator1().charAt(1)) + D0;
-                //memoria.insereByteMemoria(this.byte_1.toCharArray());
+                this.byteLow = this.byteLow + intToBin(inst.getOperator1().charAt(1)) + D0;
                
                 operando = tipoOperando(inst.getOperator2());
            
@@ -482,8 +479,8 @@ public class DecodificatedInstruction {
                     }
                 }
                
-                this.byte_2 = "01" + M + Xn;
-                memoria.insereByteMemoria((this.byte_1 +this.byte_2).toCharArray());
+                this.byteHigh = "01" + M + Xn;
+                memoria.insereByteMemoria((this.byteLow +this.byteHigh).toCharArray());
                 if(label){
                     resolveSimbolo(inst.getOperator2());
                 }
@@ -501,19 +498,19 @@ public class DecodificatedInstruction {
    }
    
    private void branch(Instruction inst){
-       this.byte_1 = "0110";
+       this.byteLow = "0110";
        
        if("BRA".equals(inst.getOperation())){
-           this.byte_1 = this.byte_1 + "0000";
+           this.byteLow = this.byteLow + "0000";
        }else{
            if("BSR".equals(inst.getOperation())){
-               this.byte_1 = this.byte_1 + "0001";
+               this.byteLow = this.byteLow + "0001";
            }else{
                if("BNE".equals(inst.getOperation())){
-                   this.byte_1 = this.byte_1 + "0110";
+                   this.byteLow = this.byteLow + "0110";
                }else{
                    if("BEQ".equals(inst.getOperation())){
-                       this.byte_1 = this.byte_1 + "0111";
+                       this.byteLow = this.byteLow + "0111";
                    }else{
                        logger.severe("Erro em Branch");
                    }
@@ -521,8 +518,7 @@ public class DecodificatedInstruction {
            }
        }
        
-       memoria.insereByteMemoria(this.byte_1.toCharArray());
-       memoria.insereByteMemoria("00000000".toCharArray());
+       memoria.insereByteMemoria((this.byteLow+"00000000").toCharArray());
        
        resolveSimbolo(inst.getOperator1());
    }
@@ -535,8 +531,7 @@ public class DecodificatedInstruction {
        M = "";
        Xn = "";
        
-       this.byte_1 = "01000010";
-       memoria.insereByteMemoria(this.byte_1.toCharArray());
+       this.byteLow = "01000010";
        
        operando = tipoOperando(inst.getOperator1());
        
@@ -559,8 +554,8 @@ public class DecodificatedInstruction {
            }
        }
        
-       this.byte_2 = "01" + M + Xn;
-       memoria.insereByteMemoria(this.byte_2.toCharArray());
+       this.byteHigh = "01" + M + Xn;
+       memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
        
        if(operando == 4){
            resolveSimbolo(inst.getOperator1());
@@ -569,18 +564,16 @@ public class DecodificatedInstruction {
    }
    
     private void RTS (){
-        this.byte_1 = "01001110";
-        this.byte_2 = "01110101";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        memoria.insereByteMemoria(this.byte_2.toCharArray());
+        this.byteLow = "01001110";
+        this.byteHigh = "01110101";
+        memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
     }
 
     
     private void STOP (){
-        this.byte_1 = "01001110";
-        this.byte_2 = "01110010";
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        memoria.insereByteMemoria(this.byte_2.toCharArray());
+        this.byteLow = "01001110";
+        this.byteHigh = "01110010";
+        memoria.insereByteMemoria((this.byteLow+this.byteHigh).toCharArray());
     }
     
     private static String intToBin (char entrada){
@@ -626,9 +619,9 @@ public class DecodificatedInstruction {
         Xn="";
         
         if(inst.getOperation().contains("MUL")){
-            this.byte_1 = "1000";
+            this.byteLow = "1000";
         }else{
-            this.byte_1 = "1100";
+            this.byteLow = "1100";
         }
         
         operando = tipoOperando(inst.getOperator2());
@@ -645,8 +638,8 @@ public class DecodificatedInstruction {
             S_U = '0';
         }
      
-        this.byte_1 = this.byte_1 + Dx + S_U;
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
+        this.byteLow = this.byteLow + Dx + S_U;
+        memoria.insereByteMemoria(this.byteLow.toCharArray());
         
             
         if(operando == 0){
@@ -699,12 +692,12 @@ public class DecodificatedInstruction {
             resolveImediato(inst.getOperator1());
         }
         
-        this.byte_2 = "11" + M + Xn;
-        memoria.insereByteMemoria(this.byte_2.toCharArray());
+        this.byteHigh = "11" + M + Xn;
+        memoria.insereByteMemoria(this.byteHigh.toCharArray());
     }
     
     private void Move (Instruction inst){
-        this.byte_1 = "0001";
+        this.byteLow = "0001";
         int operando1,operando2;
         char operando_n;
        
@@ -758,12 +751,12 @@ public class DecodificatedInstruction {
             }
         }
         
-        this.byte_1 = this.byte_1 + Xn1 + M1.charAt(0);
+        this.byteLow = this.byteLow + Xn1 + M1.charAt(0);
                 
         
                 
-        this.byte_2 = "";
-        this.byte_2 = this.byte_2 + M1.charAt(1) + M1.charAt(2);
+        this.byteHigh = "";
+        this.byteHigh = this.byteHigh + M1.charAt(1) + M1.charAt(2);
         
         if(operando2 == 0){
             M2 = "000";
@@ -807,10 +800,10 @@ public class DecodificatedInstruction {
             }
         }// fim if e else
         
-        this.byte_2 = this.byte_2 + M2 + Xn2;
+        this.byteHigh = this.byteHigh + M2 + Xn2;
                 
-        memoria.insereByteMemoria(this.byte_1.toCharArray());
-        memoria.insereByteMemoria(this.byte_2.toCharArray());
+        memoria.insereByteMemoria(this.byteLow.toCharArray());
+        memoria.insereByteMemoria(this.byteHigh.toCharArray());
                 
         if(label1){
             resolveSimbolo(inst.getOperator1());
