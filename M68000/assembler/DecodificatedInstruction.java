@@ -9,6 +9,8 @@ import M68000.services.Memory;
 import M68000.services.Registers;
 import M68000.services.TableSymbol;
 import M68000.services.TableUsage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +22,7 @@ public class DecodificatedInstruction {
     private static Memory memoria           = Memory.getInstance();
     private static TableUsage usos          = TableUsage.getInstance();
     private static Registers  registers     = Registers.getInstance();
+    private static final Logger logger = Logger.getLogger(DecodificatedInstruction.class.getName());
     
     private int bits;
     String byte_1;
@@ -398,7 +401,7 @@ public class DecodificatedInstruction {
                                    Xn = "100";
                                    equ = true;
                                }else{
-                                   System.out.println("Erro em M (operando inexistente)");
+                                   logger.severe("Erro em M (operando inexistente)");
                                }
                                
                            }
@@ -432,7 +435,7 @@ public class DecodificatedInstruction {
                 D0 = '1';
                
                 if("CMP".equals(inst.getOperation())){
-                    System.out.println("CMP mal formatado!");
+                    logger.severe("CMP mal formatado!");
                 }
                 
                 this.byte_1 = this.byte_1 + intToBin(inst.getOperator1().charAt(1)) + D0;
@@ -458,7 +461,7 @@ public class DecodificatedInstruction {
                             if(operando == 3){
                                     M = "111";
                                     Xn = "100";
-                                    System.out.print("Erro em R: #imm não pode receber valor");
+                                    logger.severe("Erro em R: #imm não pode receber valor");
                             }else{
                                 if(operando == 4){
                                         M = "100";
@@ -470,7 +473,7 @@ public class DecodificatedInstruction {
                                         Xn = "100";
                                         equ = true;
                                     }else{
-                                        System.out.println("Erro em M");
+                                        logger.severe("Erro em M");
                                     }
                                     
                                 }
@@ -492,7 +495,7 @@ public class DecodificatedInstruction {
                 }
                
            }else{
-               System.out.println("Erro R (Não usa D)\n");
+               logger.severe("Erro R (Não usa D)\n");
            }
        }
    }
@@ -512,7 +515,7 @@ public class DecodificatedInstruction {
                    if("BEQ".equals(inst.getOperation())){
                        this.byte_1 = this.byte_1 + "0111";
                    }else{
-                       System.out.println("Erro em Branch");
+                       logger.severe("Erro em Branch");
                    }
                }
            }
@@ -551,7 +554,7 @@ public class DecodificatedInstruction {
                    M = "100";
                    Xn = "100";
                }else{
-                   System.out.println("Erro em CLR, tipo inválido!");
+                   logger.severe("Erro em CLR, tipo inválido!");
                }
            }
        }
@@ -631,8 +634,7 @@ public class DecodificatedInstruction {
         operando = tipoOperando(inst.getOperator2());
         
         if(operando != 0){
-            System.out.println("MUL_DIV Error!: Resultado não vai para Dx");
-            System.out.println(inst.getOperation() + " "+ inst.getOperator1() + " " + inst.getOperator2());
+            logger.log(Level.SEVERE, "MUL_DIV Error!: Resultado não vai para Dx. {0} {1} {2}", new Object[]{inst.getOperation(), inst.getOperator1(), inst.getOperator2()});
         }
         
         Dx = intToBin(inst.getOperator2().charAt(1));
@@ -653,8 +655,7 @@ public class DecodificatedInstruction {
                Xn = intToBin(operando_n);
         }else{
             if(operando == 1){
-                System.out.println("MUL_DIV Error!: Tá usando Ax Mano! Não pode!");
-                System.out.println(inst.getOperation() + " "+ inst.getOperator1() + " " + inst.getOperator2());
+                logger.log(Level.SEVERE, "MUL_DIV Error!: Estão usando Ax Não Permitido!{0} {1} {2}", new Object[]{inst.getOperation(), inst.getOperator1(), inst.getOperator2()});
                 M = "001";
                 operando_n = inst.getOperator1().charAt(1);
                 Xn = intToBin(operando_n);
@@ -679,7 +680,7 @@ public class DecodificatedInstruction {
                                 Xn = "100";
                                 equ = true;
                             }else{
-                                System.out.println("Erro em M (operando inexistente)");
+                                logger.severe("Erro em M (operando inexistente)");
                             }
 
                         }
@@ -748,7 +749,7 @@ public class DecodificatedInstruction {
                                 Xn1 = "100";
                                 equ = true;
                             }else{
-                                System.out.println("Erro em M (operando inexistente)");
+                                logger.severe("Erro em M (operando inexistente)");
                             }
 
                         }
@@ -784,7 +785,7 @@ public class DecodificatedInstruction {
                         M2 = "111";
                         Xn2 = "100";
                         imm = true;
-                        System.out.println("Erro: imediato não pode receber valor!");
+                        logger.severe("Erro: imediato não pode receber valor!");
                     }else{
                         if(operando2 == 4){
                             M2 = "100";
@@ -795,9 +796,9 @@ public class DecodificatedInstruction {
                                 M2 = "111";
                                 Xn2 = "100";
                                 equ = true;
-                                System.out.println("Erro: imediato (EQU) não pode receber valor!");
+                                logger.severe("Erro: imediato (EQU) não pode receber valor!");
                             }else{
-                                System.out.println("Erro em M (operando inexistente)");
+                                logger.severe("Erro em M (operando inexistente)");
                             }
 
                         }
@@ -906,13 +907,13 @@ public class DecodificatedInstruction {
         if("SUB".equals(instrucao))
             return "1001";
                 
-        System.out.println("Erro encontrado em tipo R");
+        logger.severe("Erro encontrado em tipo R");
         return "";
         
     }
     
     private static void resolveSimbolo (String identificador){
-        if(simbolos.contemSimbolo(identificador)){
+        if(simbolos.hasSymbol(identificador)){
             if(simbolos.simboloDefinido(identificador)){
                 usos.insereUso(identificador, registers.getPC());
                 memoria.insertWordMemory(simbolos.getAndress(identificador).getAnddressWord());
@@ -921,7 +922,7 @@ public class DecodificatedInstruction {
                 memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
             }
         }else{
-            simbolos.adicionaSimbolo(identificador);
+            simbolos.addSymbol(identificador);
             usos.insereUso(identificador, registers.getPC());
             memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
         }

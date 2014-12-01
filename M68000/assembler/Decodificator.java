@@ -41,7 +41,7 @@ public class Decodificator {
     public void processInstruction(String line){
         Instruction instruction = new Instruction(line);
         
-        System.out.println(instruction);
+        logger.info(instruction.toString());
         
         if(instruction.hasLabel()){
             symbols.defineAnddress(instruction.getLabel(), registers.getPC());

@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Symbol é a classe usada para representar os simbolos do Moto 68k
  */
 package M68000.assistance;
 
@@ -8,7 +7,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Ruhan
+ * @author glaucomunsberg
  */
 public class Symbol {
     private final static Logger logger = Logger.getLogger(Symbol.class.getName());
@@ -28,6 +27,11 @@ public class Symbol {
      */
     private int tipo;
     
+    /**
+     * Cria um symbolo padrão com
+     *  definição falsa, não global e tipo posição de memória
+     * @param simbolo 
+     */
     public Symbol(String simbolo) {
         this.symbol = simbolo;
         this.definido = false;
@@ -36,6 +40,12 @@ public class Symbol {
         this.valor = "";
     }
     
+    /**
+     * Cria o symbolo com os seus parametros
+     * @param simbolo
+     * @param tipo
+     * @param valor 
+     */
     public Symbol(String simbolo, int tipo ,String valor) {
         this.symbol = simbolo;
         this.definido = false;
@@ -44,6 +54,11 @@ public class Symbol {
         this.valor = valor;
     }
 
+    /**
+     * Cria simbolo padrão com definição falsa e como local
+     * @param simbolo
+     * @param tipo 
+     */
     public Symbol(String simbolo, int tipo) {
         this.symbol = simbolo;
         this.definido = false;
@@ -51,19 +66,35 @@ public class Symbol {
         this.tipo = tipo;
     }
     
+    /**
+     * Insere o endereço para o simbolo já definido anteriormente
+     * @param endereco 
+     */
     public void setEndereco(int endereco) {
         this.anddress = new Anddress(endereco);
         definido = true;
     }
 
+    /**
+     * Retorna o endereço
+     * @return 
+     */
     public Anddress getEndereco() {
         return anddress;
     }
 
+    /**
+     * Retorna o simbolo
+     * @return 
+     */
     public String getSimbolo() {
         return symbol;
     }
 
+    /**
+     * Insere o endereço
+     * @param endereco 
+     */
     public void setEndereco(Anddress endereco) {
         if(this.definido){
             logger.severe("Invalidet Operation!");
@@ -74,31 +105,56 @@ public class Symbol {
         this.definido = true;
     }
 
+    /**
+     * Retorna o booleano se é definido
+     * @return 
+     */
     public boolean isDefinido() {
         return definido;
     }
 
+    /**
+     * Retorna o booleano se é global
+     * @return 
+     */
     public boolean isGlobal() {
         return global;
     }
 
+    /**
+     * Seta o simbolo como global 
+     */
     public void setGlobal() {
         this.global = true;
     }
 
+    /**
+     * Insere o tipo do simbolo
+     * 0: Posição de Memória
+     * 1: EQU
+     * 2: DC
+     * 3: DS
+     * @param tipo 
+     */
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Retorna o tipo do simbolo
+     * @return 
+     */
     public int getTipo() {
         return tipo;
     }
 
+    /**
+     * retorna o valor
+     * @return 
+     */
     public String getValor() {
         return valor;
     }
-    
-    
     
     @Override
     public String toString(){

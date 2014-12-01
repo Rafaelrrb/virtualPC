@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Esta classe, Memory, representa a memória do sistema Moto 68k
+ *  então através dela é possível inserir, editar ou até mesmo ser usada
+ *  pela MV para executar seu conteúdo
  */
 package M68000.services;
 
@@ -16,11 +16,11 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author Ruhan
+ * @author glaucomunsberg
  */
 public class Memory {
     private static volatile Memory instance = null;
-    private static Logger logger;
+    private static final Logger logger = Logger.getLogger(Memory.class.getName());
     private char[][] memory;
     private Registers registers;
     private JTable jtableMemory;
@@ -30,10 +30,9 @@ public class Memory {
      *  0 a posição inicial e memória do tamanho de 1K
      */
     private Memory() {
+        
         registers = Registers.getInstance();
-        memory = new char[1024][16];
-        registers = Registers.getInstance();
-        logger = Logger.getLogger(Memory.class.getName()); 
+        resetMemory();
         logger.info("Memory Loaded");
     }
     
@@ -52,6 +51,11 @@ public class Memory {
         return instance;
     }
            
+    /**
+     * retorna a palavra o endereco
+     * @param endereco
+     * @return 
+     */
     public char[][] getWord(int endereco){
         char[][] resposta = new char[2][8];
         
@@ -64,7 +68,6 @@ public class Memory {
  
     /**
      * Cada byte inserido na memória, o program counter é incrementado
-     * 
      * @param valor 
      */
     public void insereByteMemoria(char[] valor){
@@ -75,7 +78,6 @@ public class Memory {
     
     /**
      * Caso o byte inserido na memória tenha sido especificado o local, pc não é alterado
-     * 
      * @param valor
      * @param local 
      */
@@ -85,7 +87,6 @@ public class Memory {
   
     /**
      * Insere um byte onde está o program counter apontando, e incrementa o mesmo em 4
-     * 
      * @param valor 
      */
     public void insertWordMemory(char[][] valor){
@@ -97,7 +98,6 @@ public class Memory {
     
     /**
      * Insere uma palavra na memória
-     * 
      * @param valor 
      */
     public void insertWordMemory(char[] valor){
@@ -110,6 +110,11 @@ public class Memory {
         registers.addToPC(4);
     }
     
+    /**
+     * Insere uma palavra  em um local específico
+     * @param valor
+     * @param local 
+     */
     public void insertWordMemory(char[] valor, int local){
         for(int i = 0; i < 2; i++){
             for(int j = 0;j < 4; j ++){
@@ -118,6 +123,11 @@ public class Memory {
         }
     }
     
+    /**
+     * Insere uma palavra em um local específico
+     * @param valor
+     * @param local 
+     */
     public void insertWordMemory(char[][] valor, int local){
         for(int i = 0; i < 2 ; i++){
             System.arraycopy(valor[i], 0, memory[local + i], 0, 8);
@@ -128,7 +138,7 @@ public class Memory {
      * Printa todo conteúdo da memória desde a posição
      *  zero até a posição indicada pelo PC
      */
-    public void printMemory(){
+    public void printMemoryOnConsole(){
         int i;
         
         for(i = 0; i < registers.getPC(); i++){
@@ -142,7 +152,7 @@ public class Memory {
     
     public void resetMemory(){
         memory = new char[1024][16];
-        registers.addToPC(-registers.getPC());
+        registers.resetRegisters();
     }
    
     /**

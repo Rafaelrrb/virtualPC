@@ -23,11 +23,12 @@ public class Application {
     public TableSymbol tableSymbol;
             
     public Application(){
+        
         configuration   = Configuration.getInstance();
-        assembler   = new Assembler();
-        memory      = Memory.getInstance();
-        tableUsage  = TableUsage.getInstance();
-        tableSymbol = TableSymbol.getInstance();
+        assembler       = new Assembler();
+        memory          = Memory.getInstance();
+        tableUsage      = TableUsage.getInstance();
+        tableSymbol     = TableSymbol.getInstance();
     }
   
     /**
@@ -35,7 +36,10 @@ public class Application {
      */
     public void restart(){
         memory.resetMemory();
+        
         configuration.resetSystem();
+        
+        
     }
     
     /**

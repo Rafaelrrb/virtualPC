@@ -1,5 +1,8 @@
 package M68000.services;
-
+/*
+ * Registers, ou registradores, contêm os registradores do Moto 68k e contam
+ *  tanto os registradores de Dados e Endereços, como o CCR e o PC.
+ */
 import M68000.assistance.Configuration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,40 +12,20 @@ import java.util.logging.Logger;
  * @author glaucomunsberg
  */
 public class Registers {
-    private static Logger logger;
+    private static final Logger logger = Logger.getLogger(Registers.class.getName());
     
     private Configuration configuration;
     private char[][] registersData;
     private char[][] registersAnddress;
-    private char[] CCR;
+    private short[] CCR;
     private int pc;
     private static volatile Registers instance = null;
     
     private Registers() {
         
-        /**
-         * 
-         * X—Extend Set to the value of the C-bit for arithmetic operations;
-         * otherwise not affected or set to a specified result. 
-         * 
-         * N—Negative Set if the most significant bit of the result is set; otherwise clear.
-         * 
-         * Z—Zero Set if the result equals zero; otherwise clear. 
-         * 
-         * V—Overflow Set if an arithmetic overflow occurs implying that the result cannot be
-         * represented in the operand size; otherwise clear.
-         * 
-         * C—Carry Set if a carry out of the most significant bit of the operand
-         * occurs for an addition, or if a borrow occurs in a subtraction;
-         * otherwise clear.
-         * 
-         */
-        CCR = new char[5]; // All positions of CCR [0]X [1]N [2]Z [3]V [4]C
-        registersAnddress = new char[8][16];
-        registersData = new char[8][16];
+       
+        resetRegisters();
         configuration = Configuration.getInstance();
-        logger = Logger.getLogger(Registers.class.getName());
-        pc = 0;
         logger.info("Registers Loaded");
         
     }
@@ -103,7 +86,7 @@ public class Registers {
     */
     public char[] getRegisterA(int position){
         if(position <= 6 || position >= 0){
-            return registersData[position];
+            return registersAnddress[position];
         }else{
             logger.log(Level.SEVERE, "Ooops! Registrador A{0} não existe", position);
             return null;
@@ -118,7 +101,7 @@ public class Registers {
      */
     public void setRegisterA(int position, char[] value){
         if(position <= 6 || position >= 0){
-            registersData[position] = value;
+            registersAnddress[position] = value;
             String string = "";
             for(char i :value){
                 string +=value;
@@ -134,7 +117,7 @@ public class Registers {
      * @param value 
      */
     public void setRegistradorUSP(char[] value){
-        registersData[7] = value;
+        registersAnddress[7] = value;
         String string = "";
         for(char i :value){
             string +=value;
@@ -147,7 +130,7 @@ public class Registers {
      * @param value 
      */
     public void setRegistradorSSP(char[] value){
-        registersData[8] = value;
+        registersAnddress[8] = value;
         String string = "";
         for(char i :value){
             string +=value;
@@ -160,7 +143,7 @@ public class Registers {
      * @return 
      */
     public char[] getRegisterUSP(){
-        return registersData[7];
+        return registersAnddress[7];
     }
     
     /**
@@ -168,7 +151,7 @@ public class Registers {
      * @return 
      */
     public char[] getRegisterSSP(){
-        return registersData[8];
+        return registersAnddress[8];
     }
     
     /**
@@ -190,4 +173,111 @@ public class Registers {
         
     }
     
+    
+    public void resetRegisters(){
+        /**
+         * 
+         * X—Extend Set to the value of the C-bit for arithmetic operations;
+         * otherwise not affected or set to a specified result. 
+         * 
+         * N—Negative Set if the most significant bit of the result is set; otherwise clear.
+         * 
+         * Z—Zero Set if the result equals zero; otherwise clear. 
+         * 
+         * V—Overflow Set if an arithmetic overflow occurs implying that the result cannot be
+         * represented in the operand size; otherwise clear.
+         * 
+         * C—Carry Set if a carry out of the most significant bit of the operand
+         * occurs for an addition, or if a borrow occurs in a subtraction;
+         * otherwise clear.
+         * 
+         */
+        CCR = new short[5]; // All positions of CCR [0]X [1]N [2]Z [3]V [4]C
+        registersAnddress = new char[8][16];
+        registersData = new char[8][16];
+        
+        for(int a=0;a < 7; a++){
+            this.setRegisterA(a, "0000000000000000".toCharArray());
+        } 
+         for(int a=0;a < 8; a++){
+            this.setRegisterD(a, "0000000000000000".toCharArray());
+        }
+         
+        setCCRX(0);
+        setCCRN(0);
+        setCCRZ(0);
+        setCCRV(0);
+        setCCRC(0);
+        
+        setRegistradorSSP("0000000000000000".toCharArray());
+        setRegistradorUSP("0000000000000000".toCharArray());
+        pc=0;
+    }
+    
+    public int getCCRX(){
+        return CCR[0];
+    }
+    
+    public void setCCRX(int value){
+        if(value == 0){
+            CCR[0] = 0;
+        }else{
+            CCR[0] = 1;
+        }
+        configuration.recordX.setText(String.format("%d", CCR[0]));
+    }
+    
+    public int getCCRN(){
+        return CCR[1];
+    }
+    
+    public void setCCRN(int value){
+        if(value == 0){
+            CCR[1] = 0;
+        }else{
+            CCR[1] = 1;
+        }
+        configuration.recordN.setText(String.format("%d", CCR[1]));
+        
+    }
+    
+    public int getCCRZ(){
+        return CCR[2];
+    }
+    
+    public void setCCRZ(int value){
+        if(value == 0){
+            CCR[2] = 0;
+        }else{
+            CCR[2] = 1;
+        }
+        configuration.recordZ.setText(String.format("%d", CCR[2]));
+        
+    }
+    
+    public int getCCRVX(){
+        return CCR[3];
+    }
+    
+    public void setCCRV(int value){
+        if(value == 0){
+            CCR[3] = 0;
+        }else{
+            CCR[3] = 1;
+        }
+        configuration.recordV.setText(String.format("%d", CCR[3]));
+    }
+    
+    public int getCCRC(){
+        return CCR[4];
+    }
+    
+    public void setCCRC(int value){
+        if(value == 0){
+            CCR[4] = 0;
+        }else{
+            CCR[4] = 1;
+        }
+        configuration.recordC.setText(String.format("%d", CCR[4]));
+    }
 }

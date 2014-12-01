@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * FileMananger é a classe que manipula arquivos dentro do sistema Moto 68k
+ *      e permiti tanto abrir como salvar os arquivos
  */
 package M68000.assistance;
 
@@ -54,6 +53,12 @@ public class FileMananger {
         return instance;   
     }
     
+    /**
+     * Passa-se a url do caminho  completo e então o arquivo
+     *  será aberto para manipulação
+     * @param url
+     * @return 
+     */
     public boolean openFile(String url){
         
         if(!isOpen){
@@ -107,15 +112,25 @@ public class FileMananger {
         }
     }
     
+    /**
+     * Retorna um array de strings de todas
+     *  as linhas do arquivo aberto
+     * @return 
+     */
     public String[] getLines(){
         return this.lines;
     }
     
+    /**
+     * fecha os arquivos que estão abertos pelo sistemas
+     * @return 
+     */
     public boolean closeFile(){
  
         try{
             bufferedFile.close();
             this.isClose = true;
+            this.isOpen = false;
             logger.info("Success to close");
         }catch(Exception e){
             this.isClose = false;

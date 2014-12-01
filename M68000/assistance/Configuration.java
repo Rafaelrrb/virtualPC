@@ -1,5 +1,6 @@
 /*
- * Config é a classe base de configuração para o sistema
+ * Configuration é a classe com as referências básicas usadas 
+ *  na interface gráfica e também pelo sistema Moto 68k
  */
 package M68000.assistance;
 

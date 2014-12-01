@@ -1,9 +1,7 @@
 /*
- * .
+ * Interface é a GUI usada pela Principal para ser o meio entre a aplicação (application) e o usuário
  */
 package M68000;
-
-import M68000.assembler.Assembler;
 
 /**
  *
@@ -134,7 +132,7 @@ public class Interface extends javax.swing.JDialog{
         application.configuration.setInPut(jTextFieldInput);
         application.configuration.setOutPut(jTextFieldOutput);
         application.configuration.setLog(jTextAreaLog);
-        application.configuration.setGeneralLabels(jLabelDisplayPC, jLabelDisplayACC, jLabelddresss, jLabelDisplayN, jLabelDisplayZ, jLabelDisplayV, jLabelDisplayC, jLabelDisplayX);
+        application.configuration.setGeneralLabels(jLabelDisplayPC, jLabelDisplayACC, jLabelDisplayAddress, jLabelDisplayN, jLabelDisplayZ, jLabelDisplayV, jLabelDisplayC, jLabelDisplayX);
         application.configuration.setLinkerListFile(this.jTextLinkFileList);
         application.memory.setTableMemory(jTableMemory);
         application.tableSymbol.setTableSymbol(jTableSymbols);

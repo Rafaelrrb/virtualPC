@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Anddress é a classe responsável por modelar 
+ *  os endereços
  */
 package M68000.assistance;
 
@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Ruhan
+ * @author Glauco Roberto Munsberg
  */
 public class Anddress {
     

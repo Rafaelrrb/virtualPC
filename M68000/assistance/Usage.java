@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Usage é a classe que representa os simbolos usados
+ *      e o endereço que eles estão representando
  */
 package M68000.assistance;
 

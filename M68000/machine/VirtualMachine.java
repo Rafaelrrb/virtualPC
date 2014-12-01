@@ -35,7 +35,7 @@ public class VirtualMachine {
     
     public void startMachine(){
          logger.info("Iniciando a execução");
-         memory.printMemory();
+         memory.printMemoryOnConsole();
          // passa por todas as posições de memoria
          // para cada posicao:
          //     verifica que comando é e então executa

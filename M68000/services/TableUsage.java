@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Tabela de Uso, ou TableUsage é a tabela que ontem todos os
+ *  usos do sistema Moto 68k
  */
 package M68000.services;
 
@@ -96,6 +96,11 @@ public class TableUsage {
             printa = "".equals(printa)? u.getEndereco().toString(): printa+" "+u.getEndereco().toString();
         }
         fos.write(printa.getBytes());
+    }
+    
+    public void resetTableUsage(){
+        lista.clear();
+        this.printTableUSage();
     }
     
 }
