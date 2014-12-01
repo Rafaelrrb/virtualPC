@@ -1161,11 +1161,11 @@ public class Interface extends javax.swing.JDialog{
 
     private void jCheckBoxVirtualMachineActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(jCheckBoxVirtualMachine.isSelected()){
-            jCheckBoxAssembler.setSelected(true);
-            jCheckBoxLoader.setSelected(true);
-            jCheckBoxLinker.setSelected(true);
-            jScrollPane2.setVisible(true);
-            jLabelOut.setVisible(true);
+            //jCheckBoxAssembler.setSelected(true);
+            //jCheckBoxLoader.setSelected(true);
+            //jCheckBoxLinker.setSelected(true);
+            //jScrollPane2.setVisible(true);
+            //jLabelOut.setVisible(true);
         }
     }                                                       
 

@@ -217,4 +217,10 @@ public class Memory {
             jtableMemory.setValueAt(memoryToString(a), a, 1);
         }
     }
+    public void fullMemory(){
+        insertWordMemory("00000000000000000".toCharArray());
+        insertWordMemory("00000000000000000".toCharArray());
+        insertWordMemory("00000000000000000".toCharArray());
+        insertWordMemory("00000000000000000".toCharArray());
+    }
 }

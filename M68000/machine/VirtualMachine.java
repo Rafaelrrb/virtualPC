@@ -6,6 +6,7 @@
 package M68000.machine;
 
 import M68000.services.Memory;
+import M68000.services.Registers;
 import java.util.logging.Logger;
 
 /**
@@ -16,10 +17,12 @@ public class VirtualMachine {
     private static volatile VirtualMachine instance = null;
     private final static Logger logger = Logger.getLogger(VirtualMachine.class.getName());
     private Memory memory;
+    private Registers registers;
     
     private VirtualMachine(){
         logger.info("Virtual Machine Loaded");
         memory = Memory.getInstance();
+        registers = Registers.getInstance();
     }
     
     public static VirtualMachine getInstance() {
@@ -35,8 +38,16 @@ public class VirtualMachine {
     
     public void startMachine(){
          logger.info("Iniciando a execução");
-         memory.printMemoryOnConsole();
+         memory.fullMemory();
+         int i =0;
+         boolean stop = false;
+         while(i <= 1024 || !stop ){
+             memory.getWord(i);
+             System.out.println(i);
+             i++;
+         }
          // passa por todas as posições de memoria
+         
          // para cada posicao:
          //     verifica que comando é e então executa
     }

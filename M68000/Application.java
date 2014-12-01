@@ -6,6 +6,7 @@ package M68000;
 
 import M68000.assembler.Assembler;
 import M68000.assistance.Configuration;
+import M68000.machine.VirtualMachine;
 import M68000.services.Memory;
 import M68000.services.TableSymbol;
 import M68000.services.TableUsage;
@@ -21,11 +22,14 @@ public class Application {
     public Memory memory;
     public TableUsage tableUsage;
     public TableSymbol tableSymbol;
+    public VirtualMachine machine;
+        
             
     public Application(){
         
         configuration   = Configuration.getInstance();
         assembler       = new Assembler();
+        machine         = VirtualMachine.getInstance();
         memory          = Memory.getInstance();
         tableUsage      = TableUsage.getInstance();
         tableSymbol     = TableSymbol.getInstance();
@@ -51,6 +55,10 @@ public class Application {
             if (configuration.comboAssembler.isSelected()) {
                 assembler.execute(configuration.in.getText());
             }
+            if (configuration.comboMachine.isSelected()){
+                machine.startMachine();
+            }
+                
         }else{
         
             configuration.setLog("Set the file to open");
