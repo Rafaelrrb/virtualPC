@@ -51,27 +51,27 @@ public class Memory {
         return instance;
     }
            
+    
     /**
      * retorna a palavra o endereco
      * @param endereco
      * @return 
      */
-    public char[][] getWord(int endereco){
-        char[][] resposta = new char[2][8];
+    public char[] getWord(int endereco){
+        char[] resposta = new char[16];
         
-        for(int i = 0; i < 2; i++){
-            System.arraycopy(memory[endereco + i], 0, resposta[i], 0, 8);
-        }
+        System.arraycopy(memory[endereco], 0, resposta, 0, 16);
         
         return resposta;
     }
+    
  
     /**
      * Cada byte inserido na memória, o program counter é incrementado
      * @param valor 
      */
     public void insereByteMemoria(char[] valor){
-        System.arraycopy(valor, 0, memory[registers.getPC()], 0, 8);
+        System.arraycopy(valor, 0, memory[registers.getPC()], 0, 16);
         registers.addToPC(1);
         this.setValueOnTableMemory();
     }
@@ -82,7 +82,7 @@ public class Memory {
      * @param local 
      */
     public void insereByteMemoria(char[] valor, int local){
-        System.arraycopy(valor, 0, memory[local], 0, 8);
+        System.arraycopy(valor, 0, memory[local], 0, 16);
     }
   
     /**
@@ -102,27 +102,14 @@ public class Memory {
      */
     public void insertWordMemory(char[] valor){
         for(int i = 0; i < 2; i++){
-            for(int j = 0;j < 4; j ++){
+            for(int j = 0;j < 8; j ++){
                 memory[registers.getPC() + i][j] = valor[8*i + j]; 
             }
         }
         
         registers.addToPC(4);
     }
-    
-    /**
-     * Insere uma palavra  em um local específico
-     * @param valor
-     * @param local 
-     */
-    public void insertWordMemory(char[] valor, int local){
-        for(int i = 0; i < 2; i++){
-            for(int j = 0;j < 4; j ++){
-                memory[local + i][j] = valor[8*i + j]; 
-            }
-        }
-    }
-    
+        
     /**
      * Insere uma palavra em um local específico
      * @param valor

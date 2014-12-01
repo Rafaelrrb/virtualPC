@@ -361,7 +361,7 @@ public class DecodificatedInstruction {
        if(tipoOperando(inst.getOperator2()) == 0){ // R x,D (D armazena)
            D0 = '0';
            this.byte_1 = this.byte_1 + intToBin(inst.getOperator2().charAt(1)) + D0;
-           memoria.insereByteMemoria(this.byte_1.toCharArray());
+           //memoria.insereByteMemoria(this.byte_1.toCharArray());
                       
            operando = tipoOperando(inst.getOperator1());
            
@@ -411,7 +411,7 @@ public class DecodificatedInstruction {
            }
            
            this.byte_2 = "01" + M + Xn;
-           memoria.insereByteMemoria(this.byte_2.toCharArray());
+           memoria.insereByteMemoria((this.byte_1+this.byte_2).toCharArray());
            
            /*
             * Aqui se tem que adicionar mais porcaria na memória
@@ -439,7 +439,7 @@ public class DecodificatedInstruction {
                 }
                 
                 this.byte_1 = this.byte_1 + intToBin(inst.getOperator1().charAt(1)) + D0;
-                memoria.insereByteMemoria(this.byte_1.toCharArray());
+                //memoria.insereByteMemoria(this.byte_1.toCharArray());
                
                 operando = tipoOperando(inst.getOperator2());
            
@@ -483,7 +483,7 @@ public class DecodificatedInstruction {
                 }
                
                 this.byte_2 = "01" + M + Xn;
-                memoria.insereByteMemoria(this.byte_2.toCharArray());
+                memoria.insereByteMemoria((this.byte_1 +this.byte_2).toCharArray());
                 if(label){
                     resolveSimbolo(inst.getOperator2());
                 }
