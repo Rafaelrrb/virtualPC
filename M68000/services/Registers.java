@@ -24,8 +24,9 @@ public class Registers {
     private Registers() {
         
        
-        resetRegisters();
+        
         configuration = Configuration.getInstance();
+        resetRegisters();
         logger.info("Registers Loaded");
         
     }
@@ -58,7 +59,8 @@ public class Registers {
             for(char i :value){
                 string +=value;
             }
-            configuration.registerD[position].setText(string);
+            if (configuration.registerD != null)
+                configuration.registerD[position].setText(string);
         }else{
             logger.log(Level.SEVERE, "Ooops! Registrador D{0} não existe", position);
         }
@@ -106,7 +108,8 @@ public class Registers {
             for(char i :value){
                 string +=value;
             }
-            configuration.registerA[position].setText(string);
+            if (configuration.registerA != null)
+                configuration.registerA[position].setText(string);
         }else{
             logger.log(Level.SEVERE, "Ooops! Registrador não existe {0}", position);
         }
@@ -122,7 +125,8 @@ public class Registers {
         for(char i :value){
             string +=value;
         }
-        configuration.registerA[7].setText(string);
+        if (configuration.registerA != null)
+            configuration.registerA[7].setText(string);
     }
     
     /**
@@ -135,7 +139,8 @@ public class Registers {
         for(char i :value){
             string +=value;
         }
-        configuration.registerA[8].setText(string);
+        if (configuration.registerA != null)
+            configuration.registerA[8].setText(string);
     }
     
     /**
@@ -193,7 +198,7 @@ public class Registers {
          * 
          */
         CCR = new short[5]; // All positions of CCR [0]X [1]N [2]Z [3]V [4]C
-        registersAnddress = new char[8][16];
+        registersAnddress = new char[9][16];
         registersData = new char[8][16];
         
         for(int a=0;a < 7; a++){
@@ -224,7 +229,8 @@ public class Registers {
         }else{
             CCR[0] = 1;
         }
-        configuration.recordX.setText(String.format("%d", CCR[0]));
+        if (configuration.recordX != null)
+            configuration.recordX.setText(String.format("%d", CCR[0]));
     }
     
     public int getCCRN(){
@@ -237,7 +243,8 @@ public class Registers {
         }else{
             CCR[1] = 1;
         }
-        configuration.recordN.setText(String.format("%d", CCR[1]));
+        if (configuration.recordN != null)
+            configuration.recordN.setText(String.format("%d", CCR[1]));
         
     }
     
@@ -251,7 +258,8 @@ public class Registers {
         }else{
             CCR[2] = 1;
         }
-        configuration.recordZ.setText(String.format("%d", CCR[2]));
+        if (configuration.recordZ != null)
+            configuration.recordZ.setText(String.format("%d", CCR[2]));
         
     }
     
@@ -265,7 +273,8 @@ public class Registers {
         }else{
             CCR[3] = 1;
         }
-        configuration.recordV.setText(String.format("%d", CCR[3]));
+        if (configuration.recordV != null)
+            configuration.recordV.setText(String.format("%d", CCR[3]));
     }
     
     public int getCCRC(){
@@ -278,6 +287,7 @@ public class Registers {
         }else{
             CCR[4] = 1;
         }
-        configuration.recordC.setText(String.format("%d", CCR[4]));
+        if (configuration.recordC != null)
+            configuration.recordC.setText(String.format("%d", CCR[4]));
     }
 }
