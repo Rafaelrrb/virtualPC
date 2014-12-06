@@ -23,7 +23,9 @@ public class Decodificator {
     private Decodificator(){
         logger.info("Decodificator Loaded");
         tableSymbols = TableSymbol.getInstance();
+        tableSymbols.resetTableSymbol();
         registers = Registers.getInstance();
+        
     }
     
     public static Decodificator getInstance() {
@@ -45,31 +47,55 @@ public class Decodificator {
         
         if(instruction.hasLabel()){
             tableSymbols.defineAnddress(instruction.getLabel(), registers.getPC());
+            System.out.println("nova label: "+instruction.getLabel());
         }
         
         switch(instruction.getOperation()){
             case "XDEF":
+                processGlobalInstruction(instruction,"XDEF");
+                break;
             case "XREF":
-                processGlobalInstruction(instruction);
+                processGlobalInstruction(instruction,"XREF");
                 break;
             default:
                 processInstruction(instruction);
                 break;
         }
-        if(instruction.getOperation().equals("XDEF")){
-        
-        }else{
-        
-        }
-        if(instruction.getOperation().equals("XREF")){
-        
-        }
-        
         
     }
     
-    private void processGlobalInstruction(Instruction instruction){
-        logger.info("Processing global instruction");
+    private void processGlobalInstruction(Instruction instruction,String type){
+        int start = 0;
+        
+        if( type.equals("XDEF") ){
+           start = instruction.getStringOrigin().indexOf("XDEF");
+        }else{
+           start = instruction.getStringOrigin().indexOf("XREF");
+        }
+        
+        String labelsGroup = instruction.getStringOrigin().substring(start+5,instruction.getStringOrigin().length());
+        int startAt = 0;
+        
+        /**
+         * Processa as labels
+         */
+        for(int a=0; a < labelsGroup.length(); a++){
+            if(labelsGroup.charAt(a) == ','){
+                
+               tableSymbols.addSymbol(labelsGroup.substring(startAt, a),type.equals("XDEF"), type.equals("XREF"));
+               
+               startAt = a+1;
+            }else{
+                if(labelsGroup.charAt(a) == '\t' || labelsGroup.charAt(a) == ' '){
+                    startAt = a+1;
+                }
+            }
+        }
+        /**
+         * última Label
+         */
+        tableSymbols.addSymbol(labelsGroup.substring(startAt, labelsGroup.length()), type.equals("XDEF"), type.equals("XREF"));
+        tableSymbols.printTableSymbol();
     }
     private void processInstruction(Instruction instruction){
         switch(instruction.getOperation()){

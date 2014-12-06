@@ -35,6 +35,22 @@ public class Symbol {
         this.XREF = false;
         this.tipo = 0;
         this.valor = "";
+        
+        this.anddress = new Anddress(0);
+    }
+    
+    public Symbol(String simbolo,boolean XDEF, boolean XREF) {
+        this.symbol = simbolo;
+        this.definido = false;
+        
+        this.global = XDEF || XREF;
+            
+        this.XDEF = XDEF;
+        this.XREF = XREF;
+        this.tipo = 0;
+        this.valor = "";
+        
+        this.anddress = new Anddress(0);
     }
     
     /**
@@ -51,6 +67,8 @@ public class Symbol {
         this.XREF = false;
         this.tipo = tipo;
         this.valor = valor;
+        
+        this.anddress = new Anddress(0);
     }
 
     /**
@@ -65,6 +83,7 @@ public class Symbol {
         this.tipo = tipo;
         this.XDEF = false;
         this.XREF = false;
+        this.anddress = new Anddress(0);
     }
     
     /**
@@ -154,11 +173,11 @@ public class Symbol {
         this.XDEF = value;
     }
     
-    public boolean getXDEF(){
+    public boolean isXDEF(){
         return this.XDEF;
     }
     
-    public boolean getXREF(){
+    public boolean isXREF(){
         return this.XREF;
     }
     

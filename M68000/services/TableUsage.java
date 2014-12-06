@@ -23,7 +23,7 @@ public class TableUsage {
     private final ArrayList<Usage> lista;
     private static volatile TableUsage instance = null;
     private JTable jTableAssemblerUsage;
-    
+    private JTable jTableXREF;
     
     private TableUsage() {
         lista = new ArrayList();
@@ -81,17 +81,50 @@ public class TableUsage {
         this.jTableAssemblerUsage = table;
     }
     
+    public void setTableXREF(JTable table){
+        this.jTableXREF = table;
+    }
+    
     public void printTableUSage(){
-        DefaultTableModel model = (DefaultTableModel) jTableAssemblerUsage.getModel();
-        for(int a=0; a < model.getRowCount(); a++){
-            model.removeRow(a);
-        }
-        for(Usage i:lista){
-            if(!i.getSimbolo().isGlobal()){
-                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress())});
+        DefaultTableModel model;
+        if(jTableAssemblerUsage != null){
+            model = (DefaultTableModel) jTableAssemblerUsage.getModel();
+            if (model.getRowCount() > 0) {
+                for (int i = model.getRowCount() - 1; i > -1; i--) {
+                    model.removeRow(i);
+                }
             }
-                
+            for (Usage i : lista) {
+                if (!i.getSimbolo().isGlobal()) {
+                    model.addRow(new Object[]{i.getSimbolo(), String.format("%d", i.getEndereco().getAnddress())});
+                }
+
+            }
+            jTableAssemblerUsage = new JTable(model);
+        
+        }else{
+            logger.warning("Não tem referência da TableUsage");
         }
+        
+        if(jTableXREF != null){
+            model = (DefaultTableModel) jTableXREF.getModel();
+            if (model.getRowCount() > 0) {
+                for (int i = model.getRowCount() - 1; i > -1; i--) {
+                    model.removeRow(i);
+                }
+            }
+
+            for (Usage i : lista) {
+                if (i.getSimbolo().isXREF()) {
+                    model.addRow(new Object[]{i.getSimbolo(), String.format("%d", i.getEndereco().getAnddress()), "R"});
+                }
+
+            }
+            jTableXREF = new JTable(model);
+        }else{
+            logger.warning("Não tem referência da XREF");
+        }
+        
     }
    
     public void printaUsos(FileOutputStream fos) throws IOException{

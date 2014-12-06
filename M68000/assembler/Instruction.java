@@ -8,7 +8,7 @@ package M68000.assembler;
 public class Instruction {
     private String label;
     private boolean hasLabel;
-    
+    private String stringOrigin;
     private String operation;
     private int numberOfOperators;
     
@@ -22,7 +22,7 @@ public class Instruction {
      */
     public Instruction(String str) {
         int caracterCounter;
-        
+        this.stringOrigin = str;
         this.label = "";
         this.operation = "";
         
@@ -258,5 +258,9 @@ public class Instruction {
         return operator2;
     }
   
+    
+    public String getStringOrigin(){
+        return this.stringOrigin;
+    }
 }
 

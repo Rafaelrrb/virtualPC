@@ -22,10 +22,12 @@ public class TableSymbol {
     private TableUsage tableUsage;
     private Registers registers;
     private JTable jTableSymbol;
+    private JTable jTableXDEF;
 
     private TableSymbol() {
         this.tabela = new ArrayList();
         logger.info("Table Symbol Loaded");
+        tableUsage = TableUsage.getInstance();
         registers = Registers.getInstance();
     }
     
@@ -60,16 +62,11 @@ public class TableSymbol {
         this.addSymbol(identificador, endereco);
         printTableSymbol();
     }
+   
     
-    public void setAsGlobal(String identificador){
-        for(Symbol i : tabela){
-            if(identificador.equals(i.getSimbolo())){
-                i.setGlobal();
-                return;
-            }
-        }
+    public void addSymbol(String identificador, boolean XDEF, boolean XREF ){
+       tabela.add(new Symbol(identificador,XDEF,XREF));
     }
-    
     public void addSymbol(String identificador){
         Symbol simbolo;
         simbolo = new Symbol(identificador);
@@ -79,7 +76,7 @@ public class TableSymbol {
     
     public void addSymbol(String identificador, int endereco){
         Symbol simbolo;
-        simbolo = new Symbol(identificador);
+        simbolo = new Symbol(identificador,false,false);
         simbolo.setEndereco(endereco);
         tabela.add(simbolo);
         printTableSymbol();
@@ -216,16 +213,40 @@ public class TableSymbol {
         this.jTableSymbol = table;
     }
     
+    public void setTableXDEF(JTable table){
+        this.jTableXDEF = table;
+    }
+    
     public void printTableSymbol(){
         DefaultTableModel model = (DefaultTableModel) jTableSymbol.getModel();
-        for(int a=0; a < model.getRowCount(); a++){
-            model.removeRow(a);
+        
+        model = (DefaultTableModel) jTableSymbol.getModel();
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
         }
         for(Symbol i:tabela){
             if(!i.isGlobal()){
                 model.addRow(new Object[]{i.getSimbolo()});
             }
         }
+        jTableSymbol = new JTable(model);
+        
+        
+        model = (DefaultTableModel) jTableXDEF.getModel();
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+        for(Symbol i:tabela){
+            if(i.isXDEF()){
+                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress()),"R"});
+            }
+        }
+        
+        jTableXDEF = new JTable(model);
         
         tableUsage.printTableUSage();
         
