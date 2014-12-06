@@ -1,3 +1,5 @@
-BEGIN
+        XDEF ola,carro
+        XREF marca,uol,margina,ovomalte
 LOOP    ADD D0,(A4)
+        ADD 1001,1002
 END

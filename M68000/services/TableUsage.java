@@ -21,7 +21,7 @@ public class TableUsage {
     private final static Logger logger = Logger.getLogger(TableUsage.class.getName());
     private final ArrayList<Usage> lista;
     private static volatile TableUsage instance = null;
-    private JTable jTableUsage;
+    private JTable jTableAssemblerUsage;
     
     
     private TableUsage() {
@@ -76,12 +76,12 @@ public class TableUsage {
         return lista;
     }
     
-    public void setTableUsage(JTable table){
-        this.jTableUsage = table;
+    public void setTableAssemblerUsage(JTable table){
+        this.jTableAssemblerUsage = table;
     }
     
     public void printTableUSage(){
-        DefaultTableModel model = (DefaultTableModel) jTableUsage.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTableAssemblerUsage.getModel();
         for(int a=0; a < model.getRowCount(); a++){
             model.removeRow(a);
         }
