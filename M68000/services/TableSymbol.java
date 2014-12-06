@@ -145,6 +145,15 @@ public class TableSymbol {
         return false;
     }
     
+    public Symbol getSymbol(String identificador){
+        for (Symbol s : tabela){
+            if(s.getSimbolo().equals(identificador)){
+                return s;
+            }
+        }
+        return null;
+    }
+    
     public Anddress getAndress(String identificador){
         for (Symbol s : tabela){
             if(s.getSimbolo().equals(identificador)){
@@ -213,8 +222,13 @@ public class TableSymbol {
             model.removeRow(a);
         }
         for(Symbol i:tabela){
-            model.addRow(new Object[]{i.getSimbolo()});
+            if(!i.isGlobal()){
+                model.addRow(new Object[]{i.getSimbolo()});
+            }
         }
+        
+        tableUsage.printTableUSage();
+        
     }
     
     public void printSymbolsDefinededs(FileOutputStream fos) throws IOException{

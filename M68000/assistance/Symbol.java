@@ -16,15 +16,10 @@ public class Symbol {
     private Anddress anddress;
     private boolean definido;
     private boolean global;
+    private boolean XDEF;
+    private boolean XREF;
     private String valor; // apenas para DC
-    /*
-     * Define se é EQU,DC,DS ou POSICAO DE MEMORIA
-     * 0: Posição de Memória
-     * 1: EQU
-     * 2: DC
-     * 3: DS
-     *
-     */
+    
     private int tipo;
     
     /**
@@ -36,6 +31,8 @@ public class Symbol {
         this.symbol = simbolo;
         this.definido = false;
         this.global = false;
+        this.XDEF = false;
+        this.XREF = false;
         this.tipo = 0;
         this.valor = "";
     }
@@ -50,6 +47,8 @@ public class Symbol {
         this.symbol = simbolo;
         this.definido = false;
         this.global = false;
+        this.XDEF = false;
+        this.XREF = false;
         this.tipo = tipo;
         this.valor = valor;
     }
@@ -64,6 +63,8 @@ public class Symbol {
         this.definido = false;
         this.global = false;
         this.tipo = tipo;
+        this.XDEF = false;
+        this.XREF = false;
     }
     
     /**
@@ -146,6 +147,23 @@ public class Symbol {
      */
     public int getTipo() {
         return tipo;
+    }
+    
+    
+    public void setXDEF(boolean value){
+        this.XDEF = value;
+    }
+    
+    public boolean getXDEF(){
+        return this.XDEF;
+    }
+    
+    public boolean getXREF(){
+        return this.XREF;
+    }
+    
+    public void setXREF(boolean value){
+        this.XREF = value;
     }
 
     /**

@@ -124,6 +124,13 @@ public class Interface extends javax.swing.JDialog {
         jLabelAssemblerUsage = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableSymbols = new javax.swing.JTable();
+        jLabelAssemblerUsage1 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableAssemblerXREF = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTableAssemblerXDEF = new javax.swing.JTable();
+        jLabelAssemblerXDEF = new javax.swing.JLabel();
+        jLabelAssemblerXREF = new javax.swing.JLabel();
         jPanelObjectCode = new javax.swing.JPanel();
         jPanelLog = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -186,6 +193,7 @@ public class Interface extends javax.swing.JDialog {
         jLabelIn.setText("Input file");
 
         jTextFieldInput.setFont(new java.awt.Font("DIN Light", 0, 12)); // NOI18N
+        jTextFieldInput.setText("/Users/glaucomunsberg/Projetos/virtualPC/M68000/example/code_simple_2");
         jTextFieldInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldInputActionPerformed(evt);
@@ -295,11 +303,11 @@ public class Interface extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxLoader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxVirtualMachine)
+                .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonReset)
-                        .addComponent(jButtonStart1)))
+                        .addComponent(jButtonStart1))
+                    .addComponent(jCheckBoxVirtualMachine))
                 .addGap(63, 63, 63))
         );
 
@@ -648,44 +656,39 @@ public class Interface extends javax.swing.JDialog {
                                 .addComponent(jLabelOperatingMode1)
                                 .addGap(64, 64, 64)))
                         .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCommands1)
+                            .addComponent(jLabelCommands3)
                             .addGroup(jPanelRegistersLayout.createSequentialGroup()
-                                .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelCommands1)
-                                    .addComponent(jLabelCommands3))
-                                .addGap(353, 353, 353))
+                                .addComponent(jLabelRE1)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabelDisplayC, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelRegistersLayout.createSequentialGroup()
+                                .addComponent(jLabelRE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabelDisplayV, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRegistersLayout.createSequentialGroup()
+                                    .addComponent(jLabelRI)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(jLabelDisplayZ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRegistersLayout.createSequentialGroup()
+                                    .addComponent(jLabelMOP)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jLabelDisplayN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabelPC)
+                            .addComponent(jLabelSP)
+                            .addGroup(jPanelRegistersLayout.createSequentialGroup()
+                                .addComponent(jLabelddresss)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelRegistersLayout.createSequentialGroup()
-                                        .addComponent(jLabelRE1)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabelDisplayC, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelRegistersLayout.createSequentialGroup()
-                                        .addComponent(jLabelRE)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jLabelDisplayV, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRegistersLayout.createSequentialGroup()
-                                            .addComponent(jLabelRI)
-                                            .addGap(30, 30, 30)
-                                            .addComponent(jLabelDisplayZ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelRegistersLayout.createSequentialGroup()
-                                            .addComponent(jLabelMOP)
-                                            .addGap(28, 28, 28)
-                                            .addComponent(jLabelDisplayN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabelPC)
-                                    .addComponent(jLabelSP)
-                                    .addGroup(jPanelRegistersLayout.createSequentialGroup()
-                                        .addComponent(jLabelddresss)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanelRegistersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelDisplayAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDisplayACC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabelDisplayPC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanelRegistersLayout.createSequentialGroup()
-                                        .addComponent(jLabelX)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabelDisplayX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabelDisplayAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDisplayACC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelDisplayPC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelRegistersLayout.createSequentialGroup()
+                                .addComponent(jLabelX)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabelDisplayX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelRegistersLayout.createSequentialGroup()
                         .addComponent(jLabelCommands4)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -810,104 +813,6 @@ public class Interface extends javax.swing.JDialog {
 
         jTableAssemblerUsage.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Global", "Symbol", "Andress"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableAssemblerUsage.setColumnSelectionAllowed(true);
-        jScrollPane4.setViewportView(jTableAssemblerUsage);
-        jTableAssemblerUsage.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTableAssemblerUsage.getColumnModel().getColumnCount() > 0) {
-            jTableAssemblerUsage.getColumnModel().getColumn(0).setResizable(false);
-            jTableAssemblerUsage.getColumnModel().getColumn(1).setResizable(false);
-            jTableAssemblerUsage.getColumnModel().getColumn(2).setResizable(false);
-        }
-
-        jLabelAssemblerUsage.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
-        jLabelAssemblerUsage.setText("Table Usage");
-
-        jTableSymbols.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
                 {null, null},
                 {null, null},
                 {null, null},
@@ -974,14 +879,111 @@ public class Interface extends javax.swing.JDialog {
                 {null, null}
             },
             new String [] {
-                "Symbol", "Global"
+                "Symbol", "Andress"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAssemblerUsage.setColumnSelectionAllowed(true);
+        jScrollPane4.setViewportView(jTableAssemblerUsage);
+        jTableAssemblerUsage.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTableAssemblerUsage.getColumnModel().getColumnCount() > 0) {
+            jTableAssemblerUsage.getColumnModel().getColumn(0).setResizable(false);
+            jTableAssemblerUsage.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabelAssemblerUsage.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelAssemblerUsage.setText("Table Usage");
+
+        jTableSymbols.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Symbol"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -997,27 +999,241 @@ public class Interface extends javax.swing.JDialog {
         jTableSymbols.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTableSymbols.getColumnModel().getColumnCount() > 0) {
             jTableSymbols.getColumnModel().getColumn(0).setResizable(false);
-            jTableSymbols.getColumnModel().getColumn(1).setResizable(false);
         }
+
+        jLabelAssemblerUsage1.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelAssemblerUsage1.setText("Table Global");
+
+        jTableAssemblerXREF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Symbol", "Andress", "Signal"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTableAssemblerXREF);
+        jTableAssemblerXREF.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTableAssemblerXREF.getColumnModel().getColumnCount() > 0) {
+            jTableAssemblerXREF.getColumnModel().getColumn(0).setResizable(false);
+            jTableAssemblerXREF.getColumnModel().getColumn(1).setResizable(false);
+            jTableAssemblerXREF.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jTableAssemblerXDEF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Symbol", "Andress", "Mod"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(jTableAssemblerXDEF);
+        jTableAssemblerXDEF.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTableAssemblerXDEF.getColumnModel().getColumnCount() > 0) {
+            jTableAssemblerXDEF.getColumnModel().getColumn(0).setResizable(false);
+            jTableAssemblerXDEF.getColumnModel().getColumn(1).setResizable(false);
+            jTableAssemblerXDEF.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jLabelAssemblerXDEF.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelAssemblerXDEF.setText("Table XDEF");
+
+        jLabelAssemblerXREF.setFont(new java.awt.Font("DIN Medium", 1, 14)); // NOI18N
+        jLabelAssemblerXREF.setText("Table XREF");
 
         javax.swing.GroupLayout jPanelTabletLayout = new javax.swing.GroupLayout(jPanelTablet);
         jPanelTablet.setLayout(jPanelTabletLayout);
         jPanelTabletLayout.setHorizontalGroup(
             jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabletLayout.createSequentialGroup()
-                .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelTabletLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelSymbols))
+                            .addGroup(jPanelTabletLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabletLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelAssemblerUsage)))
                         .addGroup(jPanelTabletLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabelSymbols))
-                        .addGroup(jPanelTabletLayout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanelTabletLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabelAssemblerUsage))))
+                            .addGap(32, 32, 32)
+                            .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelTabletLayout.createSequentialGroup()
+                                    .addComponent(jLabelAssemblerXDEF)
+                                    .addGap(290, 290, 290)
+                                    .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelAssemblerXREF)
+                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanelTabletLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelAssemblerUsage1)))
                 .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTabletLayout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(382, Short.MAX_VALUE)))
         );
         jPanelTabletLayout.setVerticalGroup(
             jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1030,7 +1246,20 @@ public class Interface extends javax.swing.JDialog {
                 .addComponent(jLabelAssemblerUsage)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelAssemblerUsage1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAssemblerXDEF)
+                    .addComponent(jLabelAssemblerXREF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
+            .addGroup(jPanelTabletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabletLayout.createSequentialGroup()
+                    .addContainerGap(367, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(59, 59, 59)))
         );
 
         jTabbedPane.addTab("Assembler", jPanelTablet);
@@ -1205,6 +1434,9 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBoxVirtualMachine;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabelAssemblerUsage;
+    private javax.swing.JLabel jLabelAssemblerUsage1;
+    private javax.swing.JLabel jLabelAssemblerXDEF;
+    private javax.swing.JLabel jLabelAssemblerXREF;
     private javax.swing.JLabel jLabelCommands1;
     private javax.swing.JLabel jLabelCommands2;
     private javax.swing.JLabel jLabelCommands3;
@@ -1280,9 +1512,13 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableAssemblerUsage;
+    private javax.swing.JTable jTableAssemblerXDEF;
+    private javax.swing.JTable jTableAssemblerXREF;
     private javax.swing.JTable jTableMemory;
     private javax.swing.JTable jTableSymbols;
     private javax.swing.JTextArea jTextArea1;

@@ -3,7 +3,7 @@
  *  instrução inserida no sistema e possibilitando 
  *  retornar cada um de seus atributos (operando 1 e 2, label...)
  */
-package M68000.services;
+package M68000.assembler;
 
 public class Instruction {
     private String label;
@@ -120,11 +120,10 @@ public class Instruction {
         if(str.contains(",")){
             return 2;
         }else{
-            if("STOP".equals(this.operation) || "RTS".equals(this.operation)){
-                return 0;
-            }else{
-                return 1;
+            if("STOP".equals(this.operation)){
+               return 0; 
             }
+            return 0;
         }
                
     }

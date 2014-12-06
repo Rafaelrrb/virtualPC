@@ -5,6 +5,7 @@
 package M68000.services;
 
 import M68000.assistance.Anddress;
+import M68000.assistance.Symbol;
 import M68000.assistance.Usage;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -49,12 +50,12 @@ public class TableUsage {
         printTableUSage();
     }
     
-    public void insereUso(String simbolo, Anddress end){
+    public void insereUso(Symbol simbolo, Anddress end){
         lista.add(new Usage(simbolo,end));
         printTableUSage();
     }
     
-    public void insereUso(String simbolo, int endereco){
+    public void insereUso(Symbol simbolo, int endereco){
         lista.add(new Usage(simbolo,new Anddress(endereco)));
         printTableUSage();
     }
@@ -86,7 +87,10 @@ public class TableUsage {
             model.removeRow(a);
         }
         for(Usage i:lista){
-            model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress())});
+            if(!i.getSimbolo().isGlobal()){
+                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress())});
+            }
+                
         }
     }
    

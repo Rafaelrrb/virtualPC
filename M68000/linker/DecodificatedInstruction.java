@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package M68000.assembler;
+package M68000.linker;
 
-import M68000.services.Instruction;
+import M68000.assembler.Instruction;
 import M68000.services.Memory;
 import M68000.services.Registers;
 import M68000.services.TableSymbol;
@@ -908,15 +908,15 @@ public class DecodificatedInstruction {
     private static void resolveSimbolo (String identificador){
         if(simbolos.hasSymbol(identificador)){
             if(simbolos.simboloDefinido(identificador)){
-                usos.insereUso(identificador, registers.getPC());
+                usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
                 memoria.insertWordMemory(simbolos.getAndress(identificador).getAnddressWord());
             }else{
-                usos.insereUso(identificador, registers.getPC());
+                usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
                 memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
             }
         }else{
             simbolos.addSymbol(identificador);
-            usos.insereUso(identificador, registers.getPC());
+            usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
             memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
         }
     }

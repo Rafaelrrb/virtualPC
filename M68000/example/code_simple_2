@@ -1,5 +1,5 @@
-        XDEF ola,carro
-        XREF marca,uol,margina,ovomalte
+STAR    ADD D0,(A2)
 LOOP    ADD D0,(A4)
         ADD 1001,1002
+        STOP
 END

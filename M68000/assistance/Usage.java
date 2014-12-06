@@ -10,10 +10,10 @@ package M68000.assistance;
  */
 public class Usage {
     
-    private String simbolo;
+    private Symbol simbolo;
     private Anddress endereco;
 
-    public Usage(String simbolo, Anddress end) {
+    public Usage(Symbol simbolo, Anddress end) {
         this.simbolo = simbolo;
         this.endereco = end;
     }
@@ -22,7 +22,7 @@ public class Usage {
         return endereco;
     }
 
-    public String getSimbolo() {
+    public Symbol getSimbolo() {
         return simbolo;
     }
     

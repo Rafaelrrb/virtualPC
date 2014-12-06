@@ -25,15 +25,13 @@ public class Assembler {
     private Memory memory;
     private FileMananger file;
     private Decodificator decodificator;
-    
-    private StatusAssembler status;
-    
+   
+ 
     public Assembler(){
         memory = Memory.getInstance();
         tabletUsage = TableUsage.getInstance();
         tableSymbol = TableSymbol.getInstance();
         file = FileMananger.getInstance();
-        status = StatusAssembler.GLOBAL;
         decodificator = Decodificator.getInstance();
     }
     
@@ -51,35 +49,8 @@ public class Assembler {
          * Lê cada uma das linhas e então encaminha a execução
          */
         for (String line : lines) {
-            
-            switch(status){
-                case BEGIN:
-                    logger.info("BEGIN command");
-                    
-                    if(line.contains("END")){
-                        status = status.END;
-                        break;
-                    }
-                    decodificator.processInstruction(line);
-                    break;
-                case END:
-                    logger.info("Not command");
-                    break;
-                case GLOBAL:
-                    logger.info("GLOBAL command");
-                    if(line.contains("BEGIN")){
-                        status = status.BEGIN;
-                    }
-                    break;
-                default:
-                    logger.severe("Not processed");
-            }  
-            
-            
+          decodificator.processInstruction(line);  
         }
-        //Alocador.alocaMemoria();
-        //Alocador.resolveSimbolos();
-       
     }
     
 }

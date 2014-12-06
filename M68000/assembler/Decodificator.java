@@ -5,7 +5,7 @@
  */
 package M68000.assembler;
 
-import M68000.services.Instruction;
+import M68000.linker.DecodificatedInstruction;
 import M68000.services.Registers;
 import M68000.services.TableSymbol;
 import java.util.logging.Logger;
@@ -17,12 +17,12 @@ import java.util.logging.Logger;
 public class Decodificator {
     private static volatile Decodificator instance = null;
     private final static Logger logger = Logger.getLogger(Decodificator.class.getName());
-    private TableSymbol symbols;
+    private TableSymbol tableSymbols;
     private Registers registers;
     
     private Decodificator(){
         logger.info("Decodificator Loaded");
-        symbols = TableSymbol.getInstance();
+        tableSymbols = TableSymbol.getInstance();
         registers = Registers.getInstance();
     }
     
@@ -44,13 +44,39 @@ public class Decodificator {
         logger.info(instruction.toString());
         
         if(instruction.hasLabel()){
-            symbols.defineAnddress(instruction.getLabel(), registers.getPC());
+            tableSymbols.defineAnddress(instruction.getLabel(), registers.getPC());
         }
-        DecodificatedInstruction instruc = new DecodificatedInstruction(instruction);
+        
+        switch(instruction.getOperation()){
+            case "XDEF":
+            case "XREF":
+                processGlobalInstruction(instruction);
+                break;
+            default:
+                processInstruction(instruction);
+                break;
+        }
+        if(instruction.getOperation().equals("XDEF")){
+        
+        }else{
+        
+        }
+        if(instruction.getOperation().equals("XREF")){
+        
+        }
+        
         
     }
     
-    public void processInstructionGlobal(String line){
-    
+    private void processGlobalInstruction(Instruction instruction){
+        logger.info("Processing global instruction");
+    }
+    private void processInstruction(Instruction instruction){
+        switch(instruction.getOperation()){
+            case "ADD":
+                break;
+            case "STOP":
+                break;        
+        }
     }
 }
