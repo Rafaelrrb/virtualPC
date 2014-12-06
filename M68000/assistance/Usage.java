@@ -10,20 +10,25 @@ package M68000.assistance;
  */
 public class Usage {
     
-    private Symbol simbolo;
-    private Anddress endereco;
+    private Symbol symbol;
+    private int anddress;
 
-    public Usage(Symbol simbolo, Anddress end) {
-        this.simbolo = simbolo;
-        this.endereco = end;
+    public Usage(Symbol simbolo, int end) {
+        this.symbol = simbolo;
+        this.anddress = end;
     }
 
-    public Anddress getEndereco() {
-        return endereco;
+    public int getEndereco() {
+        return anddress;
     }
 
     public Symbol getSimbolo() {
-        return simbolo;
+        return symbol;
+    }
+    
+    @Override
+    public String toString(){
+        return "{ {symbol:"+symbol.getSimbolo()+", defined:"+symbol.isDefined()+", anddress:"+symbol.getEndereco()+", XREF:"+symbol.isXREF()+", XDEF:"+symbol.isXDEF()+"},{usage:"+anddress+"}}"; 
     }
     
     

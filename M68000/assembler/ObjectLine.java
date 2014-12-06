@@ -10,15 +10,15 @@ package M68000.assembler;
  * @author glaucomunsberg
  */
 public class ObjectLine {
-    private short cod;
+    private int cod;
     private char mod;
     
-    public ObjectLine(short cod, char mod){
+    public ObjectLine(int cod, char mod){
         this.cod = cod;
         this.mod = mod;
     }
     
-    public void setCod(short cod){
+    public void setCod(int cod){
         this.cod = cod;
     }
     
@@ -30,7 +30,12 @@ public class ObjectLine {
         return this.mod;
     }
     
-    public short getCod(){
+    public int getCod(){
         return this.cod;
+    }
+    
+    @Override
+    public String toString(){
+        return cod+" "+String.valueOf(mod);
     }
 }

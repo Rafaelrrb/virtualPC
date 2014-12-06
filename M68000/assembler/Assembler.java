@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Assembler {
     
     private static final Logger logger = Logger.getLogger(Assembler.class.getName());
-    private TableUsage tabletUsage;
+    private TableUsage tableUsage;
     private TableSymbol tableSymbol;
     private Usage usage;
     private Memory memory;
@@ -29,7 +29,7 @@ public class Assembler {
  
     public Assembler(){
         memory = Memory.getInstance();
-        tabletUsage = TableUsage.getInstance();
+        tableUsage = TableUsage.getInstance();
         tableSymbol = TableSymbol.getInstance();
         file = FileMananger.getInstance();
         decodificator = Decodificator.getInstance();
@@ -51,6 +51,8 @@ public class Assembler {
         for (String line : lines) {
           decodificator.processInstruction(line);  
         }
+        tableSymbol.printConsoleTableSymbol();
+        tableUsage.printConsoleTableUsage();
     }
     
 }

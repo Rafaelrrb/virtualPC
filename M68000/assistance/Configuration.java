@@ -19,6 +19,7 @@ public class Configuration {
     public JTextField out;
     private JTextArea linkerListFile;
     public JTextField in;
+    public JTextArea ObjecCode;
     public JCheckBox comboMachine;
     public JCheckBox comboLink;
     public JCheckBox comboLoader;
@@ -184,6 +185,13 @@ public class Configuration {
         this.recordAddress.setText("-----------------");
         this.out.setText("");
         this.in.setText("");
+    }
+    public void setObjectCode(JTextArea objectCode){
+        this.ObjecCode = objectCode;
+    }
+    
+    public JTextArea getObjectCode(){
+        return this.ObjecCode;
     }
 }
 

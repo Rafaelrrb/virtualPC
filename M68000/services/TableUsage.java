@@ -4,11 +4,8 @@
  */
 package M68000.services;
 
-import M68000.assistance.Anddress;
 import M68000.assistance.Symbol;
 import M68000.assistance.Usage;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -50,19 +47,16 @@ public class TableUsage {
         printTableUSage();
     }
     
-    public void insereUso(Symbol simbolo, Anddress end){
+    public void insereUso(Symbol simbolo, int end){
         lista.add(new Usage(simbolo,end));
         printTableUSage();
     }
+
     
-    public void insereUso(Symbol simbolo, int endereco){
-        lista.add(new Usage(simbolo,new Anddress(endereco)));
-        printTableUSage();
-    }
-    
-    public ArrayList<Anddress> returnaUsos(String simbolo){
+    public ArrayList<Integer> returnaUsos(String simbolo){
         
-        ArrayList<Anddress> enderecos = new ArrayList();
+        ArrayList<Integer> enderecos;
+        enderecos = new ArrayList<Integer>();
         
         for (Usage u : lista){
             if(u.getSimbolo().equals(simbolo)){
@@ -96,7 +90,7 @@ public class TableUsage {
             }
             for (Usage i : lista) {
                 if (!i.getSimbolo().isGlobal()) {
-                    model.addRow(new Object[]{i.getSimbolo(), String.format("%d", i.getEndereco().getAnddress())});
+                    model.addRow(new Object[]{"a","b","d"});
                 }
 
             }
@@ -116,28 +110,28 @@ public class TableUsage {
 
             for (Usage i : lista) {
                 if (i.getSimbolo().isXREF()) {
-                    model.addRow(new Object[]{i.getSimbolo(), String.format("%d", i.getEndereco().getAnddress()), "R"});
+                    model.addRow(new Object[]{i.getSimbolo().getSimbolo(), String.format("%d", i.getEndereco()), "+"});
                 }
 
             }
             jTableXREF = new JTable(model);
+            logger.warning("XREF aquui!");
         }else{
             logger.warning("Não tem referência da XREF");
         }
         
     }
    
-    public void printaUsos(FileOutputStream fos) throws IOException{
-        String printa = "";
-        for(Usage u : lista){
-            printa = "".equals(printa)? u.getEndereco().toString(): printa+" "+u.getEndereco().toString();
-        }
-        fos.write(printa.getBytes());
-    }
-    
     public void resetTableUsage(){
         lista.clear();
         this.printTableUSage();
+    }
+    
+    public void printConsoleTableUsage(){
+        System.out.println("TableUsage");
+        for(Usage u: lista){
+            System.out.println(u.toString());
+        }
     }
     
 }

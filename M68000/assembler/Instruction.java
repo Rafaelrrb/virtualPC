@@ -120,8 +120,8 @@ public class Instruction {
         if(str.contains(",")){
             return 2;
         }else{
-            if("STOP".equals(this.operation)){
-               return 0; 
+            if("STOP".equals(this.operation) || "CLR".equals(this.operation)){
+               return 1; 
             }
             return 0;
         }

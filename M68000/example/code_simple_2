@@ -1,5 +1,9 @@
-        XDEF    carro,moto,aviao,mrr
+        XDEF    carro,moto,aviao
         XREF    maria,marta
-labeT:  ADD     A1,A2
-labaT:  ADD     AD
+        ADD     D1,labeT
+labeT:  ADD     211,D2
+labaT:  ADD     D2,labeT
+carro:  CLR     120
+moto:   ADD     marta,D1
+        STOP    #200
 END

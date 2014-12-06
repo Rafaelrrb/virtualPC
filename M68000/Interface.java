@@ -105,7 +105,7 @@ public class Interface extends javax.swing.JDialog{
     private javax.swing.JTable jTableAssemblerXREF;
     private javax.swing.JTable jTableMemory;
     private javax.swing.JTable jTableSymbols;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextObjectCode;
     private javax.swing.JTextArea jTextAreaLog;
     private javax.swing.JTextField jTextFieldInput;
     private javax.swing.JTextField jTextFieldOutput;
@@ -137,6 +137,7 @@ public class Interface extends javax.swing.JDialog{
         registersD[6] = jLabelDisplayA6;
         registersD[7] = jLabelDisplayUSP;
         registersD[8] = jLabelDisplaySSP;
+        application.configuration.setObjectCode(jTextObjectCode);
         application.configuration.setRegisterAnddress(registersA);
         application.configuration.setRegisterData(registersD);
         application.configuration.setGeralComboBox(jCheckBoxAssembler, jCheckBoxLinker, jCheckBoxLoader, jCheckBoxVirtualMachine);
@@ -177,7 +178,7 @@ public class Interface extends javax.swing.JDialog{
         jButtonStart1 = new javax.swing.JButton();
         jButtonReset = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextObjectCode = new javax.swing.JTextArea();
         jPanelRegisters = new javax.swing.JPanel();
         jLabelOperatingMode = new javax.swing.JLabel();
         jLabelOperatingMode1 = new javax.swing.JLabel();
@@ -354,12 +355,12 @@ public class Interface extends javax.swing.JDialog{
             }
         });
 
-        jTextArea1.setBackground(new java.awt.Color(238, 238, 238));
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane6.setViewportView(jTextArea1);
+        jTextObjectCode.setBackground(new java.awt.Color(238, 238, 238));
+        jTextObjectCode.setColumns(20);
+        jTextObjectCode.setLineWrap(true);
+        jTextObjectCode.setRows(5);
+        jTextObjectCode.setWrapStyleWord(true);
+        jScrollPane6.setViewportView(jTextObjectCode);
 
         javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
         jPanelGeneral.setLayout(jPanelGeneralLayout);
@@ -1030,17 +1031,16 @@ public class Interface extends javax.swing.JDialog{
 
         jTableSymbols.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
             },
             new String [] {
-                "Symbol"
+                "Symbol", "Anddress Definition"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {

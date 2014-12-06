@@ -422,7 +422,7 @@ public class DecodificatedInstruction {
                resolveSimbolo(inst.getOperator1());
            }
            if(equ){
-               resolveEquivalencia(inst.getOperator1());
+//               resolveEquivalencia(inst.getOperator1());
            }
            if(imm){
                resolveImediato(inst.getOperator1());
@@ -485,7 +485,7 @@ public class DecodificatedInstruction {
                     resolveSimbolo(inst.getOperator2());
                 }
                 if(equ){
-                    resolveEquivalencia(inst.getOperator2());
+ //                   resolveEquivalencia(inst.getOperator2());
                 }
                 if(imm){
                     resolveImediato(inst.getOperator2());
@@ -686,7 +686,7 @@ public class DecodificatedInstruction {
             resolveSimbolo(inst.getOperator1());
         }
         if(equ){
-            resolveEquivalencia(inst.getOperator1());
+         //   resolveEquivalencia(inst.getOperator1());
         }
         if(imm){
             resolveImediato(inst.getOperator1());
@@ -809,7 +809,7 @@ public class DecodificatedInstruction {
             resolveSimbolo(inst.getOperator1());
         }
         if(equ){
-            resolveEquivalencia(inst.getOperator1());
+         //   resolveEquivalencia(inst.getOperator1());
         }
         if(imm){
             resolveImediato(inst.getOperator1());
@@ -877,9 +877,9 @@ public class DecodificatedInstruction {
             }
         }
         
-        if(simbolos.contemEQU(entrada)){
-            return 5;
-        }
+        //if(simbolos.contemEQU(entrada)){
+        //    return 5;
+        //}
         
         return 4;
     }
@@ -909,25 +909,19 @@ public class DecodificatedInstruction {
         if(simbolos.hasSymbol(identificador)){
             if(simbolos.simboloDefinido(identificador)){
                 usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
-                memoria.insertWordMemory(simbolos.getAndress(identificador).getAnddressWord());
+    //            memoria.insertWordMemory(simbolos.getAndress(identificador).getAnddressWord());
             }else{
                 usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
                 memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
             }
         }else{
-            simbolos.addSymbol(identificador);
+    //        simbolos.addSymbol(identificador);
             usos.insereUso(simbolos.getSymbol(identificador), registers.getPC());
             memoria.insertWordMemory("00000000000000000000000000000000".toCharArray());
         }
     }
     
-    private static void resolveEquivalencia (String identificador){
-        char[] valor;
-        
-        valor = simbolos.getWordEQU(identificador);
-        
-        memoria.insertWordMemory(valor);
-    }
+    
     
     private static void resolveImediato (String imediato){
         String valor;

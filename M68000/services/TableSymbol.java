@@ -52,14 +52,15 @@ public class TableSymbol {
         this.tableUsage.resetTableUsage();     
     }
     
-    public void defineAnddress(String identificador, int endereco){
+    public void defineAnddress(String identificador, int endereco,boolean isDefined){
         for(Symbol i : tabela){
             if(identificador.equals(i.getSimbolo())){
                 i.setEndereco(endereco);
+                i.setIsDefined(isDefined);
                 return;
             }
         }
-        this.addSymbol(identificador, endereco);
+        this.addSymbol(identificador,isDefined,endereco);
         printTableSymbol();
     }
    
@@ -67,51 +68,14 @@ public class TableSymbol {
     public void addSymbol(String identificador, boolean XDEF, boolean XREF ){
        tabela.add(new Symbol(identificador,XDEF,XREF));
     }
-    public void addSymbol(String identificador){
+    
+    public void addSymbol(String identificador,boolean defined,int anddress){
         Symbol simbolo;
-        simbolo = new Symbol(identificador);
+        simbolo = new Symbol(identificador,defined, anddress);
         tabela.add(simbolo);
         printTableSymbol();
     }
-    
-    public void addSymbol(String identificador, int endereco){
-        Symbol simbolo;
-        simbolo = new Symbol(identificador,false,false);
-        simbolo.setEndereco(endereco);
-        tabela.add(simbolo);
-        printTableSymbol();
-    }
-    
-    public void addEquivalence(String identificador, int endereco){
-        Symbol simbolo;
-        simbolo = new Symbol(identificador,1);
-        simbolo.setEndereco(endereco);
-        tabela.add(simbolo);
-        printTableSymbol();
-    }
-    
-    public void addConstant(String identificador, int valor){
-        Symbol simbolo;
-        simbolo = new Symbol(identificador,2,Integer.toString(valor));
-        tabela.add(simbolo);
-        printTableSymbol();
-    }
-    
-    public void addSpace(String identificador){
-        Symbol simbolo;
-        simbolo = new Symbol(identificador,3);
-        tabela.add(simbolo);
-        printTableSymbol();
-    }
-    
-    public void addSpace(String identificador, int endereco){
-        Symbol simbolo;
-        simbolo = new Symbol(identificador,3);
-        simbolo.setEndereco(endereco);
-        tabela.add(simbolo);
-        printTableSymbol();
-    }
-    
+       
     public void printAllOnConsole(){
         for(Symbol i : tabela){
             System.out.println(i);
@@ -131,7 +95,7 @@ public class TableSymbol {
     public boolean simboloDefinido(String identificador){
         for(Symbol s : tabela){
             if(s.getSimbolo().equals(identificador)){
-               if(s.isDefinido()){
+               if(s.isDefined()){
                    return true;
                }else{
                    return false;
@@ -151,62 +115,18 @@ public class TableSymbol {
         return null;
     }
     
-    public Anddress getAndress(String identificador){
+    public int getAndress(String identificador){
         for (Symbol s : tabela){
             if(s.getSimbolo().equals(identificador)){
                 return s.getEndereco();
             }
         }
         
-        return null;
+        return 0;
     }
     
-    public boolean contemEQU(String identificador){
-        for(Symbol s : tabela){
-           if(s.getSimbolo().equals(identificador)){
-               if(s.getTipo() == 1){
-                   return true;
-               }else{
-                   return false;
-               }
-           }
-        }
-                
-        return false;
-    }
-    
-    public char[] getWordEQU(String identificador){
-        for(Symbol s : tabela){
-           if(s.getSimbolo().equals(identificador)){
-               if(s.getTipo() == 1){
-                   return s.getEndereco().getAnddressWord();
-               }else{
-                   logger.warning("Retornando Null em getWordEQU -1");
-                   
-                   return null;
-               }
-           }
-        }
-        logger.warning("Retornando Null em getWordEQU -2");
-        return null;
-    }
-
     public ArrayList<Symbol> getTabela() {
         return tabela;
-    }
-    
-    public void printaGlobais(FileOutputStream fos) throws IOException{
-        String printa;
-        ArrayList<Anddress> end;
-        for (Symbol s : tabela){
-            //printa = "";
-            if(s.isGlobal()){
-                printa = "\n" + s.getSimbolo();
-                printa = printa + " " + s.getEndereco();
-
-                fos.write(printa.getBytes());
-            }
-        }
     }
     
     public void setTableSymbol(JTable table){
@@ -228,7 +148,7 @@ public class TableSymbol {
         }
         for(Symbol i:tabela){
             if(!i.isGlobal()){
-                model.addRow(new Object[]{i.getSimbolo()});
+                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco())});
             }
         }
         jTableSymbol = new JTable(model);
@@ -242,7 +162,7 @@ public class TableSymbol {
         }
         for(Symbol i:tabela){
             if(i.isXDEF()){
-                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco().getAnddress()),"R"});
+                model.addRow(new Object[]{i.getSimbolo(),String.format("%d", i.getEndereco()),"R"});
             }
         }
         
@@ -252,21 +172,11 @@ public class TableSymbol {
         
     }
     
-    public void printSymbolsDefinededs(FileOutputStream fos) throws IOException{
-        String printa;
-        ArrayList<Anddress> end;
-        for (Symbol s : tabela){
-            //printa = "";
-            if(!s.isDefinido()){
-                printa = "\n" + s.getSimbolo();
-                end = tableUsage.returnaUsos(s.getSimbolo());
-                for(Anddress u : end){
-                    printa = printa + " " + u.toString();
-                }
-                fos.write(printa.getBytes());
-            }
+    public void printConsoleTableSymbol(){
+        System.out.println("TableSymbol");
+        for(Symbol i: tabela){
+            System.out.println(i.toString());
         }
     }
-       
-    
+
 }
