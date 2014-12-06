@@ -90,12 +90,15 @@ public class Interface extends javax.swing.JDialog{
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableMemory;
+    private javax.swing.JPanel jPanelObjectCode;
     private javax.swing.JTable jTableSymbols;
     private javax.swing.JTable jTableUsage;
     private javax.swing.JTextArea jTextAreaLog;
+    private javax.swing.JTextArea jTextAreaObjectCode;
     private javax.swing.JTextField jTextFieldInput;
     private javax.swing.JTextField jTextFieldOutput;
     private javax.swing.JTextArea jTextLinkFileList;
@@ -218,6 +221,9 @@ public class Interface extends javax.swing.JDialog{
         jLabelOperatingMode3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableSymbols = new javax.swing.JTable();
+        jPanelObjectCode = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextAreaObjectCode = new javax.swing.JTextArea();
         jPanelLog = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextAreaLog = new javax.swing.JTextArea();
@@ -967,6 +973,31 @@ public class Interface extends javax.swing.JDialog{
         );
 
         jTabbedPane.addTab("Tables", jPanelTablet);
+
+        jTextAreaObjectCode.setColumns(20);
+        jTextAreaObjectCode.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaObjectCode.setRows(5);
+        jTextAreaObjectCode.setEnabled(false);
+        jScrollPane6.setViewportView(jTextAreaObjectCode);
+
+        javax.swing.GroupLayout jPanelObjectCodeLayout = new javax.swing.GroupLayout(jPanelObjectCode);
+        jPanelObjectCode.setLayout(jPanelObjectCodeLayout);
+        jPanelObjectCodeLayout.setHorizontalGroup(
+            jPanelObjectCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelObjectCodeLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelObjectCodeLayout.setVerticalGroup(
+            jPanelObjectCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelObjectCodeLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane.addTab("Object Code", jPanelObjectCode);
 
         jTextAreaLog.setColumns(20);
         jTextAreaLog.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N

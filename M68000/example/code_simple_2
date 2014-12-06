@@ -1,7 +1,3 @@
 BEGIN
-        ORG $1000
 LOOP    ADD D0,(A4)
-        BEQ LOOP
-        MOVE #12,$4000
-        STOP
 END

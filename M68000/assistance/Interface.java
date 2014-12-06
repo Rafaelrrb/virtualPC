@@ -5,7 +5,6 @@
  */
 package M68000.assistance;
 
-import M68000.*;
 import M68000.assembler.Assembler;
 
 
@@ -113,6 +112,9 @@ public class Interface extends javax.swing.JDialog {
         jLabelOperatingMode3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableSymbols = new javax.swing.JTable();
+        jPanelObjectCode = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextAreaObjectCode = new javax.swing.JTextArea();
         jPanelLog = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextAreaLog = new javax.swing.JTextArea();
@@ -925,6 +927,31 @@ public class Interface extends javax.swing.JDialog {
 
         jTabbedPane.addTab("Tables", jPanelTablet);
 
+        jTextAreaObjectCode.setColumns(20);
+        jTextAreaObjectCode.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
+        jTextAreaObjectCode.setRows(5);
+        jTextAreaObjectCode.setEnabled(false);
+        jScrollPane6.setViewportView(jTextAreaObjectCode);
+
+        javax.swing.GroupLayout jPanelObjectCodeLayout = new javax.swing.GroupLayout(jPanelObjectCode);
+        jPanelObjectCode.setLayout(jPanelObjectCodeLayout);
+        jPanelObjectCodeLayout.setHorizontalGroup(
+            jPanelObjectCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelObjectCodeLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelObjectCodeLayout.setVerticalGroup(
+            jPanelObjectCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelObjectCodeLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane.addTab("Object Code", jPanelObjectCode);
+
         jTextAreaLog.setColumns(20);
         jTextAreaLog.setFont(new java.awt.Font("DIN Alternate", 1, 14)); // NOI18N
         jTextAreaLog.setRows(5);
@@ -1083,25 +1110,25 @@ public class Interface extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonStart1ActionPerformed
 
-    private void jCheckBoxLinkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLinkerActionPerformed
+    private void jTextFieldOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxLinkerActionPerformed
-
-    private void jCheckBoxAssemblerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAssemblerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxAssemblerActionPerformed
-
-    private void jCheckBoxLoaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxLoaderActionPerformed
+    }//GEN-LAST:event_jTextFieldOutputActionPerformed
 
     private void jCheckBoxVirtualMachineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxVirtualMachineActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxVirtualMachineActionPerformed
 
-    private void jTextFieldOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutputActionPerformed
+    private void jCheckBoxLoaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLoaderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldOutputActionPerformed
+    }//GEN-LAST:event_jCheckBoxLoaderActionPerformed
+
+    private void jCheckBoxAssemblerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAssemblerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxAssemblerActionPerformed
+
+    private void jCheckBoxLinkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxLinkerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxLinkerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1216,6 +1243,7 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelGeneral;
     private javax.swing.JPanel jPanelLog;
     private javax.swing.JPanel jPanelMemory;
+    private javax.swing.JPanel jPanelObjectCode;
     private javax.swing.JPanel jPanelRegisters;
     private javax.swing.JPanel jPanelTablet;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -1224,12 +1252,14 @@ public class Interface extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableMemory;
     private javax.swing.JTable jTableSymbols;
     private javax.swing.JTable jTableUsage;
     private javax.swing.JTextArea jTextAreaLog;
+    private javax.swing.JTextArea jTextAreaObjectCode;
     private javax.swing.JTextField jTextFieldInput;
     private javax.swing.JTextField jTextFieldOutput;
     private javax.swing.JTextArea jTextLinkFileList;
