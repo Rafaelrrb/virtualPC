@@ -16,12 +16,13 @@ import java.util.logging.Logger;
 public class Macro {
     private static volatile Macro instance = null;
     private final static Logger logger = Logger.getLogger(Macro.class.getName());
-    public final String entrada;
+    int j;
+   // public final String entrada;
     
     public Macro(){
         logger.info("Macro Processor Loaded");
-        this.entrada= "SAV2    MACRO";
-        
+        //this.entrada= "SAV2    MACRO";
+        this.j=0;
         
     }
     
@@ -46,31 +47,62 @@ public class Macro {
     public String[] processText(String[] texto){
         logger.info("Macro Processor start process the string...");
         
-        int i,j=0; 
-        char[] str = texto[0].toCharArray();
+        int i,z; 
+        char[] str;
         ArrayList<Character> lista = new ArrayList<>();
-        ArrayList<Character> listaPalavras = new ArrayList<>();
-        char[] palavra = null;
-     //List<char[]> asList = Arrays.asList(str);  
-      //List<Character> list = new ArrayList<Character>(teste);
+        ArrayList<String> listaPalavras = new ArrayList<>();
+        char[] palavra = new char[30];
+        //List<char[]> asList = Arrays.asList(str);  
+        //List<Character> list = new ArrayList<Character>(teste);
         
         
         
+        for(z=0;z<texto.length;z++){
+            
+            str = texto[z].toCharArray();
+            
+            //retira os comentarios
+            for(i=0;i<str.length;i++){    
+                if(str[i]=='\t'){
+                        i++;        
+                }else if(str[i]==';'){
+                        lista.add(str[i]);
+                        i=str.length;
+                }else{    
+                    lista.add(str[i]);    
+                }
+            }
+            i=0;
+            //lista.remove(' ');
+            //colocar contadores diferentes
+            while(lista.get(i)!=' ' || lista.get(i)=='\n'){    
+                
+                palavra[i] = lista.get(i);
+                i++;        
+            }
+            
+            listaPalavras.add(new String(palavra));
+            
+            while( lista.get(i)!=';'|| lista.get(i)=='\n'){    
+                
+                palavra[i] = lista.get(i);
+                i++;        
+            }
+            
+            i=0;
+            listaPalavras.add(new String(palavra));
+            
         
+        
+        }
         
            
-        for(i=0;i<str.length;i++){
-            
-            
-            if(str[i]=='\t'){
-                    i++;        
-            }else if(str[i]==';'){
-                    lista.add(str[i]);
-                    i=str.length;
-            }else{    
-                lista.add(str[i]);    
-            }
-        }
+
+        
+        listaPalavras.add(lista.toString());
+        
+        
+        
         
         /*
         for(i=0;i<lista.size();i++){
