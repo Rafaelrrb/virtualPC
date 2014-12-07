@@ -5,7 +5,6 @@
  */
 package M68000.assembler;
 
-import M68000.assistance.Usage;
 import M68000.services.Memory;
 import M68000.services.Registers;
 import M68000.services.TableSymbol;
@@ -123,9 +122,34 @@ public class Decodificator {
             case "STOP":
                 STOP(instruction);
                 break;
+            case "NEG":
+                NEGX(instruction);
+                break;
+            case "NEGX":
+                NEG(instruction);
+                break;
+            case "NOT":
+                NOT(instruction);
+                break;
             case "CLR":
                 CLR(instruction);
                 break;
+            case "JUMP":
+                JUMP(instruction);
+                break;
+            case "BRA":
+                BRA(instruction);
+                break;
+            case "MOVES":
+                MOVES(instruction);
+                break;
+            case "MOVEC":
+                MOVEC(instruction);
+                break;
+            case "CMP":
+                CMP(instruction);
+                break;
+                
         }
     }
     
@@ -176,10 +200,84 @@ public class Decodificator {
         objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
     }
     
-    private void STOP(Instruction instruction){
-        objectCode.setNewLine(53, 'A');
+    private void CMP(Instruction instruction){
+        if( this.isRegister(instruction.getOperator2())){
+            objectCode.setNewLine(12, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+        
+            logger.warning("Instrução MOVEC mal formada: "+instruction.toString());
+        }
+        
+    }
+    
+    public void NEG(Instruction instruction){
+        objectCode.setNewLine(31, 'A');
+        objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+    }
+    
+    public void NEGX(Instruction instruction){
+        objectCode.setNewLine(32, 'A');
+        objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+    }
+    
+    public void NOT(Instruction instruction){
+        objectCode.setNewLine(48, 'A');
+        objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+    }
+    
+    public void JUMP(Instruction instruction){
+        objectCode.setNewLine(52, 'A');
+        objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+    }
+    
+    private void BRA(Instruction instruction){
+        objectCode.setNewLine(54, 'A');
         objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
     }
+    
+    private void MOVEC(Instruction instruction){
+        
+        if(isRn(instruction.getOperator1()) && isRn(instruction.getOperator2()) ){
+            objectCode.setNewLine(55, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução MOVEC mal formada: "+instruction.toString());
+        }
+    
+    }
+    
+    private void MOVES(Instruction instruction){
+        
+        if( isRn(instruction.getOperator1() ) ){
+            
+            if( isRn(instruction.getOperator2() ) ){
+                objectCode.setNewLine(57, 'A');
+                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+                objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+            }
+            
+        }else{
+            
+           if( isRn( instruction.getOperator2() ) ){
+               objectCode.setNewLine(58, 'A');
+               objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+               objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+           }else{
+               logger.warning("Instrução MOVES mal formada: "+instruction.toString());
+           }
+             
+        }
+    }
+    
+    private void STOP(Instruction instruction){
+        objectCode.setNewLine(59, 'A');
+        objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+    }
+    
+    
     private int solveEA(String Instruction){
         if(Instruction.substring(0, 1).matches("[0-9]")){
             return Integer.parseInt(Instruction);
@@ -188,13 +286,20 @@ public class Decodificator {
     }
             
     private int solveOperator(String anddress){
-        if(anddress.charAt(0)=='D' ||anddress.charAt(0)=='A'){
+        if( anddress.charAt(0) == 'D' || anddress.charAt(0) == 'A' ){
             return solveRegistersByNameToInt(anddress.substring(1, anddress.length()));
         }else{
             return solveEA(anddress);
         }
     }
     
+    private boolean isRn(String string){
+        return isRegister(string) || isNumber(string) ;
+    }
+    
+    private boolean isNumber(String string){
+        return string.substring(0, 1).matches("[0-9]");
+    }
     private boolean isRegister(String string){
         return string.charAt(0) == 'A' || string.charAt(0)=='D';
     }

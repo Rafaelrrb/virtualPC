@@ -52,7 +52,14 @@ public class ObjectCode {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
+                case 5:
+                case 6:
                 case 7:
+                case 12:
+                case 55:
+                case 57:
+                case 58:
                     try{
                         configuration.getObjectCode().setText(configuration.getObjectCode().getText()+a+" "+table.get(a).toString()+" "+table.get(a+1).toString()+" "+table.get(a+2).toString()+"\n");
                     }catch(Exception e){
@@ -60,7 +67,13 @@ public class ObjectCode {
                     }
                     a+=2;
                     break;
-                case 53:
+                case 11:
+                case 31:
+                case 32:
+                case 48:
+                case 52:
+                case 54:
+                case 59:
                     try{
                         configuration.getObjectCode().setText(configuration.getObjectCode().getText()+a+" "+table.get(a).toString()+" "+table.get(a+1).toString()+"\n");
                     }catch(Exception e){

@@ -6,4 +6,10 @@ labaT:  ADD     D2,labeT
 carro:  CLR     120
 moto:   ADD     marta,D1
         STOP    #200
+        NEG     labaT
+        NOT     labeT
+        JUMP    moto
+        NOT     200
+        BRA     D1
+        MOVES   D1,D3
 END

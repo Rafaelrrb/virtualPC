@@ -8,7 +8,7 @@ package M68000.assembler;
 public class Instruction {
     private String label;
     private boolean hasLabel;
-    private String stringOrigin;
+    private final String stringOrigin;
     private String operation;
     private int numberOfOperators;
     
@@ -120,10 +120,7 @@ public class Instruction {
         if(str.contains(",")){
             return 2;
         }else{
-            if("STOP".equals(this.operation) || "CLR".equals(this.operation)){
-               return 1; 
-            }
-            return 0;
+            return 1;
         }
                
     }
