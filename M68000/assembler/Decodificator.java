@@ -53,7 +53,7 @@ public class Decodificator {
         
         if(instruction.hasLabel()){
             tableSymbols.defineAnddress(instruction.getLabel(), registers.getPC(),true);
-            System.out.println("nova label: "+instruction.getLabel()+" at "+registers.getPC());
+            logger.info("New Label: "+instruction.getLabel()+" at "+registers.getPC());
         }
         
         switch(instruction.getOperation()){
@@ -112,11 +112,12 @@ public class Decodificator {
     private void processInstruction(Instruction instruction){
         switch(instruction.getOperation()){
             case "ADD":
-            case "ADDA":
                 ADD(instruction);
                 break;
+            case "ADDA":
+                ADDA(instruction);
+                break;
             case "ADDI":
-            case "ADDQ":
                 ADDI(instruction);
                 break;
             case "STOP":
@@ -149,22 +150,81 @@ public class Decodificator {
             case "CMP":
                 CMP(instruction);
                 break;
-                
+            case "CMPA":
+                CMPA(instruction);
+                break;
+            case "CMPI":
+                CMPI(instruction);
+                break;
+            case "CMP2":
+                CMP2(instruction);
+                break;
+            case "DIVS":
+                DIVS(instruction);
+                break;
+            case "DIVU":
+                DIVU(instruction);
+                break;
+            case "EXT":
+                EXT(instruction);
+                break;
+            case "EXTB":
+                EXTB(instruction);
+                break;
+            case "MULTS":
+                MULTS(instruction);
+                break;
+            case "MULTU":
+                MULTS(instruction);
+                break;
+            case "SUB":
+                SUB(instruction);
+                break;
+            case "SUBA":
+                SUBA(instruction);
+                break;
+            case "SUBI":
+                SUBI(instruction);
+                break;
+            case "SUBQ":
+                SUBQ(instruction);
+                break;
+            case "SUBX":
+                SUBQ(instruction);
+                break;
+            case "AND":
+                AND(instruction);
+                break;
+            case "ADDQ":
+                ADD(instruction);
+                break;
+            case "ANDI":
+                ANDI(instruction);
+                break;
+            case "ADDX":
+                ADDX(instruction);
+                break;
+            case "EOR":
+                EOR(instruction);
+                break;
+            case "EORI":
+                EORI(instruction);
+                break;
+            case "OR":
+                OR(instruction);
+                break;
+            case "ORI":
+                ORI(instruction);
+                break;
+            case "BCC":
+                BCC(instruction);
+                break;
         }
     }
     
-    private void ADDI(Instruction instruction){
-        if( instruction.getOperator1().charAt(0) == '#' ){
-            objectCode.setNewLine(7, 'A');
-            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
-            objectCode.setNewLine(solveEA(instruction.getOperator2()), 'R');
-        }else{
-            logger.warning("Instrução ADDI mal formada: "+instruction.toString());
-        }
-    }
     
     private void ADD(Instruction instruction){
-        if( instruction.getOperator1().charAt(0) == 'D'){
+        if( isARegisterD(instruction.getOperator1())){
             
             if(isRegister(instruction.getOperator2())){
                 logger.warning("Instrução ADD mal formada: "+instruction.toString());
@@ -176,12 +236,12 @@ public class Decodificator {
             }
             
         }else{
-            if(instruction.getOperator2().charAt(0)=='D'){
+            if(isARegisterD(instruction.getOperator2())){
                 objectCode.setNewLine(2, 'A');
                 objectCode.setNewLine(solveEA(instruction.getOperator1()), 'R');
                 objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2().substring(1, instruction.getOperator2().length())), 'A');
             }else{
-                if(instruction.getOperator2().charAt(0)=='A'){
+                if( isARegisterA(instruction.getOperator2())){
                     objectCode.setNewLine(3, 'A');
                     objectCode.setNewLine(solveEA(instruction.getOperator1()), 'R');
                     objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2().substring(1, instruction.getOperator2().length())), 'A');
@@ -194,22 +254,176 @@ public class Decodificator {
         }
     
     }
+    
+    private void ADDA(Instruction instruction){
+        if( instruction.getOperator1().charAt(0) == 'D'){
+            
+            if(isRegister(instruction.getOperator2())){
+                logger.warning("Instrução ADD mal formada: "+instruction.toString());
+            }else{
+                
+                objectCode.setNewLine(4, 'A');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1().substring(1, instruction.getOperator1().length())), 'A');
+                objectCode.setNewLine(solveEA(instruction.getOperator2()), 'R');
+            }
+            
+        }else{
+            if( isARegisterD( instruction.getOperator2() ) ){
+                objectCode.setNewLine(5, 'A');
+                objectCode.setNewLine(solveEA(instruction.getOperator1()), 'R');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2().substring(1, instruction.getOperator2().length())), 'A');
+            }else{
+                if( isARegisterA( instruction.getOperator2() ) ){
+                    objectCode.setNewLine(6, 'A');
+                    objectCode.setNewLine(solveEA(instruction.getOperator1()), 'R');
+                    objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2().substring(1, instruction.getOperator2().length())), 'A');
+                }else{
+                    logger.warning("Instrução ADD mal formada: "+instruction.toString());
+                }
+            }
+            
+            
+        }
+    
+    }
    
+    private void ADDI(Instruction instruction){
+        if( instruction.getOperator1().charAt(0) == '#' ){
+            objectCode.setNewLine(7, 'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveEA(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução ADDI mal formada: "+instruction.toString());
+        }
+    }
+    
+    private void ADDQ(Instruction instruction){
+        if( instruction.getOperator1().charAt(0) == '#' ){
+            objectCode.setNewLine(7, 'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveEA(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução ADDI mal formada: "+instruction.toString());
+        }
+    }
+    
+    private void ADDX(Instruction instruction){
+        if( isARegisterD( instruction.getOperator1() ) && isARegisterD( instruction.getOperator2() ) ){
+            objectCode.setNewLine(9, 'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        
+        }else{
+            logger.warning("Instrução ADDI mal formada: "+instruction.toString());
+        }
+        
+    }
+    
     private void CLR(Instruction instruction){
         objectCode.setNewLine(11, 'A');
         objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
     }
     
     private void CMP(Instruction instruction){
-        if( this.isRegister(instruction.getOperator2())){
+        if( isARegisterD( instruction.getOperator2() ) ){
             objectCode.setNewLine(12, 'A');
             objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'A');
+        }else{
+        
+            logger.warning("Instrução CMP mal formada: "+instruction.toString());
+        }
+        
+    }
+    
+    private void CMPA(Instruction instruction){
+        if( isARegisterA( instruction.getOperator2() ) ){
+            objectCode.setNewLine(13, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'A');
+        }else{
+        
+            logger.warning("Instrução CMPA mal formada: "+instruction.toString());
+        }
+        
+    }
+    
+    private void CMPI(Instruction instruction){
+        if( instruction.getOperator1().charAt(0) == '#'){
+            objectCode.setNewLine(14, 'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'R');
             objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
         }else{
         
-            logger.warning("Instrução MOVEC mal formada: "+instruction.toString());
+            logger.warning("Instrução CMPI mal formada: "+instruction.toString());
         }
         
+    }
+    
+    private void CMP2(Instruction instruction){
+        if( this.isRegister(instruction.getOperator2())){
+            objectCode.setNewLine(16, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }else{
+            logger.warning("Instrução CMP2 mal formada: "+instruction.toString());
+        }
+        
+    }
+    
+    private void DIVS(Instruction instruction){
+        if( isARegisterD( instruction.getOperator2()) ){
+            objectCode.setNewLine(17, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }
+    }
+    
+    private void DIVU(Instruction instruction){
+        if( isARegisterD( instruction.getOperator2() ) ){
+            objectCode.setNewLine(20, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }
+    }
+    
+    public void EXT(Instruction instruction){
+        if( isARegisterD ( instruction.getOperator1() ) ){
+            objectCode.setNewLine(23, 'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+        }else{
+            logger.warning("Instrução EXT mal formada: "+instruction.toString());
+        }
+        
+    }
+    
+    public void EXTB(Instruction instruction){
+        if( isARegisterD( instruction.getOperator1() ) ){
+            objectCode.setNewLine(24, 'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+        }else{
+            logger.warning("Instrução EXTX mal formada: "+instruction.toString());
+        }
+    }
+    
+    public void MULTS(Instruction instruction){
+        if( isARegisterD( instruction.getOperator2() ) ){
+            objectCode.setNewLine(25, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }else{
+            logger.warning("Instrução MULTS mal formada: "+instruction.toString());
+        }
+    }
+    
+    public void MULTU(Instruction instruction){
+        if( isARegisterD( instruction.getOperator2() ) ){
+            objectCode.setNewLine(28, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }else{
+            logger.warning("Instrução MULTU mal formada: "+instruction.toString());
+        }
     }
     
     public void NEG(Instruction instruction){
@@ -221,10 +435,202 @@ public class Decodificator {
         objectCode.setNewLine(32, 'A');
         objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
     }
+
+    public void SUB(Instruction instruction){
+        if( isARegisterD( instruction.getOperator2() ) ){
+            objectCode.setNewLine(33, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+        }else{
+            if( isARegisterD( instruction.getOperator1() ) ){
+            
+                objectCode.setNewLine(34, 'A');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            
+            }else{
+            
+                if ( isARegisterA( instruction.getOperator2() ) ) {
+                    objectCode.setNewLine(35, 'A');
+                    objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+                    objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+                } else {
+                    logger.warning("Instrução SUB mal formada: " + instruction.toString());
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    public void SUBA(Instruction instruction){
+        
+        if(isARegisterD( instruction.getOperator2() )){
+            
+            objectCode.setNewLine(36, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+            
+        }else{
+            
+            if(isARegisterD( instruction.getOperator1() )){
+            
+                objectCode.setNewLine(37, 'A');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            
+            }else{
+            
+                if (isARegisterA( instruction.getOperator2() )) {
+                    objectCode.setNewLine(38, 'A');
+                    objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+                    objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator2()), 'A');
+                } else {
+                    logger.warning("Instrução SUBA mal formada: " + instruction.toString());
+                }
+                
+            }
+            
+        }
+    }
+    
+    public void SUBI(Instruction instruction){
+        
+        if(instruction.getOperator1().charAt(0) == '#'){
+            objectCode.setNewLine(39,'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução SUBI mal formada: " + instruction.toString());
+        }
+        
+    }
+    
+    public void SUBQ(Instruction instruction){
+        
+        if(instruction.getOperator1().charAt(0) == '#'){
+            objectCode.setNewLine(40,'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução SUBQ mal formada: " + instruction.toString());
+        }
+        
+    }
+    
+    public void SUBX(Instruction instruction){
+        
+        if( isARegisterD( instruction.getOperator1() ) && isARegisterD( instruction.getOperator2() )){
+            objectCode.setNewLine(41,'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução SUBX mal formada: " + instruction.toString());
+        }
+        
+    }
+    
+    public void AND(Instruction instruction){
+        
+        if( isARegisterD( instruction.getOperator1() ) ){
+            
+            objectCode.setNewLine(44,'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+            
+        }else{
+            
+            if( isARegisterD(instruction.getOperator2() ) ){
+                objectCode.setNewLine(43,'A');
+                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+            
+                
+            }else{
+                logger.warning("Instrução AND mal formada: " + instruction.toString());
+            }
+        }
+        
+    }
+    
+    public void ANDI(Instruction instruction){
+        
+        if(instruction.getOperator1().charAt(0) == '#'){
+            objectCode.setNewLine(45, 'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução ANDI mal formada: " + instruction.toString());
+        }
+        
+    }
+    
+    public void EOR(Instruction instruction){
+    
+        if(isARegisterD(instruction.getOperator1())){
+        
+            objectCode.setNewLine(46, 'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()),'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+            
+        }else{
+            logger.warning("Instrução EOR mal formada: " + instruction.toString());
+        }
+    }
+    
+    public void EORI(Instruction instruction){
+        
+        if(instruction.getOperator1().charAt(0) == '#' ){
+        
+            objectCode.setNewLine(46, 'A');
+            objectCode.setNewLine(this.getValueFromHashTag(instruction.getOperator1()),'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+            
+        }else{
+            logger.warning("Instrução EORI mal formada: " + instruction.toString());
+        }
+    
+    }
     
     public void NOT(Instruction instruction){
         objectCode.setNewLine(48, 'A');
         objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+    }
+    
+    public void OR(Instruction instruction){
+        
+        if( isARegisterD( instruction.getOperator1() ) ){
+            
+            objectCode.setNewLine(49,'A');
+            objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+            
+        }else{
+            
+            if( isARegisterD(instruction.getOperator2() ) ){
+                objectCode.setNewLine(50,'A');
+                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+                objectCode.setNewLine(solveRegistersByNameToInt(instruction.getOperator1()), 'A');
+            
+                
+            }else{
+                logger.warning("Instrução AND mal formada: " + instruction.toString());
+            }
+        }
+        
+    }
+    
+    public void ORI(Instruction instruction){
+        
+        if(instruction.getOperator1().charAt(0) == '#'){
+            objectCode.setNewLine(51, 'A');
+            objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
+        }else{
+            logger.warning("Instrução ANDI mal formada: " + instruction.toString());
+        }
+        
     }
     
     public void JUMP(Instruction instruction){
@@ -232,14 +638,34 @@ public class Decodificator {
         objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
     }
     
+    public void BCC(Instruction instruction){
+    
+        if( isLabel(instruction.getOperator1())){
+            
+            objectCode.setNewLine(53, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            
+        }else{
+            logger.warning("Instrução BCC mal formada: " + instruction.toString());
+        }
+    }
+    
     private void BRA(Instruction instruction){
-        objectCode.setNewLine(54, 'A');
-        objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
+        
+        if( isLabel(instruction.getOperator1())){
+            
+            objectCode.setNewLine(54, 'A');
+            objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
+            
+        }else{
+            logger.warning("Instrução BRA mal formada: " + instruction.toString());
+        }
+        
     }
     
     private void MOVEC(Instruction instruction){
         
-        if(isRn(instruction.getOperator1()) && isRn(instruction.getOperator2()) ){
+        if(isRegister(instruction.getOperator1()) && isRegister(instruction.getOperator2()) ){
             objectCode.setNewLine(55, 'A');
             objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
             objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
@@ -251,9 +677,9 @@ public class Decodificator {
     
     private void MOVES(Instruction instruction){
         
-        if( isRn(instruction.getOperator1() ) ){
+        if( isRegister(instruction.getOperator1() ) ){
             
-            if( isRn(instruction.getOperator2() ) ){
+            if( isRegister(instruction.getOperator2() ) ){
                 objectCode.setNewLine(57, 'A');
                 objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
                 objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
@@ -261,7 +687,7 @@ public class Decodificator {
             
         }else{
             
-           if( isRn( instruction.getOperator2() ) ){
+           if( isRegister( instruction.getOperator2() ) ){
                objectCode.setNewLine(58, 'A');
                objectCode.setNewLine(solveOperator(instruction.getOperator1()), 'R');
                objectCode.setNewLine(solveOperator(instruction.getOperator2()), 'R');
@@ -277,7 +703,6 @@ public class Decodificator {
         objectCode.setNewLine(getValueFromHashTag(instruction.getOperator1()), 'A');
     }
     
-    
     private int solveEA(String Instruction){
         if(Instruction.substring(0, 1).matches("[0-9]")){
             return Integer.parseInt(Instruction);
@@ -286,22 +711,27 @@ public class Decodificator {
     }
             
     private int solveOperator(String anddress){
-        if( anddress.charAt(0) == 'D' || anddress.charAt(0) == 'A' ){
+        if(this.isRegister(anddress)){
             return solveRegistersByNameToInt(anddress.substring(1, anddress.length()));
         }else{
             return solveEA(anddress);
         }
     }
     
-    private boolean isRn(String string){
-        return isRegister(string) || isNumber(string) ;
+    private boolean isRegister(String string){
+        return isARegisterD(string) || isARegisterA(string);
     }
     
-    private boolean isNumber(String string){
-        return string.substring(0, 1).matches("[0-9]");
+    private boolean isARegisterD(String string){
+        return string.substring(1, 2).matches("[0-9]") && string.charAt(0) == 'D' && string.length() == 2;
     }
-    private boolean isRegister(String string){
-        return string.charAt(0) == 'A' || string.charAt(0)=='D';
+    
+    private boolean isARegisterA(String string){
+        return string.substring(1, 2).matches("[0-9]") && string.charAt(0) == 'A' && string.length() == 2;
+    }
+    
+    private boolean isLabel(String string){
+        return !isRegister(string) && !string.substring(0,1).matches("[0-9]");
     }
     
     private int solveRegistersByNameToInt(String string){
@@ -315,7 +745,7 @@ public class Decodificator {
             }
             return tableSymbols.getSymbol(symbol).getEndereco();
         }else{
-            logger.info("Label not yeat defined");
+            logger.info("Label not yeat defined: "+symbol);
             tableSymbols.addSymbol(symbol, false, 0);
             tableUsage.insereUso(tableSymbols.getSymbol(symbol), registers.getPC());
         }
@@ -323,11 +753,6 @@ public class Decodificator {
     }
     
     private int getValueFromHashTag(String operator){
-        System.out.println("operator: "+operator.substring(1, operator.length()));
         return Integer.parseInt(operator.substring(1, operator.length()));
-    }
-    
-    private int getIntegerFromString(String operator){
-        return Integer.parseInt(operator);
-    }
+    }  
 }

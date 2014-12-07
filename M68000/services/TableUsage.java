@@ -115,7 +115,6 @@ public class TableUsage {
 
             }
             jTableXREF = new JTable(model);
-            logger.warning("XREF aquui!");
         }else{
             logger.warning("Não tem referência da XREF");
         }

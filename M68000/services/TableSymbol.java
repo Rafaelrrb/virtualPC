@@ -76,12 +76,6 @@ public class TableSymbol {
         printTableSymbol();
     }
        
-    public void printAllOnConsole(){
-        for(Symbol i : tabela){
-            System.out.println(i);
-        }
-    }
-    
     public boolean hasSymbol(String identificador){
         for(Symbol s : tabela){
            if(s.getSimbolo().equals(identificador)){

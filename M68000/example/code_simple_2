@@ -12,4 +12,8 @@ moto:   ADD     marta,D1
         NOT     200
         BRA     D1
         MOVES   D1,D3
+        CMPI    #20,111
+        CMPA    A11,A1
+        CMPA    20,A2
+        CMP     20,D1
 END
